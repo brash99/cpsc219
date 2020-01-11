@@ -38,7 +38,7 @@ public class Loop {
         }
 
         System.out.println("\nLoop 4 ... ");
-        String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+        String[] cars = {"Volvo", "BMW", "Ford", "Mazda", "Honda"};
         for (String j : cars) {
             System.out.println(j);
         }
