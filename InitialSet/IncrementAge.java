@@ -1,8 +1,9 @@
 /*******************************
  *
  * Application: IncrementAge
- * Purpose: Demonstrate the need for understanding local and global variables, and
- *          the difference between pass by reference vs. pass by value
+ * Purpose:
+ * 
+ * Demonstrate Set and Get Methods of the PersonalInfo class
  *
  * Author:  E.J. Brash
  * Date:  January 5, 2020

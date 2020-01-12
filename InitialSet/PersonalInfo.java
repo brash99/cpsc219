@@ -1,3 +1,19 @@
+/*******************************
+ *
+ * Class: PersonalInfo
+ * 
+ * An example to demonstrate encapsulation
+ * 
+ * Define PRIVATE age and name variables
+ * Define a constructor that sets initial age and name using Set methods
+ * Define a method to increment the age using Set and Get Methods
+ * Define Set and Get Methods
+ *
+ * Author:  E.J. Brash
+ * Date:  January 5, 2020
+ *
+ *******************************/
+
 public class PersonalInfo {
     private int age;
     private String name; // name and age are defined as private ... they cannot
