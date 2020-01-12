@@ -2,7 +2,8 @@
  *
  * Application:  Switch
  *
- * Author:  E.J. Brash
+ * @author brash
+ * 
  * Date:  January 3, 2020
  *
  *******************************/
