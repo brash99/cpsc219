@@ -3,8 +3,8 @@
  * Application: Basic Array  
  * Purpose: Demonstrate a few basic array properties
  *
- * Author:  E.J. Brash
- * Date:  January 3, 2020
+ * @author brash
+ * Date: January 11, 2020
  *
  *******************************/
 
