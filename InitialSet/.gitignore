@@ -27,3 +27,9 @@
 /AbstractClassExample.class
 /Person.class
 /Student.class
+/Animal.class
+/AnimalPolymorphism.class
+/Dog.class
+/Pig.class
+/GenericAnimal.class
+/Human.class
