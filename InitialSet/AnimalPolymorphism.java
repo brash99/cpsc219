@@ -1,17 +1,15 @@
 abstract class Animal {
-  public int legs;
+  public int legs = 4;;
   public abstract void animalSound();  
 }
 
 class Pig extends Animal {
-  public int legs = 4;
   public void animalSound() {
     System.out.println("The pig says: wee wee");
   }
 }
 
 class Dog extends Animal {
-  public int legs = 4;
   public void animalSound() {
 	  System.out.println("The dog says: woof woof");
   }
@@ -32,5 +30,7 @@ class AnimalPolymorphism {
     myPig.animalSound();
     myDog.animalSound();
     myHuman.animalSound();
+    System.out.println("Pigs have " + myPig.legs + " legs.");
+    System.out.println("Humans have " + myHuman.legs + " legs.");
   }
 }
