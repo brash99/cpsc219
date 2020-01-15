@@ -2,7 +2,7 @@
  * Abstract class example
  * @author brash
  *
- *
+ * See file Person.java for definition of Student class
  */
 
 public class AbstractClassExample {

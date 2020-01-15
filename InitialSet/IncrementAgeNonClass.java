@@ -1,12 +1,12 @@
 /*******************************
  *
  * Application: IncrementAgeNonClass 
- * Purpose: Demonstrate the need for understanding local and global variables, and
- *          the difference between pass by reference vs. pass by value
+ * Purpose: Demonstrate the problems with pass by value vs. pass by reference
+ * 
  * Note: When we learn about objects and classes, this will come up again, and there
  *       is a really cool way to make our life easier!!!
  *
- * Author:  E.J. Brash
+ * @author brash
  * Date:  January 5, 2020
  *
  *******************************/

@@ -1,10 +1,11 @@
 /*******************************
  *
  * Application: IncrementAgeMethods
- * Purpose: Demonstrate the need for understanding local and global variables, and
- *          the difference between pass by reference vs. pass by value
+ * Purpose: Demonstrate the use of an externally defined class
+ * 
+ * See PersonalInfoMethods.java for definition of the class
  *
- * Author:  E.J. Brash
+ * @author  E.J. Brash
  * Date:  January 5, 2020
  *
  *******************************/

@@ -3,7 +3,7 @@
  * Application: ReadInput 
  * Purpose: Demonstrate Java packages, including the java scanner class
  *
- * Author:  E.J. Brash
+ * @author brash
  * Date:  January 3, 2020
  *
  *******************************/

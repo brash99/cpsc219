@@ -4,7 +4,7 @@
  * Application:  HelloWorld
  * Purpose:  Print "Hello World!" to the standard output
  *
- * Author:  E.J. Brash
+ * @author brash
  * Date:  January 3, 2020
  *
  *******************************/

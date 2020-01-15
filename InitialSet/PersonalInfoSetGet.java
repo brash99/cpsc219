@@ -1,3 +1,18 @@
+/*******************************
+ *
+ * Class: PersonalInfoSetGet
+ * 
+ * An example to demonstrate encapsulation
+ * 
+ * Define age and name variables
+ * Define constructor
+ * Define IncrementAge method
+ * Define Set and Get methods
+ *
+ * @author brash
+ * Date:  January 5, 2020
+ *
+ *******************************/
 public class PersonalInfoSetGet {
     int age;
     String name; // name cannot be overwritten or changed.

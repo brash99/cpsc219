@@ -1,10 +1,10 @@
 /*******************************
  *
  * Application: IncrementAgeSeparate
- * Purpose: Demonstrate the need for understanding local and global variables, and
- *          the difference between pass by reference vs. pass by value
- *
- * Author:  E.J. Brash
+ * Purpose: Define a basic external class in an external
+ * file (PersonalInfoBasic.java)
+ * 
+ * @author brash
  * Date:  January 5, 2020
  *
  *******************************/

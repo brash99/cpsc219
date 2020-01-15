@@ -1,3 +1,11 @@
+/***************************
+ * Multiple inheritance example
+ * 
+ * @author brash
+ *
+ */
+
+
 // First Parent class 
 interface Parent1 { 
     default void fun() { 

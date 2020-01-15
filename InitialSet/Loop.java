@@ -3,7 +3,7 @@
  * Application:  Loop
  * Purpose: Demonstration of various types of loops in Java
  *
- * Author:  E.J. Brash
+ * @author brash
  * Date:  January 3, 2020
  *
  *******************************/

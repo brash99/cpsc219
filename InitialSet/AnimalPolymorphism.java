@@ -1,3 +1,10 @@
+/***************************
+ * Class inheritance example
+ * @author brash
+ *
+ * 
+ */
+
 abstract class Animal {
   public int legs = 4;;
   public abstract void animalSound();  
