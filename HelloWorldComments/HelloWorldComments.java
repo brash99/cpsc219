@@ -23,10 +23,10 @@ public class HelloWorldComments {
     // We will make the class public (as opposed to private or protected, which
     // we will learn about later.
     //
-    // Class definitions generally involve two broad categories:  defining members of
-    // the class, and defining methods/functions of the class.
+    // Class definitions generally involve two broad categories:  defining attributes 
+	// (variables) of the class, and defining methods/functions of the class.
     //
-    // The application class that we are definining here will only have a single method - main - 
+    // The application class that we are defining here will only have a single method - main - 
     // which will get executed when we run the application.
 
     public static void main(String [] args) {
