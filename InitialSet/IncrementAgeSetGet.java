@@ -1,10 +1,9 @@
 /*******************************
  *
  * Application: IncrementAgeSetGet
- * Purpose: Demonstrate the need for understanding local and global variables, and
- *          the difference between pass by reference vs. pass by value
+ * Purpose:  Add Set and Get Methods - see PersonalInfoSetGet.java
  *
- * Author:  E.J. Brash
+ * @author brash
  * Date:  January 5, 2020
  *
  *******************************/

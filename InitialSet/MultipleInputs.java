@@ -1,3 +1,9 @@
+/***************************
+ * Multiple input example
+ * @author brash
+ *
+ */
+
 import java.util.Scanner;
 
 class MultipleInputs {

@@ -3,7 +3,7 @@
  * Application: MethodOverload 
  * Purpose: Demonstrate method overloading
  *
- * Author:  E.J. Brash
+ * @author brash
  * Date:  January 3, 2020
  *
  *******************************/

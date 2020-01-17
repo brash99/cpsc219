@@ -9,7 +9,7 @@
  * Define a method to increment the age using Set and Get Methods
  * Define Set and Get Methods
  *
- * Author:  E.J. Brash
+ * @author brash
  * Date:  January 5, 2020
  *
  *******************************/

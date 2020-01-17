@@ -1,3 +1,12 @@
+/***************************
+ * AgeChecker example
+ * @author brash
+ *
+ * Purpose: Demonstrate calling of a method with a parameter
+ * Requirements:  The age to be checked as a parameter
+ *
+ */
+
 public class AgeChecker {
 
   // Create a checkAge() method with an integer variable called age

@@ -3,7 +3,7 @@
  * Application: MethodOne 
  * Purpose: Basic method class
  *
- * Author:  E.J. Brash
+ * @author brash
  * Date:  January 3, 2020
  *
  *******************************/

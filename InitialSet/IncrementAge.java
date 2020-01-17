@@ -1,11 +1,11 @@
 /*******************************
  *
  * Application: IncrementAge
- * Purpose:
- * 
- * Demonstrate Set and Get Methods of the PersonalInfo class
+ * Purpose: Demonstrate Set and Get Methods of the PersonalInfo class
  *
- * Author:  E.J. Brash
+ * See PersonalInfo.java for PersonalInfo class definition
+ *
+ * @author brash
  * Date:  January 5, 2020
  *
  *******************************/

@@ -1,10 +1,9 @@
 /*******************************
  *
  * Application: IncrementAgeClass
- * Purpose: Demonstrate the need for understanding local and global variables, and
- *          the difference between pass by reference vs. pass by value
+ * Purpose: Demonstrate a basic class with age and name attributes
  *
- * Author:  E.J. Brash
+ * @author brash
  * Date:  January 5, 2020
  *
  *******************************/
