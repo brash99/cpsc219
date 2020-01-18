@@ -10,12 +10,18 @@
 
 
 class CX5 extends SUV {
+	
+	public String color = "Steel Blue"; 
+	
     public static void main(String[] args) {
 
         CX5 myCar =  new CX5();
 
         myCar.honk();
 
-        System.out.println(myCar.vehicleType + " " + myCar.fuelType + " " + myCar.numTires);
+        System.out.println("Vehicle type = " + myCar.vehicleType + 
+        		" ... fuel = " + myCar.fuelType + 
+        		" ... Number of tires = " + myCar.numTires + 
+        		" ... Color = " + myCar.color);
     }
 }
