@@ -1,4 +1,4 @@
-public class BasicJavaP1{
+public class BasicJavaP2{
 	public static long floor(double num) {
 		int a = (int)num;
 		return a;
