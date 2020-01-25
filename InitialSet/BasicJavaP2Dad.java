@@ -1,4 +1,4 @@
-public class BasicJavaP2{
+public class BasicJavaP2Dad{
 	public static boolean isUpper(char testchar) {
 		return (testchar >= 'A' && testchar <= 'Z');
 	}

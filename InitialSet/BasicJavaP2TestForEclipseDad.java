@@ -7,8 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class BasicJavaP2TestForEclipse {
-	String filename = "BasicJavaP2.java";
+public class BasicJavaP2TestForEclipseDad {
+	String filename = "BasicJavaP2Dad.java";
 
 	private boolean containsImportStatement() {
 		boolean containsImport = false;
