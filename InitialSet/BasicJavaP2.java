@@ -27,7 +27,7 @@ public class BasicJavaP2{
 				}
 			}
 			if (match == 0) {
-				return false;
+				result = false;
 			}
 		}
 		return result;
