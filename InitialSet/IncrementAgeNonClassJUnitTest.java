@@ -94,13 +94,16 @@ public class IncrementAgeNonClassJUnitTest {
 		assertEquals("Increment age 53 by 1:", expected, actual);
 	}
 	
-	@Test
-	public void test_main() {
-		int expected = 26;
+	
+	@Test 
+	public void test_main() { 
+		
+		int expected = 26; 
 		String[] myargs = {""};
 		int actual = IncrementAgeNonClassJUnit.main(myargs);
 		
-		assertEquals("Main Program return value (age = 26)", expected, actual, 0.0001);
+		assertEquals("Main Program return value (age = 26)", expected, actual); 
 	}
+	 
 	
 }
