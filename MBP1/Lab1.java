@@ -133,23 +133,29 @@ public class Lab1 extends JFrame implements ActionListener {
 		
 	
 		String size = token2.nextToken();
+		//errorLabel.setText(size);
 		if (oper.equals("ADD")||oper.equals("SUB")) {
-			if(size.equals("B")) 
-				position = position | (0x000<<6);
-			else if(size.equals("W"))
-				position = position | (0x001<<6);
-			else if(size.equals("L"))
-				position = position | (0x010<<6);
-			else {
+			System.out.println(oper);
+			if(size.equals("B")) {
+				position = position | (0x0000<<6);
+			}else if(size.equals("W")) {
+				position = position | (0x0001<<6);
+			}else if(size.equals("L")) {
+				position = position | (0x0002<<6);
+			}else {
 				errorLabel.setText("Illegal operation for assembly1 instruction");
 			}
 		} else {
 			// instruction must be MULS or DIVS if we are here
 			// Thus, set these bits to 111 always
-			position = position | (0x111<<6);
+			if (size.equals("W")) {
+				position = position | (0x0007<<6);
+			} else {
+				errorLabel.setText("Illegal operation for assembly1 instruction");
+			}
 		}
 			  
-		//String result = oper + "." + size;
+		//errorLabel.setText(shortToBinary((short)position));
 		
 		   
 		String operands = token.nextToken();
@@ -307,10 +313,12 @@ public class Lab1 extends JFrame implements ActionListener {
             }
 		
 // Isolate the source register and decode it
-		int source = (binary >> 4) & 0x00E0;
+		//int source = (binary >> 4) & 0x00E0;
+		int source = (binary >> 9) & 0x0007;
 		assemble = assemble+ "." +size2;
 // Isolate the destination register and decode it
 		int destination = binary & 0x3F;
+		//System.out.println(source + " " + destination);
 		assemble = assemble +" " + registerDecode(source)+"," + registerDecode(destination); 
 // If no errors occurred, display the assembler instruction
 		if (errorLabel.getText().equals(""))
@@ -323,6 +331,7 @@ public class Lab1 extends JFrame implements ActionListener {
 		code = Integer.toString(register & 7);
 // Isolate the addressing mode and decode it
 		int mode = (register >> 3) & 7;
+		//System.out.println(register + " " + code + " " + mode);
 		if(mode == 0) code = "D" + code;
 		else if (mode == 1) code = "D" + code + "";
 		else if (mode == 2) code = "D" + code + "+";
