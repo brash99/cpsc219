@@ -145,7 +145,7 @@ public class Lab1 extends JFrame implements ActionListener {
 			}else {
 				errorLabel.setText("Illegal operation for assembly1 instruction");
 			}
-		} else {
+		} else if (oper.equals("MULS")||oper.equals("DIVS")) {
 			// instruction must be MULS or DIVS if we are here
 			// Thus, set these bits to 111 always
 			if (size.equals("W")) {
@@ -153,7 +153,7 @@ public class Lab1 extends JFrame implements ActionListener {
 			} else {
 				errorLabel.setText("Illegal operation for assembly1 instruction");
 			}
-		}
+		} 
 			  
 		//errorLabel.setText(shortToBinary((short)position));
 		
@@ -168,11 +168,23 @@ public class Lab1 extends JFrame implements ActionListener {
 		}
 		String source = token.nextToken();
 // Encode the source register and put those bits in the proper place
-		position = position | (encodeRegister(source) << 9);
+		// Assume code is D# ... parse off D, to get # as an integer
+		// Example:  D7 -> 7 << 9
+		
+		String sourceValue = String.valueOf(source.charAt(1));
+		int isource=Integer.parseInt(sourceValue,10);
+		position = position | (isource << 9);
+		//position = position | (encodeRegister(source) << 9);
+		
 		token.nextToken();	//skip the comma
 		String destination = token.nextToken();
+		String destinationValue = String.valueOf(destination.charAt(1));
+		int idestination=Integer.parseInt(destinationValue,10);
+		position = position | (idestination);
+		
+		
 // Encode the destination register and put those bits in the proper place
-		position = position | encodeRegister(destination);
+		//position = position | encodeRegister(destination);
 // If no errors occurred, display the binary and hex encodings
 		if (errorLabel.getText().equals("")) {
 			binaryInstruction.setText(shortToBinary((short)position));
@@ -248,6 +260,9 @@ public class Lab1 extends JFrame implements ActionListener {
 			return;
 		}
 		int bin;
+		// int is a primitive type
+		// Integer, Double, String are NOT!!!!
+		//
 		try {
 			bin = Integer.parseInt(s,2);
 		} catch (Exception e) {
@@ -304,7 +319,7 @@ public class Lab1 extends JFrame implements ActionListener {
 				} else {
 					errorLabel.setText("Illegal binary operation");
 				}
-            } else {
+            } else if (assemble == "MULS" || assemble == "DIVS") {
             	if ((binary & 0x01C0) != 0x01C0) {
             		errorLabel.setText("Illegal binary operation");
             	} else {
@@ -314,13 +329,16 @@ public class Lab1 extends JFrame implements ActionListener {
 		
 // Isolate the source register and decode it
 		//int source = (binary >> 4) & 0x00E0;
-		int source = (binary >> 9) & 0x0007;
+		int source = (binary & 0x0E00) >> 9;
 		assemble = assemble+ "." +size2;
 // Isolate the destination register and decode it
-		int destination = binary & 0x3F;
+		//int destination = binary & 0x3F;
+		int destination = binary & 0x0007;
 		//System.out.println(source + " " + destination);
-		assemble = assemble +" " + registerDecode(source)+"," + registerDecode(destination); 
-// If no errors occurred, display the assembler instruction
+//		assemble = assemble +" " + registerDecode(source)+"," + registerDecode(destination); 
+		assemble = assemble +" D" + source +",D" + destination; 
+
+		// If no errors occurred, display the assembler instruction
 		if (errorLabel.getText().equals(""))
 			assemblerInstruction.setText(assemble);
 	}
