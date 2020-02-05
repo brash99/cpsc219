@@ -4,4 +4,4 @@ addons:
   apt:
     packages:
       - ant
-install: ant compile
+install: ant compile jar run
