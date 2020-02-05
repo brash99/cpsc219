@@ -36,8 +36,13 @@ public class ArrayListPrintable {
 		
 		System.out.println("The ArrayList follows: ");
 		
+		// Print out the entire ArrayList ... this structure of the for loop is like
+		// for tmp in myList: 
+		// in Python
+		//
 		for (PrintableObject tmp : myList) {
 			System.out.println(tmp);
 		}
+		
 	}
 }

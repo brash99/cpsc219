@@ -60,8 +60,8 @@ public class ArrayListExample {
 		System.out.println(myList);
 		
 		// Note:  If we want "println" to actually print out the contents of the object in some
-		// meaningful way, we would have to add toString() methods to the SimpleObject Class, and to the 
-		// ArrayListExample class as well!
+		// meaningful way, we would have to add a toString() method to the SimpleObject Class
+		// See ArrayListPrintable for an example of how to do this!!!
 		
 	}
 }
