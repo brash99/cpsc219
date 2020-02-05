@@ -10,7 +10,7 @@ public class BasicJavaP2Dad{
 	}
 	
 	public static int floorAfterMult(int i,double x) {
-		// do the multiplication first, and only then cast the result into an integer
+		// do the multiplication first, and only then cast the result into an integer		
 		double y = i*x;
 		return (int)y;
 	}
