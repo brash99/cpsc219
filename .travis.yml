@@ -4,3 +4,4 @@ addons:
   apt:
     packages:
       - ant
+install: ant compile
