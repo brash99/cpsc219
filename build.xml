@@ -38,5 +38,131 @@
 			</classpath>
 		</java>
     	</target>
+    	<target name="AbstractClassExample">
+        	<java classname = "AbstractClassExample">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="AgeChecker">
+        	<java classname = "AgeChecker">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="AnimalPolymorphism">
+        	<java classname = "AnimalPolymorphism">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="ArrayListExample">
+        	<java classname = "ArrayListExample">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="ArrayListPrintable">
+        	<java classname = "ArrayListPrintable">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="CastingExample">
+        	<java classname = "CastingExample">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="Conditional">
+        	<java classname = "Conditional">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="CX5">
+        	<java classname = "CX5">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="IncrementAge">
+        	<java classname = "IncrementAge">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="Loop">
+        	<java classname = "Loop">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="MathExample">
+        	<java classname = "MathExample">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="MethodOne">
+        	<java classname = "MethodOne">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="MethodOverload">
+        	<java classname = "MethodOverload">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="MultipleInheritance">
+        	<java classname = "MultipleInheritance">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="MultipleInputs">
+        	<java classname = "MultipleInputs">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="ReadInput">
+        	<java classname = "ReadInput">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="StringExample">
+        	<java classname = "StringExample">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="Switch">
+        	<java classname = "Switch">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
 
 </project>
