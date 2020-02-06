@@ -25,14 +25,14 @@
     	</target>
 
     	<target name="HelloWorld">
-        	<java classname = "HelloWorld.Main">
+        	<java classname = "HelloWorld">
 			<classpath>
 				<pathelement location="build/jar/InitialSet.jar" />
 			</classpath>
 		</java>
     	</target>
     	<target name="HelloWorld2">
-        	<java classname = "HelloWorld2.Main">
+        	<java classname = "HelloWorld2">
 			<classpath>
 				<pathelement location="build/jar/InitialSet.jar" />
 			</classpath>
