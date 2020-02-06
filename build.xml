@@ -21,7 +21,7 @@
     	</target>
 
     	<target name="run">
-        	<java jar="build/jar/InitialSet.jar" fork="true"/>
+        	<java -cp jar="build/jar/InitialSet.jar" HelloWorld2 fork="true"/>
     	</target>
 
 </project>
