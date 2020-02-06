@@ -14,15 +14,7 @@ public class Money {
                         if (currency != other.currency) return false;
                         if (amount != other.amount) return false;
                         return true;
-            }
-
-            public int hashCode() {
-                        return this.currency.hashCode();
-            }
-            
-            public String toString() {
-            	return "The amount of money is " + currency + " " + amount;
-            }
+            }       
 
             public Money plus(Money other) {                                                
                         if (null == other) return null;
@@ -31,6 +23,10 @@ public class Money {
                         }
 
                         return new Money(amount + other.amount, currency);
+            }
+            
+            public String toString() {
+            	return "The amount of money is " + currency + " " + amount;
             }
             
             public static void main(String[] args) {
