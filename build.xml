@@ -12,7 +12,7 @@
 
 	<target name="compile">
 		<mkdir dir="build/classes"/>
-        	<javac srcdir="InitialSet" destdir="build/classes" classpathref="classpath"/>
+        	<javac srcdir="InitialSet" destdir="build/classes" classpathref="classpath" includeantruntime="false"/>
     	</target>
 
 	<target name="jar">
@@ -23,6 +23,19 @@
             		</manifest>
 		</jar>
     	</target>
+
+	<target name="test" depends="compile">
+		<junit printsummary="on" haltonfailure="yes" fork="true">
+			<classpath>
+				<path refid="classpath"/>
+				<pathelement location="build/classes"/>
+			</classpath>
+			<formatter type="brief" usefile="false" />
+			<batchtest>
+				<fileset dir="InitialSet" includes="**/*Test*.java" />
+			</batchtest>
+		</junit>
+	</target>
 
     	<target name="HelloWorld">
         	<java classname = "HelloWorld">
