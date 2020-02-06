@@ -17,15 +17,11 @@
 
 	<target name="jar">
 		<mkdir dir="build/jar"/>
-		<jar destfile="build/jar/HelloWorld.jar" basedir="build/classes">
-            		<manifest>
-                		<attribute name="Main-Class" value="HelloWorld"/>
-            		</manifest>
-        	</jar>
+		<jar destfile="build/jar/InitialSet.jar" basedir="build/classes"></jar>
     	</target>
 
     	<target name="run">
-        	<java jar="build/jar/HelloWorld.jar" fork="true"/>
+        	<java jar="build/jar/InitialSet.jar" fork="true"/>
     	</target>
 
 </project>
