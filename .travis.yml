@@ -4,4 +4,4 @@ addons:
   apt:
     packages:
       - ant
-script: ant compile jar run
+script: ant compile jar HelloWorld HelloWorld2

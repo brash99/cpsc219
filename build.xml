@@ -24,8 +24,19 @@
 		</jar>
     	</target>
 
-    	<target name="run">
-        	<java jar="build/jar/InitialSet.jar" fork="true"/>
+    	<target name="HelloWorld">
+        	<java classname = "HelloWorld.Main">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
+    	<target name="HelloWorld2">
+        	<java classname = "HelloWorld2.Main">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
     	</target>
 
 </project>
