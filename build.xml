@@ -28,7 +28,6 @@
 		<junit printsummary="on" haltonfailure="yes" fork="true">
 			<classpath>
 				<path refid="classpath"/>
-				<pathelement location="lib"/>
 				<pathelement location="build/classes"/>
 			</classpath>
 			<formatter type="brief" usefile="false" />
