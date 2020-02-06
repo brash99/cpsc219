@@ -10,4 +10,4 @@ notifications:
     on_failure: always
 before_install:
   - sudo apt-get install ant-optional
-script: ant compile jar test HelloWorld HelloWorld2 AbstractClassExample AgeChecker ArrayListExample ArrayListPrintable CastingExample Conditional IncrementAge Loop MathExample MethodOne MethodOverload StringExample Switch
+script: ant delete compile jar test Money HelloWorld HelloWorld2 AbstractClassExample AgeChecker ArrayListExample ArrayListPrintable CastingExample Conditional IncrementAge Loop MathExample MethodOne MethodOverload StringExample Switch
