@@ -4,4 +4,4 @@ addons:
   apt:
     packages:
       - ant
-script: ant compile jar HelloWorld HelloWorld2
+script: ant compile jar HelloWorld HelloWorld2 AbstractClassExample AgeChecker AnimalPolymorphism ArrayListExample ArrayListPrintable CastingExample Conditional CX5 IncrementAge Loop MathExample MethodOne MethodOverload MultipleInheritance MultipleInputs ReadInput StringExample Switch
