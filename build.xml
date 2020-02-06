@@ -142,5 +142,12 @@
 			</classpath>
 		</java>
     	</target>
+    	<target name="Money">
+        	<java classname = "Money">
+			<classpath>
+				<pathelement location="build/jar/InitialSet.jar" />
+			</classpath>
+		</java>
+    	</target>
 
 </project>
