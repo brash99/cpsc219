@@ -4,4 +4,8 @@ addons:
   apt:
     packages:
       - ant
+notifications:
+  email:
+    recipients: brash@jlab.org
+    on_failure: always
 script: ant compile jar test HelloWorld HelloWorld2 AbstractClassExample AgeChecker ArrayListExample ArrayListPrintable CastingExample Conditional IncrementAge Loop MathExample MethodOne MethodOverload StringExample Switch
