@@ -25,6 +25,9 @@ public class PollList {
 		//
 		// Step 2: Search through the poll list from the end, to check for a matching poll name
 		//			If one is found, replace it with the new poll and then return
+		// N.B.  We use polls.length-1 because the first poll is at element zero (so -1 for that)
+		//       
+		//
 		for(int i=0;i<Math.min(goodIndex,polls.length-1);i++){
 			System.out.println(polls[i].getPollName() + " " + aPoll.getPollName());
 			if(polls[i].getPollName() == aPoll.getPollName()){
@@ -51,21 +54,9 @@ public class PollList {
 		return;
 	}
 	
-	public void getAggregatePoll(String[] partyNames) {
-		
-		for (int i=0; i<partyNames.length; i++) {
-			System.out.println("Search for " + partyNames[i]);
-			for (int j=0; j<polls.length; j++) {
-				System.out.println(polls[j].getParty(partyNames[i]));
-			}
-			
-		}
-		
-		return;
-	}
-	
-
 	private static int getEmptyPollIndex(Poll[] p) {
+		//
+		// This is a helper method for the addPoll method
 		//
 		// Start from the END of the PollList
 		// Count down to the beginning until we find something that is NOT null
@@ -80,7 +71,52 @@ public class PollList {
 		return 0;
 	}
 	
+	public Poll getAggregatePoll(String[] partyNames) {
+		
+		// First define a "testparty" object that we will use to temporarily store
+		// information
+		Party testparty = new Party("Test");
+		Poll testPoll = new Poll("aggregate",partyNames.length);
+		//
+		// start looping through the array of partyNames that was passed to this method
+		//
+		for (int i=0; i<partyNames.length; i++) {
+			System.out.println("Search for " + partyNames[i]);
+			//
+			// Loop through all of the polls in the list ... the endpoint is polls.length - 1 because
+			// we don't want to search that last space in this list that is reserved for the aggregate poll itself
+			
+			double seatsum = 0.0;
+			double parliamentsum = 0.0;
+			for (int j=0; j<polls.length; j++) {
+				System.out.println(polls[j].getParty(partyNames[i]));
+				// store the current poll information associated with the current search party in a temporary object 
+				testparty = polls[j].getParty(partyNames[i]);
+				// extract the number of seats and percentage of votes for the current search party in the current poll
+				System.out.println(testparty.getProjectedNumberOfSeats());
+				System.out.println(testparty.getProjectedPercentageOfVotes());
+				seatsum = seatsum + testparty.getProjectedNumberOfSeats();
+				parliamentsum = parliamentsum + testparty.getProjectedNumberOfSeats()/(0.01*testparty.getProjectedPercentageOfVotes());
+			}
+			System.out.println(partyNames[i] + " " + seatsum + " " + parliamentsum);
+			
+			Party testparty2 = new Party(partyNames[i],(float)seatsum,(float)(seatsum/parliamentsum*100.0));
+
+			testPoll.addParty(testparty2);
+			
+		}
+		
+		return testPoll;
+	}
+	
+
 	public String toString() {
+		//
+		// Add a toString method for the purposes of debugging
+		// This should loop through all of the polls in the poll list (we don't know how many there are)
+		// and for each one it will print that poll - printing that poll means that it will in turn call
+		// the toString() method in the Poll class definition.
+		//
 		int index=0;
 		while (true) {
 			try {
@@ -97,6 +133,17 @@ public class PollList {
 	}
 	
 	public static void main(String[] args) {
+		
+		// We want to first define a variable (for testing purposes) that is the number of polls that
+		// we might want to store in the PollList
+		int numberOfPolls = 3;
+		
+		//
+		// Next we create a PollList that allows for the number of Polls that we will store
+		//
+		PollList testList = new PollList(numberOfPolls,225);
+		
+		
 		Party conservative1 = new Party("Conservative",100,50f);
 		Party liberal1 = new Party("Liberal",50,25f);
 		Party ndp1 = new Party("NDP",50,25f);
@@ -158,8 +205,7 @@ public class PollList {
 		System.out.println(liberal5);
 		System.out.println(ndp5);
 
-		PollList testList = new PollList(3,225);
-		
+
 		System.out.println("Adding first poll ... ");
 		testList.addPoll(testPoll1);
 		System.out.println("Adding second poll ... ");
@@ -176,8 +222,9 @@ public class PollList {
 		
 		String[] aggPollNames = {"Conservative","Liberal","NDP"};
 		
-		
-		testList.getAggregatePoll(aggPollNames);
+		Poll aggregatePoll = new Poll("aggregate",aggPollNames.length);
+		aggregatePoll = testList.getAggregatePoll(aggPollNames);
+		System.out.println(aggregatePoll);
 	}
 	
 }
