@@ -21,7 +21,7 @@ public class PollList {
 		//
 		// Step 1: Get the index of the next empty space in the poll list
 		int goodIndex = getEmptyPollIndex(polls);
-		System.out.println("goodIndex = " + goodIndex);
+		//System.out.println("goodIndex = " + goodIndex);
 		//
 		// Step 2: Search through the poll list from the end, to check for a matching poll name
 		//			If one is found, replace it with the new poll and then return
@@ -31,9 +31,9 @@ public class PollList {
 		for(int i=0;i<Math.min(goodIndex,polls.length-1);i++){
 			System.out.println(polls[i].getPollName() + " " + aPoll.getPollName());
 			if(polls[i].getPollName() == aPoll.getPollName()){
-				System.out.println("Found a match at i = " + i);
+				//System.out.println("Found a match at i = " + i);
 				polls[i]=aPoll;
-				System.out.println("");
+				//System.out.println("");
 				return;
 			}
 		}
@@ -43,14 +43,14 @@ public class PollList {
 		// Check to see if the index is (the last element allowed + 1).  If so, the poll list is already full.
 		// Otherwise, add the new poll to the list.
 		//
-		System.out.println("Adding NEW poll ...");
+		//System.out.println("Adding NEW poll ...");
 		if (goodIndex == (polls.length)) {
 			System.out.println("Poll list already full.");
 		} else {
 			polls[goodIndex] = aPoll;
 		}
 		
-		System.out.println("");
+		//System.out.println("");
 		return;
 	}
 	
@@ -63,7 +63,7 @@ public class PollList {
 		// In this way, we will not get any errors due to going beyond the end of the array
 		//
 		for(int i=p.length-1;i>=0;i--){
-			System.out.println(i + " " + p[i]);
+			//System.out.println(i + " " + p[i]);
 			if(p[i]!=null){
 				return i+1;
 			}
@@ -81,7 +81,7 @@ public class PollList {
 		// start looping through the array of partyNames that was passed to this method
 		//
 		for (int i=0; i<partyNames.length; i++) {
-			System.out.println("Search for " + partyNames[i]);
+			//System.out.println("Search for " + partyNames[i]);
 			//
 			// Loop through all of the polls in the list ... the endpoint is polls.length - 1 because
 			// we don't want to search that last space in this list that is reserved for the aggregate poll itself
@@ -89,16 +89,16 @@ public class PollList {
 			double seatsum = 0.0;
 			double parliamentsum = 0.0;
 			for (int j=0; j<polls.length; j++) {
-				System.out.println(polls[j].getParty(partyNames[i]));
+				//System.out.println(polls[j].getParty(partyNames[i]));
 				// store the current poll information associated with the current search party in a temporary object 
 				testparty = polls[j].getParty(partyNames[i]);
 				// extract the number of seats and percentage of votes for the current search party in the current poll
-				System.out.println(testparty.getProjectedNumberOfSeats());
-				System.out.println(testparty.getProjectedPercentageOfVotes());
+				//System.out.println(testparty.getProjectedNumberOfSeats());
+				//System.out.println(testparty.getProjectedPercentageOfVotes());
 				seatsum = seatsum + testparty.getProjectedNumberOfSeats();
 				parliamentsum = parliamentsum + testparty.getProjectedNumberOfSeats()/(0.01*testparty.getProjectedPercentageOfVotes());
 			}
-			System.out.println(partyNames[i] + " " + seatsum + " " + parliamentsum);
+			//System.out.println(partyNames[i] + " " + seatsum + " " + parliamentsum);
 			
 			Party testparty2 = new Party(partyNames[i],(float)seatsum,(float)(seatsum/parliamentsum*100.0));
 
@@ -224,6 +224,7 @@ public class PollList {
 		
 		Poll aggregatePoll = new Poll("aggregate",aggPollNames.length);
 		aggregatePoll = testList.getAggregatePoll(aggPollNames);
+		
 		System.out.println(aggregatePoll);
 	}
 	
