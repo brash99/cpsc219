@@ -25,6 +25,7 @@ public class PrintableObject {
 	// when we call System.out.println() for an object of this type, it will call our own
 	// toString method instead.
 	//
+	
 	public String toString() {
 		return ("Age = " + this.age + ", income = " + this.income + ", name = " + this.name);
 	}
