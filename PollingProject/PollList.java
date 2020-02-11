@@ -29,9 +29,9 @@ public class PollList {
 		//       
 		//
 		for(int i=0;i<Math.min(goodIndex,polls.length-1);i++){
-			System.out.println(polls[i].getPollName() + " " + aPoll.getPollName());
+			//System.out.println(polls[i].getPollName() + " " + aPoll.getPollName());
 			if(polls[i].getPollName() == aPoll.getPollName()){
-				//System.out.println("Found a match at i = " + i);
+				System.out.println("Replacing poll at index = " + i);
 				polls[i]=aPoll;
 				//System.out.println("");
 				return;
@@ -152,9 +152,9 @@ public class PollList {
 		testPoll1.addParty(liberal1);
 		testPoll1.addParty(ndp1);
 		System.out.println(testPoll1);
-		System.out.println(conservative1);
-		System.out.println(liberal1);
-		System.out.println(ndp1);
+		//System.out.println(conservative1);
+		//System.out.println(liberal1);
+		//System.out.println(ndp1);
 		
 		
 		Party conservative2 = new Party("Conservative",80,40f);
@@ -165,9 +165,9 @@ public class PollList {
 		testPoll2.addParty(liberal2);
 		testPoll2.addParty(ndp2);
 		System.out.println(testPoll2);
-		System.out.println(conservative2);
-		System.out.println(liberal2);
-		System.out.println(ndp2);
+		//System.out.println(conservative2);
+		//System.out.println(liberal2);
+		//System.out.println(ndp2);
 		
 		Party conservative3 = new Party("Conservative",60,30f);
 		Party liberal3 = new Party("Liberal",100,50f);
@@ -177,9 +177,9 @@ public class PollList {
 		testPoll3.addParty(liberal3);
 		testPoll3.addParty(ndp3);
 		System.out.println(testPoll3);
-		System.out.println(conservative3);
-		System.out.println(liberal3);
-		System.out.println(ndp3);
+		//System.out.println(conservative3);
+		//System.out.println(liberal3);
+		//System.out.println(ndp3);
 		
 		Party conservative4 = new Party("Conservative",200,100.0f);
 		Party liberal4 = new Party("Liberal",0,0f);
@@ -189,9 +189,9 @@ public class PollList {
 		testPoll4.addParty(liberal4);
 		testPoll4.addParty(ndp4);
 		System.out.println(testPoll4);
-		System.out.println(conservative4);
-		System.out.println(liberal4);
-		System.out.println(ndp4);
+		//System.out.println(conservative4);
+		//System.out.println(liberal4);
+		//System.out.println(ndp4);
 			
 		Party conservative5 = new Party("Conservative",2,1f);
 		Party liberal5 = new Party("Liberal",4,2f);
@@ -201,9 +201,9 @@ public class PollList {
 		testPoll5.addParty(liberal5);
 		testPoll5.addParty(ndp5);
 		System.out.println(testPoll5);
-		System.out.println(conservative5);
-		System.out.println(liberal5);
-		System.out.println(ndp5);
+		//System.out.println(conservative5);
+		//System.out.println(liberal5);
+		//System.out.println(ndp5);
 
 
 		System.out.println("Adding first poll ... ");
@@ -217,6 +217,8 @@ public class PollList {
 		System.out.println("Adding fifth poll ... should replace second poll");
 		testList.addPoll(testPoll5);
 		System.out.println("Done adding polls ");
+		
+		System.out.println("\n Final Poll List + Aggregate: \n");
 		
 		System.out.println(testList);
 		

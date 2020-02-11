@@ -42,7 +42,7 @@ public class Poll {
 	public String toString() {
 		String output = this.name + ":\n";
 		for (int i=0; i<parties.length; i++) {
-			output = output + (parties[i].getName() + " " + parties[i].getProjectedNumberOfSeats() + " " + parties[i].getProjectedPercentageOfVotes() + "\n");
+			output = output + (parties[i].getName() + " " + parties[i].getProjectedNumberOfSeats() + " " + parties[i].getProjectedPercentageOfVotes() + "%\n");
 		}
 		
 		return output;
