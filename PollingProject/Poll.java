@@ -40,6 +40,11 @@ public class Poll {
 	
 	@Override
 	public String toString() {
-		return name;
+		String output = this.name + ":\n";
+		for (int i=0; i<parties.length; i++) {
+			output = output + (parties[i].getName() + " " + parties[i].getProjectedNumberOfSeats() + " " + parties[i].getProjectedPercentageOfVotes() + "\n");
+		}
+		
+		return output;
 	}
 }
