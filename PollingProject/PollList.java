@@ -264,8 +264,8 @@ public class PollList {
 		
 		System.out.println(testList);
 		
-		//String[] aggPollNames = {"CPC","Liberal","Green","NDP","PPC","Rhinoceros"};
-		String[] aggPollNames = {"CPC","Liberal","Green","NDP"};		
+		String[] aggPollNames = {"CPC","Liberal","Green","NDP","PPC","Rhinoceros"};
+		//String[] aggPollNames = {"CPC","Liberal","Green","NDP"};		
 		Poll aggregatePoll = new Poll("aggregate",aggPollNames.length);
 		aggregatePoll = testList.getAggregatePoll(aggPollNames);
 		

@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 //package application;
 
 public class Poll {
@@ -31,8 +33,11 @@ public class Poll {
 	}
 	
 	public Party[] getPartiesSortedBySeats() {
+		
+		Arrays.sort(parties);
 		return parties;
 	}
+	
 
 	public Party[] getPartiesSortedByVotes() {
 		return parties;
@@ -41,8 +46,10 @@ public class Poll {
 	@Override
 	public String toString() {
 		String output = this.name + ":\n";
-		for (int i=0; i<parties.length; i++) {
-			output = output + (parties[i].getName() + " " + parties[i].getProjectedNumberOfSeats() + " " + parties[i].getProjectedPercentageOfVotes() + "%\n");
+		Party[] sortedPartyList = this.getPartiesSortedBySeats();
+		for (int i=0; i<sortedPartyList.length; i++) {
+			output = output + sortedPartyList[i].textVisualizationBySeats(26, 13, 11.0) + "\n";
+			//output = output + (parties[i].getName() + " " + parties[i].getProjectedNumberOfSeats() + " " + parties[i].getProjectedPercentageOfVotes() + "%\n");
 		}
 		
 		return output;
