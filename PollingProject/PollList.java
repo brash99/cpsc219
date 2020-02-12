@@ -73,28 +73,45 @@ public class PollList {
 	
 	public Poll getAggregatePoll(String[] partyNames) {
 		
+		// create a test Poll that we will fill with appropriate information
+		Poll testPoll = new Poll("aggregate",partyNames.length);
+		
+		// create the aggregate poll
+		testPoll = createAggregatePoll(testPoll,partyNames);
+		System.out.println("Original Aggregate Poll");
+		System.out.println(testPoll);
+		
+		// Before we return the aggregate poll object, we need to go through
+		// and calculate the total of all of the percentages, and seats, and
+		// possibly renormalize them, if the percentages add up to more than
+		// 100%, or if the number of seats is greater than the number available.	
+
+		testPoll = renormalize(partyNames, testPoll);		
+		return testPoll;
+	}
+	
+	
+	private Poll createAggregatePoll(Poll testPoll, String[] partyNames) {
 		// First define a "testparty" object that we will use to temporarily store
 		// information
 		Party testparty = new Party("Test");
-		Poll testPoll = new Poll("aggregate",partyNames.length);
 		//
 		// start looping through the array of partyNames that was passed to this method
 		//
 		for (int i=0; i<partyNames.length; i++) {
-			//System.out.println("Search for " + partyNames[i]);
-			//
+
 			// Loop through all of the polls in the list ... the endpoint is polls.length - 1 because
 			// we don't want to search that last space in this list that is reserved for the aggregate poll itself
-			
+		
 			double seatsum = 0.0;
 			double percentsum = 0.0;
 			int counter = 0;
-			
+		
 			for (int j=0; j<polls.length; j++) {
 				//System.out.println(polls[j].getParty(partyNames[i]));
 				// store the current poll information associated with the current search party in a temporary object 
 				testparty = polls[j].getParty(partyNames[i]);
-				
+			
 				// if this party is actually in this poll:
 				if (testparty != null) {
 					counter++;
@@ -106,29 +123,30 @@ public class PollList {
 			// that this party was actually in.
 			seatsum = seatsum / counter;
 			percentsum = percentsum / counter;
-			
+		
 			// create a party object for this party and add it to the
 			// aggregate poll
 			Party testparty2 = new Party(partyNames[i],(float)(seatsum),(float)(percentsum));
 			testPoll.addParty(testparty2);
+			
 		}
-		
-		//
-		// Before we return the aggregate poll object, we need to go through
-		// and calculate the total of all of the percentages, and seats, and
-		// possibly renormalize them, if the percentages add up to more than
-		// 100%, or if the number of seats is greater than the number available.
-		//
-		
-		System.out.println(testPoll);
-		
+
+		return testPoll;
+	}
+	
+	private Poll renormalize(String[] partyNames, Poll testPoll) {
+		// initialize counters
 		double ssum = 0;
 		double psum = 0; 
+		// go through each entry in the poll, and add up the total number of seats,
+		// and the totals of the percentages.
 		for (int i=0; i<testPoll.getNumberOfParties(); i++) {
 			ssum =  ssum + testPoll.getParty(partyNames[i]).getProjectedNumberOfSeats();
 			psum = psum + testPoll.getParty(partyNames[i]).getProjectedPercentageOfVotes();
 		}
 		
+		// if the percentage total is greater than 100, go through each entry in the poll
+		// again, and apply normalization factor of 100/psum to each percentage.
 		if (psum>100.0) {
 			for (int i=0; i<testPoll.getNumberOfParties(); i++) {
 				testPoll.getParty(partyNames[i]).setProjectedPercentageOfVotes(
@@ -138,11 +156,14 @@ public class PollList {
 
 		}
 		
+		// if the seat total is greater than allowed number of seats, go through each entry in the poll
+		// again, and apply normalization factor of (numSeats)/ssum to each seat number.
+		
 		if (ssum > this.getNumOfSeats()) {
 			for (int i=0; i<testPoll.getNumberOfParties(); i++) {
 				testPoll.getParty(partyNames[i]).setProjectedNumberOfSeats(
 						(float)(testPoll.getParty(partyNames[i]).
-								getProjectedNumberOfSeats()*ssum/this.getNumOfSeats()));
+								getProjectedNumberOfSeats()*this.getNumOfSeats()/ssum));
 			}
 		}
 		
