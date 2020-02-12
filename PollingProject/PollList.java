@@ -269,6 +269,7 @@ public class PollList {
 		Poll aggregatePoll = new Poll("aggregate",aggPollNames.length);
 		aggregatePoll = testList.getAggregatePoll(aggPollNames);
 		
+		System.out.println("Final Aggregate Poll:");
 		System.out.println(aggregatePoll);
 	}
 	
