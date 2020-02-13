@@ -52,10 +52,7 @@ public class Poll {
 		for (int i=0; i<sortedPartyList.length; i++) {
 			output = output + (parties[i].getName() + " " + parties[i].getProjectedNumberOfSeats() + " " + parties[i].getProjectedPercentageOfVotes() + "%\n");
 		}
-		
-		//	output = output + sortedPartyList[i].textVisualizationByVotes(25, 12, 4.0) + "\n";
 
-		
 		return output;
 	}
 }
