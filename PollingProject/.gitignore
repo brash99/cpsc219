@@ -3,3 +3,5 @@
 /Poll.class
 /PollList.class
 /TextApplication.class
+/SeatComparator.class
+/VoteComparator.class
