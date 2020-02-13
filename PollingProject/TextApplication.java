@@ -30,10 +30,30 @@ public class TextApplication {
 		System.out.println(output);
 	}
 	
+	public void displayPollDataByVotes(Poll aPoll) {
+		 
+		int majorityStars = (int)(Math.round((double)((double)(MAX_NUMBER_OF_STARS)/2.0)));
+		String output = aPoll.getPollName() + ":\n";
+		Party[] sortedPartyList = aPoll.getPartiesSortedBySeats();
+		double starPercent = (double)(getTotalPercentInPoll(sortedPartyList))/MAX_NUMBER_OF_STARS;
+		for (int i=0; i<sortedPartyList.length; i++) {
+			output = output + sortedPartyList[i].textVisualizationByVotes(MAX_NUMBER_OF_STARS, majorityStars, starPercent) + "\n";
+		}
+		System.out.println(output);
+	}
+	
 	private int getTotalSeatsInPoll (Party[] partyList) {
 		float mySum = 0;
 		for (int i=0; i<partyList.length; i++) {
 			mySum += partyList[i].getProjectedNumberOfSeats();
+		}
+		return (int)mySum;
+	}
+	
+	private int getTotalPercentInPoll (Party[] partyList) {
+		float mySum = 0;
+		for (int i=0; i<partyList.length; i++) {
+			mySum += partyList[i].getProjectedPercentageOfVotes();
 		}
 		return (int)mySum;
 	}
@@ -60,6 +80,28 @@ public class TextApplication {
 		this.displayPollDataBySeat(aggregatePoll);
 	}
 	
+	public void displayPollsByVotes(String[] partyNames) {
+		
+		int index=0;
+		Poll[] myPolls = polls.getPolls();
+		while (true) {
+			try {
+				if (myPolls[index]==null) {
+					break;
+				} else {
+					this.displayPollDataByVotes(myPolls[index]);;
+					index++;
+				}
+			} catch (Exception e) {
+				break;
+			}
+		}
+				
+		Poll aggregatePoll = new Poll("aggregate",partyNames.length);
+		aggregatePoll = polls.getAggregatePoll(partyNames);
+		this.displayPollDataBySeat(aggregatePoll);
+	}
+	
 	public static void main(String[] args) {
 		
 		// Testing Code
@@ -74,6 +116,7 @@ public class TextApplication {
 		polls.addPoll(factory.createRandomPoll("Poll4"));
 		TextApplication app = new TextApplication(polls);
 		app.displayPollsBySeat(factory.getPartyNames());
+		//app.displayPollsByVotes(factory.getPartyNames());	
 		// End of Testing Code
 		
 	}
