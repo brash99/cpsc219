@@ -1,7 +1,6 @@
 //package application;
 
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class TextApplication {
 	
@@ -166,9 +165,7 @@ public class TextApplication {
 	    	System.out.println("Choose an option:");
 	    	String myChoice2 = myObj.nextLine();
 	    	if (myChoice2.contentEquals("all")) {
-	    		System.out.println("Printing polls ...");
 	    		app.displayPollsBySeat(factory.getPartyNames());
-	    		System.out.println("Back from printing ... ");
 	    	} else if (myChoice2.contentEquals("aggregate")) {
 	    		app.displayAggregatePollbySeat(partyNames);
 	    	} else if (myChoice2.contentEquals("quit")) {
