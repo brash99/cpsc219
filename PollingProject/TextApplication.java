@@ -176,6 +176,8 @@ public class TextApplication {
 	    	}
 	    }
 	    
+	    System.out.println("Goodbye ... :)");
+	    
 		return;
 	}
 	
