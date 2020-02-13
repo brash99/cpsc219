@@ -50,8 +50,8 @@ public class Poll {
 		String output = this.name + ":\n";
 		Party[] sortedPartyList = this.getPartiesSortedBySeats();
 		for (int i=0; i<sortedPartyList.length; i++) {
-			output = output + sortedPartyList[i].textVisualizationBySeats(26, 13, 11.0) + "\n";
-			//output = output + (parties[i].getName() + " " + parties[i].getProjectedNumberOfSeats() + " " + parties[i].getProjectedPercentageOfVotes() + "%\n");
+			//output = output + sortedPartyList[i].textVisualizationBySeats(26, 13, 11.0) + "\n";
+			output = output + (parties[i].getName() + " " + parties[i].getProjectedNumberOfSeats() + " " + parties[i].getProjectedPercentageOfVotes() + "%\n");
 		}
 		//sortedPartyList = this.getPartiesSortedByVotes();
 		//for (int i=0; i<sortedPartyList.length; i++) {

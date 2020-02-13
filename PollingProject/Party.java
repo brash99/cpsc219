@@ -34,11 +34,6 @@ public class Party implements Comparable{
 	public void setProjectedNumberOfSeats(float projectedNumberOfSeats) {
 		seats = projectedNumberOfSeats;
 	}
-
-	@Override
-	public String toString() {
-		return name + " (" + percent + "% " + seats + ")";
-	}
 	
 	public double projectedPercentOfSeats(int totalNumberOfSeats) {
 		return (double)(this.getProjectedNumberOfSeats()/totalNumberOfSeats*100.0);
@@ -84,6 +79,11 @@ public class Party implements Comparable{
 		int stars = (int)Math.round(this.getProjectedPercentageOfVotes()/percentOfVotesPerStar);
 		
 		return createStarString(starsNeededForMajority,stars,maxStars);
+	}
+	
+	@Override
+	public String toString() {
+		return name + " (" + percent + "% " + seats + ")";
 	}
 	
 	public int compareTo(Object o) {
