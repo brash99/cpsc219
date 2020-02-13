@@ -78,8 +78,8 @@ public class PollList {
 		
 		// create the aggregate poll
 		testPoll = createAggregatePoll(testPoll,partyNames);
-		System.out.println("Original Aggregate Poll");
-		System.out.println(testPoll);
+		//System.out.println("Original Aggregate Poll");
+		//System.out.println(testPoll);
 		
 		// Before we return the aggregate poll object, we need to go through
 		// and calculate the total of all of the percentages, and seats, and

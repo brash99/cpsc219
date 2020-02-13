@@ -19,11 +19,30 @@ public class Factory {
 	}
 	
 	public Poll createRandomPoll(String name) {
+		
+		//System.out.println("Random poll: "+name);
 		Poll poll = new Poll(name, partyNames.length);
 		
 		Random rand = new Random();
-		for (String partyName : partyNames) {
-			poll.addParty(new Party(partyName, rand.nextInt(numOfSeats), rand.nextFloat()));
+		
+		Integer[] seats = new Integer[partyNames.length];
+		
+		float seatsum = 0.0f;
+		int seatsAvailable = numOfSeats;
+		for (int i=0; i<partyNames.length; i++) {
+			seats[i] = rand.nextInt(seatsAvailable);
+			seatsAvailable -= seats[i];
+			seatsum = seatsum + seats[i];
+			//System.out.println(i+" "+partyNames[i]+" "+seats[i]+" "+seatsum);
+		}
+		for (int i=0; i<partyNames.length; i++) {
+			seats[i] = (int)(float)(seats[i]/seatsum*numOfSeats);
+		}
+		
+		for (int i=0; i<partyNames.length; i++) {
+			float percentOfVotes = (float)((float)seats[i]/numOfSeats*100.0);
+			//System.out.println(i+" "+partyNames[i]+" "+seats[i]+" "+percentOfVotes);
+			poll.addParty(new Party(partyNames[i], (float)(seats[i]), percentOfVotes));
 		}
 		return poll;
 	}
