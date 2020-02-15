@@ -133,8 +133,11 @@ public class Lab2_orig implements ActionListener {
 /************************************************************************/
 /*               DO NOT CHANGE ANYTHING ABOVE THIS POINT                 /
 /************************************************************************/
+	
 	private boolean firstpass = true;
-	String first_encrypted;	
+	String first_encrypted;
+	String old_decr;
+	String old_subs;
 	
 	static HashMap<Character, Integer> characterCount(String inputString) 
     { 
@@ -208,20 +211,15 @@ public class Lab2_orig implements ActionListener {
  			decrypted.setText(decr);
  			
  			HashMap<Character, Integer> charCountMap = characterCount(encr);
- 			System.out.println(charCountMap.get('A'));
- 			System.out.println(letters);
  		
  			for (int i=0; i<letters.length(); i++) {
- 				//System.out.println(letters.charAt(i) + " " + charCountMap.get(letters.charAt(i)));
  				if (letters.charAt(i) >= 'A' && letters.charAt(i) <= 'Z') {
-
  					if (charCountMap.get(letters.charAt(i)) != null) {
  						//System.out.println("Replace!");
  						int value = charCountMap.get(letters.charAt(i));
  						int length = String.valueOf(value).length();
  						count = count.substring(0,i-length+1)+value+count.substring(i-length+2);
  					}
- 
  				}
  			}
  			countLabel.setText(count);
@@ -272,15 +270,11 @@ public class Lab2_orig implements ActionListener {
 						ee = decr.charAt(i);
 					}   			
 					decr = decr.substring(0,i)+ee+decr.substring(i+1);
-				}
-				
+				}				
 				decrypted.setText(decr);
 				subLabel.setText(subs);
-
     		}
-    		
-    		
-    		
+    				
     	} else if (command == "Reset Subs") {
     		System.out.println("Resetting ...");
 		}  else if (command == "Undo") {

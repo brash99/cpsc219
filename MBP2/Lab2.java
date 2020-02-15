@@ -173,7 +173,6 @@ public class Lab2 implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
     	
-		System.out.println(encrypted.getText());
 		String encr = encrypted.getText();
 		encr = encr.toUpperCase();
 		if (!encr.equals(first_encrypted) && firstpass==false) {
@@ -190,26 +189,35 @@ public class Lab2 implements ActionListener {
 		
  		if (firstpass) {
  			first_encrypted = encr;
- 			HashMap<Character, Integer> charCountMap = characterCount(encr);
  			
- 			System.out.println(charCountMap.get('A'));
- 		
- 			System.out.println(letters);
+ 			decr = encr;
+			for(int i = 0; i < encr.length() ; i++) { 
+				char c = encr.charAt(i);
+				char ee;
+				if (c >= 'A' && c<= 'Z'){
+					ee = '-';
+				} else {
+					ee = c;
+				}
+				decr = decr.substring(0,i)+ee+decr.substring(i+1);
+			}
+ 			decrypted.setText(decr);
+ 			
+ 			HashMap<Character, Integer> charCountMap = characterCount(encr);
  		
  			for (int i=0; i<letters.length(); i++) {
  				//System.out.println(letters.charAt(i) + " " + charCountMap.get(letters.charAt(i)));
  				if (letters.charAt(i) >= 'A' && letters.charAt(i) <= 'Z') {
-
  					if (charCountMap.get(letters.charAt(i)) != null) {
  						//System.out.println("Replace!");
  						int value = charCountMap.get(letters.charAt(i));
  						int length = String.valueOf(value).length();
  						count = count.substring(0,i-length+1)+value+count.substring(i-length+2);
  					}
- 
  				}
  			}
  			countLabel.setText(count);
+ 			
  			firstpass = false;
  		}
  		  	
@@ -236,64 +244,33 @@ public class Lab2 implements ActionListener {
     		} catch (Exception exception) {
     			crypt_char = "";
     			plain_char = "";
-    			goodInput = false;
-
-    			if (decr.length() != encr.length()) {
-    				decr = encr;
-    				for(int i = 0; i < encr.length() ; i++) { 
-    					char c = encr.charAt(i);
-    					char ee;
-    					if (c >= 'A' && c<= 'Z'){
-    						ee = '-';
-    					} else {
-    						ee = c;
-    					}
-    					decr = decr.substring(0,i)+ee+decr.substring(i+1);
-    				}
-    			}    
+    			goodInput = false;   
     		}
     		  		
     		if (goodInput) {
-    			if (decr.length() != encr.length()) {
-    				decr = encr;
-    				for(int i = 0; i < encr.length() ; i++) { 
-    					char c = encr.charAt(i);
-    					char ee;
-    					if (c == crypt_char.charAt(0)) {
-    						ee = plain_char.charAt(0);
-    					} else if (c >= 'A' && c<= 'Z'){
-    						ee = '-';
-    					} else {
-    						ee = c;
-    					}
-    					decr = decr.substring(0,i)+ee+decr.substring(i+1);
-    				}
-    			} else {
-					old_subs = subs;
-		    		old_decr = decr;
-    				for(int i = 0; i < encr.length() ; i++) { 
-    					char c = encr.charAt(i);
-    					char ee;
-    					if (c == crypt_char.charAt(0)) {
-    						ee = plain_char.charAt(0);
-    						int value = 3*(c-65)+1;
-        					subs = subs.substring(0,value)+ee+subs.substring(value+1);
-        					undoButton.setEnabled(true);
-    					} else { 
-    						ee = decr.charAt(i);
-    					}   			
-    					decr = decr.substring(0,i)+ee+decr.substring(i+1);
-    					subLabel.setText(subs);
-    				}
-    			}
-   		
-    			System.out.println(decr);
-    			
+
+				old_subs = subs;
+		    	old_decr = decr;
+    			for(int i = 0; i < encr.length() ; i++) { 
+    				char c = encr.charAt(i);
+    				char ee;
+    				if (c == crypt_char.charAt(0)) {
+    					ee = plain_char.charAt(0);
+    					int value = 3*(c-65)+1;
+        				subs = subs.substring(0,value)+ee+subs.substring(value+1);
+        				undoButton.setEnabled(true);
+    				} else { 
+    					ee = decr.charAt(i);
+    				}   			
+    				decr = decr.substring(0,i)+ee+decr.substring(i+1);
+
+    			}   			
     		} // ends goodInput
+			subLabel.setText(subs);
 			decrypted.setText(decr);
-			System.out.println(old_decr);
-			System.out.println(old_subs);
+			
     	} else if (command == "Reset Subs") {
+    		
     		decr = encr;
 			for(int i = 0; i < encr.length() ; i++) { 
 				char c = encr.charAt(i);
@@ -307,10 +284,14 @@ public class Lab2 implements ActionListener {
 			}
 			decrypted.setText(decr);
 			subLabel.setText(" -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - ");
+			undoButton.setEnabled(false);
+			
 		}  else if (command == "Undo") {
+			
 			decrypted.setText(old_decr);
 			subLabel.setText(old_subs);
-			undoButton.setEnabled(false);			
+			undoButton.setEnabled(false);
+			
 		} // end Undo
     } // ends actionPerformed
 } // ends main class
