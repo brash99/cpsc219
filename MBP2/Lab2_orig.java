@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class Lab2 implements ActionListener {
+public class Lab2_orig implements ActionListener {
 
 	private JFrame frame;
 
@@ -15,7 +15,7 @@ public class Lab2 implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Lab2 window = new Lab2();
+					Lab2_orig window = new Lab2_orig();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -27,7 +27,7 @@ public class Lab2 implements ActionListener {
 	/**
 	 * Create the application.
 	 */
-	public Lab2() {
+	public Lab2_orig() {
 		initialize();
 	}
 
@@ -133,11 +133,8 @@ public class Lab2 implements ActionListener {
 /************************************************************************/
 /*               DO NOT CHANGE ANYTHING ABOVE THIS POINT                 /
 /************************************************************************/
-	
 	private boolean firstpass = true;
-	String first_encrypted;
-	String old_decr;
-	String old_subs;
+	String first_encrypted;	
 	
 	static HashMap<Character, Integer> characterCount(String inputString) 
     { 
@@ -173,27 +170,45 @@ public class Lab2 implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
     	
-		System.out.println(encrypted.getText());
+    	// Get the basic information from the GUI
+
 		String encr = encrypted.getText();
 		encr = encr.toUpperCase();
+		
+		String decr = decrypted.getText();
+		decr = decr.toUpperCase();
+		
+		String count = countLabel.getText();
+		String letters = letterLabel.getText();
+		String subs = subLabel.getText();
+		
 		if (!encr.equals(first_encrypted) && firstpass==false) {
 			firstpass = true;
 			countLabel.setText("                                                                              ");
 			subLabel.setText(" -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - ");
 		}
 		
-		String decr = decrypted.getText();
-		decr = decr.toUpperCase();
-		String count = countLabel.getText();
-		String letters = letterLabel.getText();
-		String subs = subLabel.getText();
-		
  		if (firstpass) {
  			first_encrypted = encr;
- 			HashMap<Character, Integer> charCountMap = characterCount(encr);
+ 			// do stuff
+ 			// 1. Create decr string -- ----- ---- CHECK
+ 			// 2. create the letter counter string. 
  			
+			decr = encr;
+			for(int i = 0; i < encr.length() ; i++) { 
+				char c = encr.charAt(i);
+				char ee;
+				if (c >= 'A' && c<= 'Z'){
+					ee = '-';
+				} else {
+					ee = c;
+				}
+				decr = decr.substring(0,i)+ee+decr.substring(i+1);
+			}
+ 			decrypted.setText(decr);
+ 			
+ 			HashMap<Character, Integer> charCountMap = characterCount(encr);
  			System.out.println(charCountMap.get('A'));
- 		
  			System.out.println(letters);
  		
  			for (int i=0; i<letters.length(); i++) {
@@ -210,13 +225,14 @@ public class Lab2 implements ActionListener {
  				}
  			}
  			countLabel.setText(count);
+ 			
  			firstpass = false;
  		}
  		  	
     	String command = e.getActionCommand();
     	
     	if (command.equals("Update")) {
-
+    		
     		String crypt_char = cryptTF.getText().trim();
     		crypt_char = crypt_char.toUpperCase();
     		
@@ -224,6 +240,7 @@ public class Lab2 implements ActionListener {
     		plain_char = plain_char.toUpperCase();
     		
     		boolean goodInput;
+    		
     		try {
     			boolean goodCryptA = crypt_char.charAt(0) >= 'A';
     			boolean goodCryptZ = crypt_char.charAt(0) <= 'Z';
@@ -236,81 +253,38 @@ public class Lab2 implements ActionListener {
     		} catch (Exception exception) {
     			crypt_char = "";
     			plain_char = "";
-    			goodInput = false;
-
-    			if (decr.length() != encr.length()) {
-    				decr = encr;
-    				for(int i = 0; i < encr.length() ; i++) { 
-    					char c = encr.charAt(i);
-    					char ee;
-    					if (c >= 'A' && c<= 'Z'){
-    						ee = '-';
-    					} else {
-    						ee = c;
-    					}
-    					decr = decr.substring(0,i)+ee+decr.substring(i+1);
-    				}
-    			}    
+    			goodInput = false;   
     		}
-    		  		
+    		
     		if (goodInput) {
-    			if (decr.length() != encr.length()) {
-    				decr = encr;
-    				for(int i = 0; i < encr.length() ; i++) { 
-    					char c = encr.charAt(i);
-    					char ee;
-    					if (c == crypt_char.charAt(0)) {
-    						ee = plain_char.charAt(0);
-    					} else if (c >= 'A' && c<= 'Z'){
-    						ee = '-';
-    					} else {
-    						ee = c;
-    					}
-    					decr = decr.substring(0,i)+ee+decr.substring(i+1);
-    				}
-    			} else {
-					old_subs = subs;
-		    		old_decr = decr;
-    				for(int i = 0; i < encr.length() ; i++) { 
-    					char c = encr.charAt(i);
-    					char ee;
-    					if (c == crypt_char.charAt(0)) {
-    						ee = plain_char.charAt(0);
-    						int value = 3*(c-65)+1;
-        					subs = subs.substring(0,value)+ee+subs.substring(value+1);
-        					undoButton.setEnabled(true);
-    					} else { 
-    						ee = decr.charAt(i);
-    					}   			
-    					decr = decr.substring(0,i)+ee+decr.substring(i+1);
-    					subLabel.setText(subs);
-    				}
-    			}
-   		
-    			System.out.println(decr);
+    			// do stuff - replace character and update subLabel
+    			// march through the decrypted string and replace dashes with appropriate character
+    			// update subLabel
     			
-    		} // ends goodInput
-			decrypted.setText(decr);
-			System.out.println(old_decr);
-			System.out.println(old_subs);
-    	} else if (command == "Reset Subs") {
-    		decr = encr;
-			for(int i = 0; i < encr.length() ; i++) { 
-				char c = encr.charAt(i);
-				char ee;
-				if (c >= 'A' && c<= 'Z'){
-					ee = '-';
-				} else {
-					ee = c;
+				for(int i = 0; i < encr.length() ; i++) { 
+					char c = encr.charAt(i);
+					char ee;
+					if (c == crypt_char.charAt(0)) {
+						ee = plain_char.charAt(0);
+						int value = 3*(c-65)+1; // c will be between 65(A) and 90(Z).
+    					subs = subs.substring(0,value)+ee+subs.substring(value+1);
+					} else { 
+						ee = decr.charAt(i);
+					}   			
+					decr = decr.substring(0,i)+ee+decr.substring(i+1);
 				}
-				decr = decr.substring(0,i)+ee+decr.substring(i+1);
-			}
-			decrypted.setText(decr);
-			subLabel.setText(" -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - ");
+				
+				decrypted.setText(decr);
+				subLabel.setText(subs);
+
+    		}
+    		
+    		
+    		
+    	} else if (command == "Reset Subs") {
+    		System.out.println("Resetting ...");
 		}  else if (command == "Undo") {
-			decrypted.setText(old_decr);
-			subLabel.setText(old_subs);
-			undoButton.setEnabled(false);			
+    		System.out.println("Undoing ...");	
 		} // end Undo
     } // ends actionPerformed
 } // ends main class
