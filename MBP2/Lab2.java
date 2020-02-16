@@ -167,6 +167,7 @@ public class Lab2 implements ActionListener {
     	
 		String encr = encrypted.getText();
 		encr = encr.toUpperCase();
+		
 		if (!encr.equals(first_encrypted) && firstpass==false) {
 			firstpass = true;
 			countLabel.setText("                                                                              ");
@@ -215,7 +216,9 @@ public class Lab2 implements ActionListener {
  		  	
     	String command = e.getActionCommand();
     	
-    	if (command.equals("Update")) {
+    	switch (command) {
+    	
+    	case "Update":
 
     		String crypt_char = cryptTF.getText().trim();
     		crypt_char = crypt_char.toUpperCase();
@@ -261,7 +264,9 @@ public class Lab2 implements ActionListener {
 			subLabel.setText(subs);
 			decrypted.setText(decr);
 			
-    	} else if (command == "Reset Subs") {
+			break;
+			
+    	case "Reset Subs":
     		
     		decr = encr;
 			for(int i = 0; i < encr.length() ; i++) { 
@@ -278,7 +283,9 @@ public class Lab2 implements ActionListener {
 			subLabel.setText(" -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - ");
 			undoButton.setEnabled(false);
 			
-		}  else if (command == "Undo") {
+			break;
+			
+    	case "Undo":
 			
 			//undoButton.setEnabled(false);
 			decr = decrypted.getText();
@@ -287,7 +294,7 @@ public class Lab2 implements ActionListener {
 			
 			for(int i = 0; i < decr.length() ; i++) {
 				char c = decr.charAt(i);
-				System.out.println(i + " " + c);
+				//System.out.println(i + " " + c);
 				if (c == ee){
 					c = '-';
 				}
@@ -309,7 +316,9 @@ public class Lab2 implements ActionListener {
 				undoButton.setEnabled(false);
 			}
 			
-		} // end Undo
+			break;
+			
+		} // end switch
     } // ends actionPerformed
 } // ends main class
     		  
