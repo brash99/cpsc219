@@ -1,4 +1,4 @@
-// package application;
+//package PollingProject;
 
 public class PollList {
 	private Poll[] polls;

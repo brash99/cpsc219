@@ -1,3 +1,5 @@
+//package PollingProject;
+
 import java.util.Comparator;
  
 public class SeatComparator implements Comparator<Party> {

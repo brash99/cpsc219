@@ -1,4 +1,4 @@
-//package application;
+//package PollingProject;
 
 public class Party implements Comparable{
 	private String name;

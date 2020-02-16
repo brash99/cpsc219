@@ -1,4 +1,4 @@
-//package application;
+//package PollingProject;
 
 import java.util.Random;
 

@@ -1,3 +1,5 @@
+//package PollingProject;
+
 import java.util.Comparator;
  
 public class VoteComparator implements Comparator<Party> {

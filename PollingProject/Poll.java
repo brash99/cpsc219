@@ -1,6 +1,6 @@
-import java.util.Arrays;
+//package PollingProject;
 
-//package application;
+import java.util.Arrays;
 
 public class Poll {
 	private String name;
