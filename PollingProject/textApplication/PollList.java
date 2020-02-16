@@ -78,8 +78,8 @@ public class PollList {
 		
 		// create the aggregate poll
 		testPoll = createAggregatePoll(testPoll,partyNames);
-		System.out.println("Original Aggregate Poll");
-		System.out.println(testPoll);
+		//System.out.println("Original Aggregate Poll");
+		//System.out.println(testPoll);
 		
 		// Before we return the aggregate poll object, we need to go through
 		// and calculate the total of all of the percentages, and seats, and
@@ -264,8 +264,8 @@ public class PollList {
 		
 		System.out.println(testList);
 		
-		//String[] aggPollNames = {"CPC","Liberal","Green","NDP","PPC","Rhinoceros"};
-		String[] aggPollNames = {"CPC","Liberal","Green","NDP"};		
+		String[] aggPollNames = {"CPC","Liberal","Green","NDP","PPC","Rhinoceros"};
+		//String[] aggPollNames = {"CPC","Liberal","Green","NDP"};		
 		Poll aggregatePoll = new Poll("aggregate",aggPollNames.length);
 		aggregatePoll = testList.getAggregatePoll(aggPollNames);
 		
