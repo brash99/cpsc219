@@ -136,8 +136,6 @@ public class Lab2 implements ActionListener {
 	
 	private boolean firstpass = true;
 	String first_encrypted;
-	String old_decr;
-	String old_subs;
 	
 	static HashMap<Character, Integer> characterCount(String inputString) 
     { 		
@@ -242,9 +240,7 @@ public class Lab2 implements ActionListener {
     		}
     		  		
     		if (goodInput) {
-
-				old_subs = subs;
-		    	old_decr = decr;
+    			
 		    	char ee = plain_char.charAt(0);
 		    	undoButton.setEnabled(true);
 				undoStack.push(ee);
@@ -259,7 +255,8 @@ public class Lab2 implements ActionListener {
     					ee = decr.charAt(i);
     				}   			
     				decr = decr.substring(0,i)+ee+decr.substring(i+1);
-    			}   			
+    			}   
+    			
     		} // ends goodInput
 			subLabel.setText(subs);
 			decrypted.setText(decr);
