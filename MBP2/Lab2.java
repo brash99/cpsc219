@@ -161,7 +161,22 @@ public class Lab2 implements ActionListener {
             } 
         }        
         return charCountMap; 
-    } 
+    }
+	
+	private String resetDecrypted(String encr) {
+		String decr = encr;
+		for(int i = 0; i < encr.length() ; i++) { 
+			char c = encr.charAt(i);
+			char ee;
+			if (c >= 'A' && c<= 'Z'){
+				ee = '-';
+			} else {
+				ee = c;
+			}
+			decr = decr.substring(0,i)+ee+decr.substring(i+1);
+		}
+		return decr;
+	}
 
     public void actionPerformed(ActionEvent e) {
     	
@@ -183,17 +198,8 @@ public class Lab2 implements ActionListener {
  		if (firstpass) {
  			first_encrypted = encr;
  			
- 			decr = encr;
-			for(int i = 0; i < encr.length() ; i++) { 
-				char c = encr.charAt(i);
-				char ee;
-				if (c >= 'A' && c<= 'Z'){
-					ee = '-';
-				} else {
-					ee = c;
-				}
-				decr = decr.substring(0,i)+ee+decr.substring(i+1);
-			}
+ 			decr = resetDecrypted(encr);
+ 			
  			decrypted.setText(decr);
  			
  			HashMap<Character, Integer> charCountMap = characterCount(encr);
@@ -268,17 +274,7 @@ public class Lab2 implements ActionListener {
 			
     	case "Reset Subs":
     		
-    		decr = encr;
-			for(int i = 0; i < encr.length() ; i++) { 
-				char c = encr.charAt(i);
-				char ee;
-				if (c >= 'A' && c<= 'Z'){
-					ee = '-';
-				} else {
-					ee = c;
-				}
-				decr = decr.substring(0,i)+ee+decr.substring(i+1);
-			}
+    		decr = resetDecrypted(encr);
 			decrypted.setText(decr);
 			subLabel.setText(" -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - ");
 			undoButton.setEnabled(false);
