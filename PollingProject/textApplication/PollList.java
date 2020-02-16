@@ -1,4 +1,4 @@
-// package application;
+package textApplication;
 
 public class PollList {
 	private Poll[] polls;

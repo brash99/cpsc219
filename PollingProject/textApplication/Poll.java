@@ -1,4 +1,6 @@
-//package application;
+package textApplication;
+
+import java.util.Arrays;
 
 public class Poll {
 	private String name;
@@ -31,20 +33,26 @@ public class Poll {
 	}
 	
 	public Party[] getPartiesSortedBySeats() {
+		
+		Arrays.sort(parties, new SeatComparator());
 		return parties;
 	}
+	
 
 	public Party[] getPartiesSortedByVotes() {
+		
+		Arrays.sort(parties, new VoteComparator());
 		return parties;
 	}
 	
 	@Override
 	public String toString() {
 		String output = this.name + ":\n";
-		for (int i=0; i<parties.length; i++) {
+		Party[] sortedPartyList = this.getPartiesSortedBySeats();
+		for (int i=0; i<sortedPartyList.length; i++) {
 			output = output + (parties[i].getName() + " " + parties[i].getProjectedNumberOfSeats() + " " + parties[i].getProjectedPercentageOfVotes() + "%\n");
 		}
-		
+
 		return output;
 	}
 }
