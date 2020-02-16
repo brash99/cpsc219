@@ -140,35 +140,29 @@ public class Lab2 implements ActionListener {
 	String old_subs;
 	
 	static HashMap<Character, Integer> characterCount(String inputString) 
-    { 
-		
+    { 		
 		// Creating a HashMap containing char 
 		// as a key and occurrences as  a value 
 		HashMap<Character, Integer> charCountMap 
             = new HashMap<Character, Integer>(); 
   
-        // Converting given string to char array 
-  
+        // Converting given string to char array   
         char[] strArray = inputString.toCharArray(); 
   
         // checking each char of strArray 
         for (char c : strArray) { 
             if (charCountMap.containsKey(c)) { 
-  
                 // If char is present in charCountMap, 
                 // incrementing it's count by 1 
                 charCountMap.put(c, charCountMap.get(c) + 1); 
             } 
-            else { 
-  
+            else {  
                 // If char is not present in charCountMap, 
                 // putting this char to charCountMap with 1 as it's value 
                 charCountMap.put(c, 1); 
             } 
-        } 
-        
-        return charCountMap;
-  
+        }        
+        return charCountMap; 
     } 
 
     public void actionPerformed(ActionEvent e) {
@@ -251,19 +245,20 @@ public class Lab2 implements ActionListener {
 
 				old_subs = subs;
 		    	old_decr = decr;
+		    	char ee = plain_char.charAt(0);
+		    	undoButton.setEnabled(true);
+				undoStack.push(ee);
+				//System.out.println("Stack after update = " + undoStack);
     			for(int i = 0; i < encr.length() ; i++) { 
     				char c = encr.charAt(i);
-    				char ee;
     				if (c == crypt_char.charAt(0)) {
     					ee = plain_char.charAt(0);
     					int value = 3*(c-65)+1;
         				subs = subs.substring(0,value)+ee+subs.substring(value+1);
-        				undoButton.setEnabled(true);
     				} else { 
     					ee = decr.charAt(i);
     				}   			
     				decr = decr.substring(0,i)+ee+decr.substring(i+1);
-
     			}   			
     		} // ends goodInput
 			subLabel.setText(subs);
@@ -288,9 +283,34 @@ public class Lab2 implements ActionListener {
 			
 		}  else if (command == "Undo") {
 			
-			decrypted.setText(old_decr);
-			subLabel.setText(old_subs);
-			undoButton.setEnabled(false);
+			//undoButton.setEnabled(false);
+			decr = decrypted.getText();
+			char ee = undoStack.pop();
+			//System.out.println("Stack after undo = " + undoStack);
+			
+			for(int i = 0; i < decr.length() ; i++) {
+				char c = decr.charAt(i);
+				System.out.println(i + " " + c);
+				if (c == ee){
+					c = '-';
+				}
+				decr = decr.substring(0,i)+c+decr.substring(i+1);
+			}
+			
+			for(int i = 0; i < subs.length() ; i++) { 
+				char c = subs.charAt(i);
+				if (c == ee) {
+					c = '-';
+				}  			
+				subs = subs.substring(0,i)+c+subs.substring(i+1);
+			}   			
+			
+			subLabel.setText(subs);
+ 			decrypted.setText(decr);
+ 			
+			if (undoStack.size() < 1) {
+				undoButton.setEnabled(false);
+			}
 			
 		} // end Undo
     } // ends actionPerformed
