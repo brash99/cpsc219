@@ -18,6 +18,10 @@ public class PollList {
 	}
 
 	public void addPoll(Poll aPoll) {
+		if (aPoll == null) {
+			System.out.println("Error:  null poll passed to addPoll");
+			return;
+		}
 		//
 		// Step 1: Get the index of the next empty space in the poll list
 		int goodIndex = getEmptyPollIndex(polls);
@@ -28,8 +32,7 @@ public class PollList {
 		// N.B.  We use polls.length-1 because the first poll is at element zero (so -1 for that)
 		//       
 		//
-		for(int i=0;i<Math.min(goodIndex,polls.length-1);i++){
-			//System.out.println(polls[i].getPollName() + " " + aPoll.getPollName());
+		for(int i=0;i<goodIndex;i++){
 			if(polls[i].getPollName() == aPoll.getPollName()){
 				System.out.println("Replacing poll at index = " + i);
 				polls[i]=aPoll;
