@@ -1,4 +1,4 @@
-package textApplication;
+package application;
 
 import java.util.Scanner;
 
@@ -7,13 +7,13 @@ public class TextApplication {
 	private PollList polls;
 	private final int MAX_NUMBER_OF_STARS = 25;
 	
-	public TextApplication() {
-		//System.out.println("Starting program ... max stars = "+MAX_NUMBER_OF_STARS);
-	}
-	
 	public TextApplication(PollList newpolls) {
 		this();
 		polls = newpolls;
+	}
+	
+	public TextApplication() {
+		//System.out.println("Starting program ... max stars = "+MAX_NUMBER_OF_STARS);
 	}
 	
 	public int getMaxNumberOfStars() {

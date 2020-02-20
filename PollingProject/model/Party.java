@@ -1,4 +1,4 @@
-package textApplication;
+package model;
 
 public class Party implements Comparable{
 	private String name;
