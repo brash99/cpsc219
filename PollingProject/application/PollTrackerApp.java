@@ -21,7 +21,7 @@ import javafx.scene.control.TextArea;
 
 public class PollTrackerApp extends Application {
 	public static final int DEFAULT_NUMBER_OF_SEATS = 345;
-	public static final String FXML_FILES_LOCATION = "src/view/";
+	public static final String FXML_FILES_LOCATION = "view/";
 	public static final int DEFAULT_NUMBER_OF_POLLS = 5;
 	
 	private PollList polls;
