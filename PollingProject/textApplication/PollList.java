@@ -18,6 +18,10 @@ public class PollList {
 	}
 
 	public void addPoll(Poll aPoll) {
+		if (aPoll == null) {
+			System.out.println("Error:  null poll passed to addPoll");
+			return;
+		}
 		//
 		// Step 1: Get the index of the next empty space in the poll list
 		int goodIndex = getEmptyPollIndex(polls);
@@ -28,8 +32,7 @@ public class PollList {
 		// N.B.  We use polls.length-1 because the first poll is at element zero (so -1 for that)
 		//       
 		//
-		for(int i=0;i<Math.min(goodIndex,polls.length-1);i++){
-			//System.out.println(polls[i].getPollName() + " " + aPoll.getPollName());
+		for(int i=0;i<goodIndex;i++){
 			if(polls[i].getPollName() == aPoll.getPollName()){
 				System.out.println("Replacing poll at index = " + i);
 				polls[i]=aPoll;
@@ -110,13 +113,15 @@ public class PollList {
 			for (int j=0; j<polls.length; j++) {
 				//System.out.println(polls[j].getParty(partyNames[i]));
 				// store the current poll information associated with the current search party in a temporary object 
-				testparty = polls[j].getParty(partyNames[i]);
-			
-				// if this party is actually in this poll:
-				if (testparty != null) {
-					counter++;
-					seatsum = seatsum + testparty.getProjectedNumberOfSeats();
-					percentsum = percentsum + testparty.getProjectedPercentageOfVotes();
+				if (polls[j] != null) {
+					testparty = polls[j].getParty(partyNames[i]);
+
+					// if this party is actually in this poll:
+					if (testparty != null) {
+						counter++;
+						seatsum = seatsum + testparty.getProjectedNumberOfSeats();
+						percentsum = percentsum + testparty.getProjectedPercentageOfVotes();
+					}
 				}
 			}
 			// average the number of seats and percentages over the polls 
@@ -178,26 +183,22 @@ public class PollList {
 		// and for each one it will print that poll - printing that poll means that it will in turn call
 		// the toString() method in the Poll class definition.
 		//
-		int index=0;
-		while (true) {
-			try {
-				if (polls[index]==null) {
-					return "";
-				} else {
-					System.out.println(polls[index]);
-					index++;
-				}
-			} catch (Exception e) {
-				return "";
+		String returnString = "";
+		for (int i=0; i<polls.length; i++) {
+			System.out.println(i);
+			if (polls[i] != null) {
+				returnString += polls[i].toString();
 			}
 		}
+		
+		return returnString;
 	}
 	
 	public static void main(String[] args) {
 		
 		// We want to first define a variable (for testing purposes) that is the number of polls that
 		// we might want to store in the PollList
-		int numberOfPolls = 3;
+		int numberOfPolls = 4;
 		
 		//
 		// Next we create a PollList that allows for the number of Polls that we will store
