@@ -21,6 +21,8 @@ public class PollList {
 		if (aPoll == null) {
 			System.out.println("Error:  null poll passed to addPoll");
 			return;
+		} else {
+			System.out.println("Adding poll " + aPoll.getPollName() + "  to PollList ");
 		}
 		//
 		// Step 1: Get the index of the next empty space in the poll list

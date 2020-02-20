@@ -25,7 +25,8 @@ public class Factory {
 	
 	public Poll createRandomPoll(String name) {
 		
-		//System.out.println("Random poll: "+name);
+		System.out.println("Random poll: "+name);
+		//System.out.println("partyNames: "+partyNames.length);		
 		Poll poll = new Poll(name, partyNames.length);
 		
 		Random rand = new Random();
