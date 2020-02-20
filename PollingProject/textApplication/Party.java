@@ -19,20 +19,20 @@ public class Party implements Comparable{
 		return name;
 	}
 	
+	public float getProjectedNumberOfSeats() {
+		return seats;
+	}
+	
 	public float getProjectedPercentageOfVotes() {
 		return percent;
 	}
 	
-	public void setProjectedPercentageOfVotes(float projectedPercentageOfVotes) {
-		percent = projectedPercentageOfVotes;
-	}
-
-	public float getProjectedNumberOfSeats() {
-		return seats;
-	}
-
 	public void setProjectedNumberOfSeats(float projectedNumberOfSeats) {
 		seats = projectedNumberOfSeats;
+	}
+	
+	public void setProjectedPercentageOfVotes(float projectedPercentageOfVotes) {
+		percent = projectedPercentageOfVotes;
 	}
 	
 	public double projectedPercentOfSeats(int totalNumberOfSeats) {
