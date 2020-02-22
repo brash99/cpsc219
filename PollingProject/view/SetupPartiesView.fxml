@@ -22,27 +22,40 @@
  				<Font size="14.0" />
 			</font>
 		</Button>
+		
 		<Button layoutX="192.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleSetPartyInfoAction" text="Set Party Info">
 			<font>
 				<Font size="14.0" />
 			</font>
 		</Button>
+		
 		<Button layoutX="328.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleSubmitPartyInfoAction" text="Submit All Party Info">
   			<font>
 				<Font size="14.0" />
 			</font>
 		</Button>
-		<TextField layoutX="187.0" layoutY="144.0" fx:id="newPartyName" prefHeight="27.0" prefWidth="267.0" />
-		<Label layoutX="88.0" layoutY="146.0" text="Party Name:">
-  			<font>
+		
+		<Label layoutX="57.0" layoutY="146.0" text="New Party Name:">
+			<font>
+				<Font size="18.0" />
+ 			</font>
+		</Label>
+		<TextField layoutX="195.0" layoutY="144.0" fx:id="newPartyName" prefHeight="27.0" prefWidth="267.0" />
+ 		
+ 		<Label layoutX="82.0" layoutY="30.0" text="Select Party to setup:">
+			<font>
 				<Font size="18.0" />
 			</font>
 		</Label>
-		<Label layoutX="112.0" layoutY="43.0" text="Select Party to setup:">
-			<font>
+ 		<MenuButton fx:id="partyMenu" text="Choose Party" onAction="#handleMenuChoice" layoutX="321.0" layoutY="28.0" mnemonicParsing="false"/>
+
+		<Label layoutX="34.0" layoutY="103.0" prefHeight="23.0" prefWidth="155.0" text="Current Party Name:">
+ 			<font>
  				<Font size="18.0" />
-			</font>
-		</Label>
-		<MenuButton fx:id="newPartyChoice" layoutX="303.0" layoutY="41.0" mnemonicParsing="false"/>
+ 			</font>
+ 		</Label>
+		<TextField layoutX="195.0" layoutY="101.0" fx:id="currentPartyName" prefHeight="27.0" prefWidth="267.0" />
+		
+	
 	</children>
 </AnchorPane>

@@ -66,8 +66,8 @@ public class SetupPollTrackerController extends PollTrackerController {
 		}
 		factory = new Factory(numberOfSeats);
 		factory.setPartyNames(nameList);
-		//PollList polls = factory.createRandomPollList(numberOfPolls);
-		polls = new PollList(numberOfPolls, numberOfSeats);
+		//polls = factory.createEmptyPollList(numberOfPolls);
+	    polls = new PollList(numberOfPolls, numberOfSeats);
 
 		System.out.println("Setting polls in main app ...");
 		app.setPolls(polls);

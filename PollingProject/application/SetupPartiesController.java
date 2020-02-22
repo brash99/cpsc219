@@ -4,28 +4,28 @@ import javafx.fxml.FXML;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-
-import model.Factory;
-import model.PollList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 public class SetupPartiesController extends PollTrackerController {
 	
 	private PollTrackerApp app;
 	
-	private Factory factory;
 	private String[] partyNames;
+	private boolean reload = true;
 	
 	@FXML
 	private TextField newPartyName;
 	@FXML
-	private MenuButton m;
-	private MenuItem m1;
+	private TextField currentPartyName;
+	@FXML
+	private MenuButton partyMenu;
 	
 	public void setPollTrackerApp(PollTrackerApp app) {
 		System.out.println("In SetupPartiesController constructor ...");
 		this.app = app;
-		factory = app.getFactory();
-		partyNames = factory.getPartyNames();
+		
+		partyNames = app.getFactory().getPartyNames();
 		System.out.println("Initial party names:");
 		for (int i=0; i<partyNames.length; i++) {
 			System.out.println(partyNames[i]);
@@ -35,32 +35,58 @@ public class SetupPartiesController extends PollTrackerController {
 	public void refresh() {
 		System.out.println("In refresh method of SetupPartiesController");
     	newPartyName.setText("");
+    	currentPartyName.setText("");
 		System.out.println("Main app party names:");
 		for (int i=0; i<app.getFactory().getPartyNames().length;i++) {
 			System.out.println(app.getFactory().getPartyNames()[i]);
 		}
-		partyNames = app.getFactory().getPartyNames();
+		if (reload) {
+			System.out.println("Reload ...");
+			partyNames = app.getFactory().getPartyNames();
+			reload = false;
+		}
+		partyMenu.getItems().clear();
+		for (int i=0; i<partyNames.length; i++) {
+			System.out.println("Updating menu items ... " + partyNames[i]);
+			MenuItem add1 = new MenuItem(partyNames[i]);
+			partyMenu.getItems().add(add1);
+		    add1.setOnAction(new EventHandler<ActionEvent>() {
+		        public void handle(ActionEvent t) {
+		        	currentPartyName.setText(add1.getText());
+		        	partyMenu.setText(currentPartyName.getText());
+		        	newPartyName.setText(add1.getText());
+		        }
+		    });
+		}
 	}
 	
     public void handlePartyClearAction() {
+    	reload = true;
     	refresh();
     	newPartyName.setText("");
+    	currentPartyName.setText("");
     }
     
     public void handleSetPartyInfoAction() {
-    	String temp_party = newPartyName.getText();
-    	partyNames[1]=temp_party;
-        //refresh();
+    	for (int i=0; i<partyNames.length; i++) {
+    		System.out.println(partyNames[i] + " ...*... " + currentPartyName.getText());
+    		if (partyNames[i].equals(currentPartyName.getText())) {
+    			System.out.println("Match! " + i);
+    			partyNames[i] = newPartyName.getText();
+    		}
+    	}
+
+        refresh();
     }
     
     public void handleSubmitPartyInfoAction() {
-    	partyNames[0]="crap";
-    	updatePartyInfo();
-        //refresh();
+    	app.getFactory().setPartyNames(partyNames);
+    	refresh();
     }
     
-	private void updatePartyInfo() {
-		System.out.println("Updating party Information");
-		app.getFactory().setPartyNames(partyNames);
-	}
+    public void handleMenuChoice() {
+    	System.out.println(partyMenu.getId());
+    	partyMenu.setText(currentPartyName.getText());
+    }
+    
 }
