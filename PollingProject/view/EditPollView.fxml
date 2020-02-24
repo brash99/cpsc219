@@ -41,7 +41,7 @@
                    <Font size="18.0" />
                 </font>
              </Label>
-             <Label fx:id="numberOfSeats" layoutX="428.0" layoutY="142.0" text="/345" />
+             <Label fx:id="numberOfSeats" layoutX="428.0" layoutY="142.0" text="/0" />
              <Label layoutX="441.0" layoutY="192.0" text="\%" />
              <Button layoutX="164.0" layoutY="225.0" mnemonicParsing="false" onAction="#handleClearEditAction" text="Clear">
                 <font>

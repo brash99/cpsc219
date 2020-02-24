@@ -36,8 +36,12 @@ public class Factory {
 		float seatsum = 0.0f;
 		int seatsAvailable = numOfSeats;
 		for (int i=0; i<partyNames.length; i++) {
-			seats[i] = rand.nextInt(seatsAvailable);
-			seatsAvailable -= seats[i];
+			if (i == partyNames.length-1) {
+				seats[i] = seatsAvailable;
+			} else {
+				seats[i] = rand.nextInt(seatsAvailable);
+				seatsAvailable -= seats[i];
+			}
 			seatsum = seatsum + seats[i];
 			//System.out.println(i+" "+partyNames[i]+" "+seats[i]+" "+seatsum);
 		}
