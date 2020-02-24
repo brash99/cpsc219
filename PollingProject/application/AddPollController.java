@@ -68,6 +68,7 @@ public class AddPollController extends PollTrackerController {
    }
     
     public void handleAddPollAction() {
+    	pollMenu.setText(newPollName.getText());
     	System.out.println("In handlePollAction");
     	System.out.println(polls.getPolls().length);
 		Poll aPoll = app.getFactory().createRandomPoll(newPollName.getText());

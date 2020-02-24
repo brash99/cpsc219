@@ -68,6 +68,8 @@ public class SetupPartiesController extends PollTrackerController {
     }
     
     public void handleSetPartyInfoAction() {
+    	
+    	partyMenu.setText(newPartyName.getText());
     	for (int i=0; i<partyNames.length; i++) {
     		System.out.println(partyNames[i] + " ...*... " + currentPartyName.getText());
     		if (partyNames[i].equals(currentPartyName.getText())) {

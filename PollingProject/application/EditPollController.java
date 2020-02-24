@@ -20,6 +20,8 @@ public class EditPollController extends PollTrackerController {
 	private PollList polls;
 	private Factory factory;
 	private String originalName;
+	private String originalParty;
+	private Party[] tempPartyList;
 	
 	@FXML
 	private TextField projNumberOfSeats;
@@ -35,6 +37,7 @@ public class EditPollController extends PollTrackerController {
 		this.app = app;
 		this.polls = app.getPolls();
 		this.factory = app.getFactory();
+		refresh();
 	}
 	
 	public void refresh() {
@@ -42,10 +45,17 @@ public class EditPollController extends PollTrackerController {
 		System.out.println("In refresh method of AddPollController");
 		projNumberOfSeats.setText("");
 		projPercentageOfVotes.setText("");
-		pollMenu.getItems().clear();
 		
+		pollMenu.getItems().clear();
+		partyMenu.getItems().clear();
+		pollMenuCreate();
+		partyMenuCreate(tempPartyList);
+		
+	}
+	
+	private void pollMenuCreate() {
 		for (int i=0; i<polls.getPolls().length; i++) {
-			System.out.println("Updating poll menu items ... " + polls.getPolls()[i].getPollName());
+			System.out.println("Adding poll menu item ... " + polls.getPolls()[i].getPollName());
 			MenuItem add1 = new MenuItem(polls.getPolls()[i].getPollName());
 			pollMenu.getItems().add(add1);
 		    add1.setOnAction(new EventHandler<ActionEvent>() {
@@ -55,16 +65,43 @@ public class EditPollController extends PollTrackerController {
 		        	originalName = add1.getText();
 		        	for (int j=0; j<polls.getPolls().length; j++) {
 		        		if (polls.getPolls()[j].getPollName() == originalName) {
-		        			Party[] temp_party = polls.getPolls()[j].getPartiesSortedBySeats();
-		        			System.out.println(temp_party);
+		        			tempPartyList = polls.getPolls()[j].getPartiesSortedBySeats();
 		        		}
 		        	}
 		        }
-		    });
+		    });	    
+		}
+	}
+	
+	private void partyMenuCreate(Party[] tempPartyList) {
+		if (tempPartyList != null) {
+			for (int i=0; i<tempPartyList.length; i++) {
+				String partyName = tempPartyList[i].getName();
+				System.out.println(tempPartyList[i]);
+				MenuItem add2 = new MenuItem(partyName);
+				partyMenu.getItems().add(add2);
+				add2.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent t) {
+						System.out.println("Choosing to edit Party " + add2.getText());
+						partyMenu.setText(add2.getText());
+						originalParty = add2.getText();
+						for (int j=0; j<tempPartyList.length; j++) {
+							if (tempPartyList[j].getName() == add2.getText()) {
+								String s = String.format ("%.2f", tempPartyList[j].getProjectedNumberOfSeats());
+								projNumberOfSeats.setText(s);
+								String ss = String.format ("%.2f", tempPartyList[j].getProjectedPercentageOfVotes());
+								projPercentageOfVotes.setText(ss);
+							}
+						}
+					}
+				});	    		
+			}
 		}
 	}
 	
     public void handleClearEditAction() {
+    	pollMenu.setText("");
+    	partyMenu.setText("");
     	refresh();
    }
     
