@@ -59,6 +59,27 @@ public class PollList {
 		return;
 	}
 	
+	public void replacePollAtIndex(Poll aPoll, String originalName) {
+		
+		if (aPoll == null) {
+			System.out.println("Error:  null poll passed to addPoll");
+			return;
+		} else {
+			System.out.println("Adding poll " + aPoll.getPollName() + "  to PollList ");
+		}
+		
+		for(int i=0;i<polls.length;i++){
+			if(polls[i].getPollName() == originalName){
+				System.out.println("Replacing poll at index = " + i);
+				polls[i]=aPoll;
+				//System.out.println("");
+				return;
+			}
+		}
+		
+		return;
+	}
+	
 	private static int getEmptyPollIndex(Poll[] p) {
 		//
 		// This is a helper method for the addPoll method

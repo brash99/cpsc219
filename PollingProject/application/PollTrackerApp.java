@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
 import model.Factory;
+import model.Poll;
 import model.PollList;
 
 import javafx.scene.Scene;
@@ -33,7 +34,10 @@ public class PollTrackerApp extends Application {
 	
 	public void setPolls(PollList aList) {
 		System.out.println("In PollTrackerApp.setPolls");
-		polls = aList;
+		System.out.println("Priting passed list ...");
+	    System.out.println(aList);
+	    polls = aList;
+		System.out.println("Printing poll list ...");
 		System.out.println(polls);
 		TextArea vizTextArea = new TextArea();
 		//this.updateVisualization(vizTextArea);
@@ -46,6 +50,9 @@ public class PollTrackerApp extends Application {
 	public void setFactory(Factory aFactory) {
 		System.out.println("In PollTrackerApp.setFactory");
 		factory = aFactory;
+		for (int i=0; i<factory.getPartyNames().length; i++) {	
+			System.out.println(factory.getPartyNames()[i]);
+		}
 	}
 	
 	private Tab createTab(String tabName, String FXMLFilename) {
@@ -136,7 +143,7 @@ public class PollTrackerApp extends Application {
 				createTab("Setup Poll Tracker", FXML_FILES_LOCATION + "SetupPollTrackerView.fxml"),
 				createTab("Setup Parties", FXML_FILES_LOCATION + "SetupPartiesView.fxml"),
 				createTab("Add Poll", FXML_FILES_LOCATION + "AddPollView.fxml"),
-				//createTab("Edit Poll", FXML_FILES_LOCATION + "EditPollView.fxml"),
+				createTab("Edit Poll", FXML_FILES_LOCATION + "EditPollView.fxml"),
 				//createTab("Visualize Poll", FXML_FILES_LOCATION + "VisualizePollView.fxml")
 				getDefaultVisualization()
 									);

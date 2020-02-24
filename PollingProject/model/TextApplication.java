@@ -10,6 +10,7 @@ public class TextApplication {
 	public TextApplication(PollList newpolls) {
 		this();
 		polls = newpolls;
+		System.out.println("In TextApplication constructor");
 	}
 	
 	public TextApplication() {

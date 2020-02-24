@@ -47,6 +47,7 @@ public class Poll {
 	
 	@Override
 	public String toString() {
+		System.out.println("In Poll toString() method ...");
 		String output = this.name + ":\n";
 		Party[] sortedPartyList = this.getPartiesSortedBySeats();
 		for (int i=0; i<sortedPartyList.length; i++) {
