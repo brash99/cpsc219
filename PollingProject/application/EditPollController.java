@@ -68,6 +68,8 @@ public class EditPollController extends PollTrackerController {
 		        			tempPartyList = polls.getPolls()[j].getPartiesSortedBySeats();
 		        		}
 		        	}
+		    		partyMenu.getItems().clear();
+		        	partyMenuCreate(tempPartyList);
 		        }
 		    });	    
 		}
