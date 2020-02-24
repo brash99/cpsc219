@@ -25,8 +25,8 @@ public class AddPollController extends PollTrackerController {
 	@FXML
 	private MenuButton pollMenu;
 	
-	public void setPollTrackerApp(PollTrackerApp app) {
-		System.out.println("AddPollController constructor ...");
+	public void setupController(PollTrackerApp app) {
+		System.out.println("In AddPollController setupController ...");
 		this.app = app;
 		this.polls = app.getPolls();
 		this.factory = app.getFactory();

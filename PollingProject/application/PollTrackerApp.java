@@ -69,7 +69,7 @@ public class PollTrackerApp extends Application {
 			System.out.println("Statement 4");
 			aTab.setOnSelectionChanged (e -> controller.refresh());
 			System.out.println("Statement 5");
-			controller.setPollTrackerApp(this);
+			controller.setupController(this);
 			System.out.println("Done");
 		} catch (IOException e1) {
 			System.out.println("Problem loading FXML file " + FXMLFilename);

@@ -11,8 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 import model.PollList;
-import model.Poll;
-import model.Factory;
 import model.Party;
 
 public class EditPollController extends PollTrackerController {
@@ -20,9 +18,8 @@ public class EditPollController extends PollTrackerController {
 	private PollTrackerApp app;
 	
 	private PollList polls;
-	private Factory factory;
-	private String originalName;
-	private String originalParty;
+
+	private String tempPollName;
 	private Party[] tempPartyList;
 	private int tempPollIndex;
 	private int tempPartyIndex;
@@ -38,11 +35,10 @@ public class EditPollController extends PollTrackerController {
 	@FXML
 	private MenuButton partyMenu;
 	
-	public void setPollTrackerApp(PollTrackerApp app) {
-		System.out.println("EditPollController constructor ...");
+	public void setupController(PollTrackerApp app) {
+		System.out.println("In EditPollController setupController ...");
 		this.app = app;
 		this.polls = app.getPolls();
-		this.factory = app.getFactory();
 		refresh();
 	}
 	
@@ -68,9 +64,9 @@ public class EditPollController extends PollTrackerController {
 		        public void handle(ActionEvent t) {
 					System.out.println("Choosing to edit Poll " + add1.getText());
 		        	pollMenu.setText(add1.getText());
-		        	originalName = add1.getText();
+		        	tempPollName = add1.getText();
 		        	for (int j=0; j<polls.getPolls().length; j++) {
-		        		if (polls.getPolls()[j].getPollName() == originalName) {
+		        		if (polls.getPolls()[j].getPollName() == tempPollName) {
 		        			tempPartyList = polls.getPolls()[j].getPartiesSortedBySeats();
 		        			tempPollIndex = j;
 		        		}
@@ -94,7 +90,6 @@ public class EditPollController extends PollTrackerController {
 						float seatSum = 0.0f;
 						System.out.println("Choosing to edit Party " + add2.getText());
 						partyMenu.setText(add2.getText());
-						originalParty = add2.getText();
 						for (int j=0; j<tempPartyList.length; j++) {
 							seatSum = seatSum + tempPartyList[j].getProjectedNumberOfSeats();
 							if (tempPartyList[j].getName() == add2.getText()) {
