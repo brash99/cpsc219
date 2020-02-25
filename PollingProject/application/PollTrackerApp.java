@@ -144,9 +144,9 @@ public class PollTrackerApp extends Application {
 				createTab("Setup Parties", FXML_FILES_LOCATION + "SetupPartiesView.fxml"),
 				createTab("Add Poll", FXML_FILES_LOCATION + "AddPollView.fxml"),
 				createTab("Edit Poll", FXML_FILES_LOCATION + "EditPollView.fxml"),
-				//createTab("Visualize Poll", FXML_FILES_LOCATION + "VisualizePollView.fxml")
-				getDefaultVisualization()
-									);
+				createTab("Visualize Poll", FXML_FILES_LOCATION + "VisualizePollView.fxml"));
+//				getDefaultVisualization()
+//									);
 		
 		System.out.println("Back from open ... defining scene");
 		
