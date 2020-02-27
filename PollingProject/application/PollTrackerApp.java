@@ -4,14 +4,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
 import model.Factory;
-import model.Poll;
 import model.PollList;
 
 import javafx.scene.Scene;
@@ -39,7 +37,7 @@ public class PollTrackerApp extends Application {
 	    polls = aList;
 		System.out.println("Printing poll list ...");
 		System.out.println(polls);
-		TextArea vizTextArea = new TextArea();
+		//TextArea vizTextArea = new TextArea();
 		//this.updateVisualization(vizTextArea);
 	}
 	

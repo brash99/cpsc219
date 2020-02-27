@@ -4,8 +4,6 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
 import javafx.scene.chart.PieChart;
 
 import javafx.event.ActionEvent;
@@ -16,19 +14,15 @@ import javafx.collections.FXCollections;
 
 import model.PollList;
 import model.Party;
-import model.Factory;
 
 public class VisualizePollController extends PollTrackerController {
 	
 	private PollTrackerApp app;
 	
 	private PollList polls;
-	private Factory factory;
 
 	private String tempPollName;
 	private Party[] tempPartyList;
-	private int tempPollIndex;
-	private int tempPartyIndex;
 	
 	@FXML
 	private MenuButton displayPollChoice;
@@ -41,7 +35,6 @@ public class VisualizePollController extends PollTrackerController {
 		System.out.println("In VisualizePollController setupController ...");
 		this.app = app;
 		this.polls = app.getPolls();
-		this.factory = app.getFactory();
 		refresh();
 	}
 	
@@ -66,7 +59,6 @@ public class VisualizePollController extends PollTrackerController {
 		        	for (int j=0; j<polls.getPolls().length; j++) {
 		        		if (polls.getPolls()[j].getPollName() == tempPollName) {
 		        			tempPartyList = polls.getPolls()[j].getPartiesSortedBySeats();
-		        			tempPollIndex = j;
 		        		}
 		        	}
 		        	displayPieCharts(tempPartyList);

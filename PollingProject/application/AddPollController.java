@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-import model.Factory;
 import model.PollList;
 import model.Poll;
 
@@ -17,7 +16,6 @@ public class AddPollController extends PollTrackerController {
 	private PollTrackerApp app;
 	
 	private PollList polls;
-	private Factory factory;
 	private String originalName;
 	
 	@FXML
@@ -29,7 +27,6 @@ public class AddPollController extends PollTrackerController {
 		System.out.println("In AddPollController setupController ...");
 		this.app = app;
 		this.polls = app.getPolls();
-		this.factory = app.getFactory();
 		System.out.println("Initial party names:");
 		for (int i=0; i<app.getFactory().getPartyNames().length; i++) {
 			System.out.println(app.getFactory().getPartyNames()[i]);
@@ -38,7 +35,6 @@ public class AddPollController extends PollTrackerController {
 	
 	public void refresh() {
 		this.polls = app.getPolls();
-		this.factory = app.getFactory();
 		System.out.println("In refresh method of AddPollController");
     	newPollName.setText("");
 		System.out.println("Main app party names:");
