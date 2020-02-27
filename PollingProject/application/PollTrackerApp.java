@@ -98,6 +98,8 @@ public class PollTrackerApp extends Application {
 		 * Use the first if you need the application to run with some randomly generated.
 		 * use the second if you want a list of empty polls to start with.
 		 */
+		String[] nameList = {"Liberal","NDP","Green","CPC","BQ","Rhinoceros","PPC","Olivia"};
+        factory.setPartyNames(nameList);
 		polls = factory.createRandomPollList(DEFAULT_NUMBER_OF_POLLS);
 		//polls = new PollList(DEFAULT_NUMBER_OF_POLLS, DEFAULT_NUMBER_OF_SEATS);
 			
