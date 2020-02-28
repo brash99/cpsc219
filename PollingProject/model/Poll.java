@@ -22,6 +22,10 @@ public class Poll {
 	public void addParty(Party aParty) {
 		parties[partiesInPoll++] = aParty;
 	}
+	
+	public void replaceParty(Party aParty, int index) {
+		parties[index] = aParty;
+	}
 
 	public Party getParty(String name) {
 		for (int i=0; i<parties.length;i++) {
@@ -47,6 +51,7 @@ public class Poll {
 	
 	@Override
 	public String toString() {
+		System.out.println("In Poll toString() method ...");
 		String output = this.name + ":\n";
 		Party[] sortedPartyList = this.getPartiesSortedBySeats();
 		for (int i=0; i<sortedPartyList.length; i++) {

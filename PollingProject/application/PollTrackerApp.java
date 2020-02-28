@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +20,7 @@ import javafx.scene.control.TextArea;
 
 public class PollTrackerApp extends Application {
 	public static final int DEFAULT_NUMBER_OF_SEATS = 345;
-	public static final String FXML_FILES_LOCATION = "view/";
+	public static final String FXML_FILES_LOCATION = "./view/";
 	public static final int DEFAULT_NUMBER_OF_POLLS = 5;
 	
 	private PollList polls;
@@ -32,7 +31,14 @@ public class PollTrackerApp extends Application {
 	}
 	
 	public void setPolls(PollList aList) {
-		polls = aList;
+		System.out.println("In PollTrackerApp.setPolls");
+		System.out.println("Priting passed list ...");
+	    System.out.println(aList);
+	    polls = aList;
+		System.out.println("Printing poll list ...");
+		System.out.println(polls);
+		//TextArea vizTextArea = new TextArea();
+		//this.updateVisualization(vizTextArea);
 	}
 	
 	public Factory getFactory() {
@@ -40,19 +46,32 @@ public class PollTrackerApp extends Application {
 	}
 	
 	public void setFactory(Factory aFactory) {
+		System.out.println("In PollTrackerApp.setFactory");
 		factory = aFactory;
+		for (int i=0; i<factory.getPartyNames().length; i++) {	
+			System.out.println(factory.getPartyNames()[i]);
+		}
 	}
 	
 	private Tab createTab(String tabName, String FXMLFilename) {
 		Tab aTab = null;
 		try {
+			System.out.println("Statement 1");
 			FXMLLoader loader = new FXMLLoader();
-			aTab = new Tab(tabName, loader.load(new FileInputStream(FXMLFilename)));
+			System.out.println("Statement 2");
+			FileInputStream xmlFile = new FileInputStream(FXMLFilename);
+			System.out.println("Statement 2.5");
+			aTab = new Tab(tabName, loader.load(xmlFile));
+			System.out.println("Statement 3");
 			PollTrackerController controller = (PollTrackerController)loader.getController();
+			System.out.println("Statement 4");
 			aTab.setOnSelectionChanged (e -> controller.refresh());
-			controller.setPollTrackerApp(this);
+			System.out.println("Statement 5");
+			controller.setupController(this);
+			System.out.println("Done");
 		} catch (IOException e1) {
 			System.out.println("Problem loading FXML file " + FXMLFilename);
+			e1.printStackTrace();
 		}
 		return aTab;
 	}
@@ -106,9 +125,9 @@ public class PollTrackerApp extends Application {
 		 * Use the first if you need the application to run with some randomly generated.
 		 * use the second if you want a list of empty polls to start with.
 		 */
-		String[] nameList = {"Liberal","NDP","Green","CPC","BQ","Rhinoceros","PPC","Olivia"};
-		factory.setPartyNames(nameList);
-		polls = factory.createRandomPollList(DEFAULT_NUMBER_OF_POLLS);
+		//String[] nameList = {"Liberal","NDP","Green","CPC","BQ","Rhinoceros","PPC","Olivia"};
+		//factory.setPartyNames(nameList);
+		//polls = factory.createRandomPollList(DEFAULT_NUMBER_OF_POLLS);
 		//polls = new PollList(DEFAULT_NUMBER_OF_POLLS, DEFAULT_NUMBER_OF_SEATS);
 			
 		/* Uncomment the line for the view you are working on.  All should be uncommented for
@@ -119,13 +138,14 @@ public class PollTrackerApp extends Application {
 		 */
 		System.out.println("Opening root TabPane object ...");
 		TabPane root = new TabPane(
-				//createTab("Setup Poll Tracker", FXML_FILES_LOCATION + "SetupPollTrackerView.fxml"),
-				//createTab("Setup Parties", FXML_FILES_LOCATION + "SetupPartiesView.fxml"),
-				//createTab("Add Poll", FXML_FILES_LOCATION + "AddPollView.fxml"),
-				//createTab("Edit Poll", FXML_FILES_LOCATION + "EditPollView.fxml"),
-				//createTab("Visualize Poll", FXML_FILES_LOCATION + "VisualizePollView.fxml")
-				getDefaultVisualization()
-									);
+				createTab("Setup Poll Tracker", FXML_FILES_LOCATION + "SetupPollTrackerView.fxml"),
+				createTab("Setup Parties", FXML_FILES_LOCATION + "SetupPartiesView.fxml"),
+				createTab("Add Poll", FXML_FILES_LOCATION + "AddPollView.fxml"),
+				createTab("Edit Poll", FXML_FILES_LOCATION + "EditPollView.fxml"),
+				createTab("Visualize Poll", FXML_FILES_LOCATION + "VisualizePollView.fxml"));
+//				getDefaultVisualization()
+//									);
+		
 		System.out.println("Back from open ... defining scene");
 		
 		Scene scene = new Scene(root,500,400);

@@ -8,7 +8,8 @@ public abstract class PollTrackerController {
 	
 	public abstract void refresh();
 	
-	public void setPollTrackerApp(PollTrackerApp app) {
+	public void setupController(PollTrackerApp app) {
+		System.out.println("In PollTrackerController setupController ...");
 		this.app = app;
 		refresh();
 	}
