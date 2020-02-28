@@ -23,6 +23,19 @@ public class Factory {
 		return partyNames;
 	}
 	
+	private static int[] RandomizeArray(int[] array){
+		Random rgen = new Random();  // Random number generator			
+ 
+		for (int i=0; i<array.length; i++) {
+		    int randomPosition = rgen.nextInt(array.length);
+		    int temp = array[i];
+		    array[i] = array[randomPosition];
+		    array[randomPosition] = temp;
+		}
+ 
+		return array;
+	}
+	
 	public Poll createRandomPoll(String name) {
 		
 		System.out.println("Random poll: "+name);
@@ -35,14 +48,23 @@ public class Factory {
 		
 		float seatsum = 0.0f;
 		int seatsAvailable = numOfSeats;
+		
+		int[] indexlist = new int[partyNames.length];
+		for (int i=0; i<partyNames.length; i++) {
+			indexlist[i]=i;
+		}
+		indexlist = RandomizeArray(indexlist);
+		
+		System.out.println(indexlist);
+		
 		for (int i=0; i<partyNames.length; i++) {
 			if (i == partyNames.length-1) {
-				seats[i] = seatsAvailable;
+				seats[indexlist[i]] = seatsAvailable;
 			} else {
-				seats[i] = rand.nextInt(seatsAvailable);
-				seatsAvailable -= seats[i];
+				seats[indexlist[i]] = rand.nextInt(seatsAvailable);
+				seatsAvailable -= seats[indexlist[i]];
 			}
-			seatsum = seatsum + seats[i];
+			seatsum = seatsum + seats[indexlist[i]];
 			//System.out.println(i+" "+partyNames[i]+" "+seats[i]+" "+seatsum);
 		}
 		for (int i=0; i<partyNames.length; i++) {
