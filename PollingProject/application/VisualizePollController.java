@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tooltip;
+
 import javafx.scene.chart.PieChart;
 
 import javafx.event.ActionEvent;
@@ -97,6 +99,22 @@ public class VisualizePollController extends PollTrackerController {
 	    
 	    	leftChart.setData(leftChartObservableList);
 	    	rightChart.setData(rightChartObservableList);
+	    	
+	    	leftChart.getData().stream().forEach(data -> {
+	    	    Tooltip tooltip = new Tooltip();
+	    	    tooltip.setText(data.getPieValue() + "");
+	    	    Tooltip.install(data.getNode(), tooltip);
+	    	    data.pieValueProperty().addListener((observable, oldValue, newValue) -> 
+	    	        tooltip.setText(newValue + ""));
+	    	});
+	    	
+	    	rightChart.getData().stream().forEach(data -> {
+	    	    Tooltip tooltip = new Tooltip();
+	    	    tooltip.setText(data.getPieValue() + "%");
+	    	    Tooltip.install(data.getNode(), tooltip);
+	    	    data.pieValueProperty().addListener((observable, oldValue, newValue) -> 
+	    	        tooltip.setText(newValue + "%"));
+	    	});
 	    }
 	}
 	
