@@ -7,3 +7,5 @@
 /VoteComparator.class
 /PollTrackerApp.class
 /PollTrackerController.class
+/Poll$SeatsComparator.class
+/Poll$VotesComparator.class

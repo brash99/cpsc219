@@ -10,11 +10,6 @@ public class Factory {
 	public Factory(int numOfSeats) {
 		this.numOfSeats = numOfSeats;
 	}
-	
-	public int getNumOfSeats() {
-		return numOfSeats;
-	}
-	
 	public void setPartyNames(String[] names) {
 		partyNames = names;
 	}
@@ -24,35 +19,11 @@ public class Factory {
 	}
 	
 	public Poll createRandomPoll(String name) {
-		
-		System.out.println("Random poll: "+name);
-		//System.out.println("partyNames: "+partyNames.length);		
 		Poll poll = new Poll(name, partyNames.length);
 		
 		Random rand = new Random();
-		
-		Integer[] seats = new Integer[partyNames.length];
-		
-		float seatsum = 0.0f;
-		int seatsAvailable = numOfSeats;
-		for (int i=0; i<partyNames.length; i++) {
-			if (i == partyNames.length-1) {
-				seats[i] = seatsAvailable;
-			} else {
-				seats[i] = rand.nextInt(seatsAvailable);
-				seatsAvailable -= seats[i];
-			}
-			seatsum = seatsum + seats[i];
-			//System.out.println(i+" "+partyNames[i]+" "+seats[i]+" "+seatsum);
-		}
-		for (int i=0; i<partyNames.length; i++) {
-			seats[i] = (int)(float)(seats[i]/seatsum*numOfSeats);
-		}
-		
-		for (int i=0; i<partyNames.length; i++) {
-			float percentOfVotes = (float)((float)seats[i]/numOfSeats*100.0);
-			//System.out.println(i+" "+partyNames[i]+" "+seats[i]+" "+percentOfVotes);
-			poll.addParty(new Party(partyNames[i], (float)(seats[i]), percentOfVotes));
+		for (String partyName : partyNames) {
+			poll.addParty(new Party(partyName, rand.nextInt(numOfSeats), rand.nextFloat()));
 		}
 		return poll;
 	}
