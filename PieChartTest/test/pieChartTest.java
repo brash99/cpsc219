@@ -38,6 +38,8 @@ public class pieChartTest extends Application {
         final Label caption = new Label("");
         caption.setTextFill(Color.WHITE);
         caption.setStyle("-fx-font: 12 arial;");
+        
+        System.out.println(pieChart.getData());
  
         for (final PieChart.Data data : pieChart.getData()) {
             data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {

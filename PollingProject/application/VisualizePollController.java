@@ -51,6 +51,8 @@ public class VisualizePollController extends PollTrackerController {
 		System.out.println("In refresh method of AddPollController");
 		
 		displayPollChoice.getItems().clear();
+		leftCaption.setText(null);
+		rightCaption.setText(null);
 		displayPollChoiceCreate();
 	}
 	
@@ -103,20 +105,36 @@ public class VisualizePollController extends PollTrackerController {
 	    		rightChartObservableList.add(i,new PieChart.Data(tempPartyList[i].getName(),tempPartyList[i].getProjectedPercentageOfVotes()));
 	    	}
 	    	
-	        leftCaption.setTextFill(Color.WHITE);
+	        leftCaption.setTextFill(Color.BLACK);
 	        leftCaption.setStyle("-fx-font: 12 arial;");
-            System.out.println("Here I am 1");
+            //System.out.println("Here I am 1");
+	    	leftChart.setData(leftChartObservableList);
+	    	rightChart.setData(rightChartObservableList);
+            //System.out.println(leftChart.getData());
             
 	        for (final PieChart.Data data : leftChart.getData()) {
-                System.out.println("Here I am 2" + leftChart.getData());
+                //System.out.println("Here I am 2" + leftChart.getData());
 	            data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
 	                @Override
 	                public void handle(MouseEvent e) {
 	                    leftCaption.setTranslateX(e.getSceneX());
-	                    leftCaption.setTranslateY(e.getSceneY());
+	                    leftCaption.setTranslateY(e.getSceneY()-35.0); 
+	                    leftCaption.setText(String.format("%.2f",data.getPieValue()  ));
+	                    //System.out.println("Here I am 3");
+	                }
+	            });
+	        }
+	        
+	        for (final PieChart.Data data : rightChart.getData()) {
+                //System.out.println("Here I am 2" + leftChart.getData());
+	            data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+	                @Override
+	                public void handle(MouseEvent e) {
+	                    leftCaption.setTranslateX(e.getSceneX());
+	                    leftCaption.setTranslateY(e.getSceneY()-35.0);
 	 
-	                    leftCaption.setText(String.valueOf(data.getPieValue()));
-	                    System.out.println("Here I am 3");
+	                    leftCaption.setText(String.format("%.2f",data.getPieValue()) + "%");
+	                    //System.out.println("Here I am 3");
 	                }
 	            });
 	        }
