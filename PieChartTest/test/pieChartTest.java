@@ -15,7 +15,6 @@ public class pieChartTest extends Application {
  
     @Override
     public void start(Stage primaryStage) throws Exception {
-        System.out.println("Here 1");
  
         PieChart pieChart = new PieChart();
  
@@ -56,8 +55,6 @@ public class pieChartTest extends Application {
         AnchorPane root = new AnchorPane();
         root.getChildren().addAll(pieChart, caption);
         
-        
-        System.out.println("Here");
         Scene scene = new Scene(root, 400, 300);
  
         primaryStage.setScene(scene);
