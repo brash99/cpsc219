@@ -23,8 +23,8 @@ public class SetupPollTrackerController extends PollTrackerController {
 	@FXML
 	private TextField numberOfPartiesRunning;
 	
-	public void setPollTrackerApp(PollTrackerApp app) {
-		System.out.println("In SetupPollTrackerController constructor ...");
+	public void setupController(PollTrackerApp app) {
+		System.out.println("In SetupPollTrackerController setupController ...");
 		this.app = app;
 		this.createNewPolls();
 	}

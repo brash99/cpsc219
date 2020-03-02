@@ -21,8 +21,8 @@ public class SetupPartiesController extends PollTrackerController {
 	@FXML
 	private MenuButton partyMenu;
 	
-	public void setPollTrackerApp(PollTrackerApp app) {
-		System.out.println("In SetupPartiesController constructor ...");
+	public void setupController(PollTrackerApp app) {
+		System.out.println("In SetupPartiesController setupController ...");
 		this.app = app;
 		
 		partyNames = app.getFactory().getPartyNames();
