@@ -10,11 +10,11 @@ public class SetupPollTrackerController extends PollTrackerController {
 	
 	private PollTrackerApp app;
 	
-	private int numberOfPolls = 0;
-	private int numberOfSeats = 0;
-	private int numberOfParties = 0;
-	private PollList polls;
-	private Factory factory;
+	private int localNumberOfPolls = 0;
+	private int localNumberOfSeats = 0;
+	private int localNumberOfParties = 0;
+	private PollList localPolls;
+	private Factory localFactory;
 	
 	@FXML
 	private TextField numberOfPollsToTrack;
@@ -31,19 +31,19 @@ public class SetupPollTrackerController extends PollTrackerController {
 	
 	public void refresh() {
 		System.out.println("In refresh method of SetupPollTrackerController");
-		System.out.println("Number of polls: " + numberOfPolls + " Number of Seats: " + numberOfSeats + " Number of Parties: " + numberOfParties);
+		System.out.println("Number of polls: " + localNumberOfPolls + " Number of Seats: " + localNumberOfSeats + " Number of Parties: " + localNumberOfParties);
 		
-		numberOfPollsToTrack.setText(Integer.toString(numberOfPolls));
-		numberOfSeatsAvailable.setText(Integer.toString(numberOfSeats));
-		numberOfPartiesRunning.setText(Integer.toString(numberOfParties));
+		numberOfPollsToTrack.setText(Integer.toString(localNumberOfPolls));
+		numberOfSeatsAvailable.setText(Integer.toString(localNumberOfSeats));
+		numberOfPartiesRunning.setText(Integer.toString(localNumberOfParties));
 
 	}
 	
     public void handleSubmitAction() {
         System.out.println("Submitting information ... ");
-        numberOfPolls = Integer.parseInt(numberOfPollsToTrack.getText());
-        numberOfSeats = Integer.parseInt(numberOfSeatsAvailable.getText());
-        numberOfParties = Integer.parseInt(numberOfPartiesRunning.getText());
+        localNumberOfPolls = Integer.parseInt(numberOfPollsToTrack.getText());
+        localNumberOfSeats = Integer.parseInt(numberOfSeatsAvailable.getText());
+        localNumberOfParties = Integer.parseInt(numberOfPartiesRunning.getText());
         
 		this.createNewPolls();
         
@@ -52,29 +52,29 @@ public class SetupPollTrackerController extends PollTrackerController {
     
     public void handleClearAction() {
         System.out.println("Clearing information ... ");
-        numberOfPolls = 0;
-        numberOfSeats = 0;
-        numberOfParties = 0;
+        localNumberOfPolls = 0;
+        localNumberOfSeats = 0;
+        localNumberOfParties = 0;
         refresh();
     }
     
 	private void createNewPolls() {
 		System.out.println("Creating factory and polls");
-		String[] nameList = new String[numberOfParties];
-		for (int i=0; i<numberOfParties; i++ ) {
+		String[] nameList = new String[localNumberOfParties];
+		for (int i=0; i<localNumberOfParties; i++ ) {
 			nameList[i]=Integer.toString(i+1);
 			System.out.println(nameList[i]);
 		}
-		factory = new Factory(numberOfSeats);
-		factory.setPartyNames(nameList);
-		polls = factory.createRandomPollList(numberOfPolls);
+		localFactory = new Factory(localNumberOfSeats);
+		localFactory.setPartyNames(nameList);
+		localPolls = localFactory.createRandomPollList(localNumberOfPolls);
 	    //polls = new PollList(numberOfPolls, numberOfSeats);
-	    System.out.println(polls);
+	    System.out.println(localPolls);
 
 		System.out.println("Setting polls in main app ...");
-		app.setPolls(polls);
+		app.setPolls(localPolls);
 		System.out.println("Setting factory in main app ...");		
-		app.setFactory(factory);
+		app.setFactory(localFactory);
 	}
 
 }
