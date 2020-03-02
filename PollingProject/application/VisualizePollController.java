@@ -4,7 +4,11 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Label;
+
 import javafx.scene.chart.PieChart;
+import javafx.scene.paint.Color;
+import javafx.scene.input.MouseEvent;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,6 +34,10 @@ public class VisualizePollController extends PollTrackerController {
 	private PieChart leftChart;
 	@FXML
 	private PieChart rightChart;
+	@FXML
+	private Label leftCaption;
+	@FXML
+	private Label rightCaption;
 	
 	public void setupController(PollTrackerApp app) {
 		System.out.println("In VisualizePollController setupController ...");
@@ -43,6 +51,8 @@ public class VisualizePollController extends PollTrackerController {
 		System.out.println("In refresh method of AddPollController");
 		
 		displayPollChoice.getItems().clear();
+		leftCaption.setText(null);
+		rightCaption.setText(null);
 		displayPollChoiceCreate();
 	}
 	
@@ -65,7 +75,7 @@ public class VisualizePollController extends PollTrackerController {
 		        }
 		    });	    
 		}
-		
+
 		System.out.println("Adding aggregate poll menu item ... ");
 		MenuItem add2 = new MenuItem("aggregate");
 		displayPollChoice.getItems().add(add2);
@@ -78,7 +88,7 @@ public class VisualizePollController extends PollTrackerController {
 	        	tempPartyList = polls.getAggregatePoll(sss).getPartiesSortedBySeats();
 	        	displayPieCharts(tempPartyList);
 	        }
-	    });	 
+	    });
 	}
 	
 	private void displayPieCharts(Party[] tempPartyList) {
@@ -94,12 +104,45 @@ public class VisualizePollController extends PollTrackerController {
 	    	for (int i=0;i<tempPartyList.length;i++) {
 	    		rightChartObservableList.add(i,new PieChart.Data(tempPartyList[i].getName(),tempPartyList[i].getProjectedPercentageOfVotes()));
 	    	}
-	    
+	    	
+	        leftCaption.setTextFill(Color.BLACK);
+	        leftCaption.setStyle("-fx-font: 12 arial;");
+            //System.out.println("Here I am 1");
 	    	leftChart.setData(leftChartObservableList);
 	    	rightChart.setData(rightChartObservableList);
+            //System.out.println(leftChart.getData());
+            
+	        for (final PieChart.Data data : leftChart.getData()) {
+                //System.out.println("Here I am 2" + leftChart.getData());
+	            data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+	                @Override
+	                public void handle(MouseEvent e) {
+	                    leftCaption.setTranslateX(e.getSceneX());
+	                    leftCaption.setTranslateY(e.getSceneY()-35.0); 
+	                    leftCaption.setText(String.format("%.2f",data.getPieValue()  ));
+	                    //System.out.println("Here I am 3");
+	                }
+	            });
+	        }
+	        
+	        for (final PieChart.Data data : rightChart.getData()) {
+                //System.out.println("Here I am 2" + leftChart.getData());
+	            data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+	                @Override
+	                public void handle(MouseEvent e) {
+	                    leftCaption.setTranslateX(e.getSceneX());
+	                    leftCaption.setTranslateY(e.getSceneY()-35.0);
+	 
+	                    leftCaption.setText(String.format("%.2f",data.getPieValue()) + "%");
+	                    //System.out.println("Here I am 3");
+	                }
+	            });
+	        }
+	        
+	    	leftChart.setData(leftChartObservableList);
+	    	rightChart.setData(rightChartObservableList);
+
 	    }
 	}
-	
-	
     
 }

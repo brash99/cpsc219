@@ -88,7 +88,7 @@ public class PollTrackerApp extends Application {
 		//for (String myString : partyNameList) {
 		//	System.out.println(myString);
 		//}
-		(new model.TextApplication(polls)).displayPollsBySeat(factory.getPartyNames());
+		(new application.TextApplication(polls)).displayPollsBySeat(factory.getPartyNames());
 		System.out.flush();
 		System.setOut(old);
 		visualizationStream.close();
