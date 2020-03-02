@@ -1,6 +1,11 @@
-package model;
+package application;
 
 import java.util.Scanner;
+
+import model.Party;
+import model.Poll;
+import model.PollList;
+import model.Factory;
 
 public class TextApplication {
 	
@@ -177,6 +182,7 @@ public class TextApplication {
 	    }
 	    
 	    System.out.println("Goodbye ... :)");
+	    myObj.close();
 	    
 		return;
 	}
