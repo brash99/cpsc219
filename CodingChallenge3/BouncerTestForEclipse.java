@@ -22,10 +22,8 @@ public class BouncerTestForEclipse extends FormatTester{
 	
 		@Test
 		public void test_Constructor_bounciness_Zero_GoodHeight(){
-			System.out.println("Here I am");
 			testClassDefinition();
 			Bouncer c = new Bouncer(0.00,5);
-			System.out.println(c.getHeight() + " " + c.getBounciness());
 			assertEquals("Created bouncer with invalid 0% bounciness", .50, c.getBounciness(), 0.000001);
 			assertEquals("Created bouncer with valid 5 height.", 5, c.getHeight());
 		}
@@ -189,7 +187,6 @@ public class BouncerTestForEclipse extends FormatTester{
 			testClassDefinition();
 			Bouncer c = new Bouncer(.99,1);
 			c.bounce();
-			
 			assertEquals("bouncer with height 0.0 (after first bounce) will bounce 0 times.", 0, c.numberOfBounces());
 			assertEquals("Expected bouncer height to be unchanged after checking number of bounces.", 0, c.getHeight());
 		}

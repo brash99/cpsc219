@@ -38,7 +38,11 @@ public class Bouncer {
 	}
 	
 	public void setHeight(int height) {
-		this.height = height;
+		if (height > 0) {
+			this.height = height;
+		} else {
+			this.height = 1;
+		}
 	}
 	
 	public int getHeight() {
@@ -46,7 +50,11 @@ public class Bouncer {
 	}
 	
 	public void setBounciness (double bounciness) {
-		this.bounciness = bounciness;
+		if (bounciness > 0 && bounciness < 1) {
+			this.bounciness = bounciness;
+		} else {
+			this.bounciness = 0.50;
+		}
 	}
 	
 	public double getBounciness() {
@@ -59,9 +67,12 @@ public class Bouncer {
 	
 	public int numberOfBounces () {
 		int n = 0;
+		int original_height = this.height;
+		
 		while (true) {
 			int initial_height = this.height;
 			bounce();
+			//System.out.println("Bounce(): n = " + n + "   initial_height = " + initial_height + " new height = " + this.height);
 			if (this.height != initial_height) {
 				n++;
 			} else {
@@ -69,6 +80,7 @@ public class Bouncer {
 			}
 		}
 		
+		height = original_height;
 		return n;
 	}
 	

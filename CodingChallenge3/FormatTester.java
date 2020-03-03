@@ -10,7 +10,7 @@ public abstract class FormatTester {
 	public FormatTester(String classname, boolean forEclipse) {
 		this.classname = classname;
 		if (forEclipse) {
-			this.filename = "src/" + classname + ".java";
+			this.filename = classname + ".java";
 		} else {
 			this.filename = classname + ".java";
 		}
@@ -148,7 +148,6 @@ public abstract class FormatTester {
 		}
 		boolean allPrivate = true;
 
-		
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(filename));
 			String line = in.readLine();
