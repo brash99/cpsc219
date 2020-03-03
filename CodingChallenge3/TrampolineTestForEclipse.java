@@ -210,6 +210,8 @@ public class TrampolineTestForEclipse extends FormatTester{
 		Trampoline c = new Trampoline(175,.75, 98);
 		c.bounce();
 		
+		System.out.println(c.getBounciness());
+		System.out.println(c.getHeight());
 		assertEquals("Checking height after bounce (weight: 175, height:5, bounciness .75)", 80, c.getHeight());
 	}
 

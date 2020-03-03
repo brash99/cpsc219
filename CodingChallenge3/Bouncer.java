@@ -62,7 +62,7 @@ public class Bouncer {
 	}
 	
 	public void bounce() {
-		height = (int)(height*bounciness);
+		height = (int)(height*this.getBounciness());
 	}
 	
 	public int numberOfBounces () {
