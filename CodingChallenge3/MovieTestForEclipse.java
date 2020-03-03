@@ -74,10 +74,13 @@ public class MovieTestForEclipse  extends FormatTester
 	public void test_Constructor_FarFutureReleaseDate() {
 		testInterface();
 		Date d = getDate(2023,12,11);
+		System.out.println("*************************");
 		Movie c = new Movie("TestingMovie", 0, "Ava DuVernay", d);
 		assertEquals("Created movie - testing theatre instance vars (title)", "TESTINGMOVIE", c.getTitle());
 		assertEquals("Created movie - testing theatre instance vars (rating)", 0, c.getRating());
 		assertEquals("Created movie - testing director", "Ava DuVernay", c.getDirector());
+		System.out.println(new Date().getTime());
+		System.out.println(c.getReleaseDate().getTime());
 		assertEquals("Created movie - testing invalid date, year 2023 as release date", new Date().getTime(), c.getReleaseDate().getTime(), 100*60); // allow 6 second difference from now.
 	}
 
