@@ -74,7 +74,11 @@ public class Factory {
 		for (int i=0; i<partyNames.length; i++) {
 			float percentOfVotes = (float)((float)seats[i]/numOfSeats*100.0);
 			//System.out.println(i+" "+partyNames[i]+" "+seats[i]+" "+percentOfVotes);
-			poll.addParty(new Party(partyNames[i], (float)(seats[i]), percentOfVotes));
+			try {
+				poll.addParty(new Party(partyNames[i], (float)(seats[i]), percentOfVotes));
+			} catch (InvalidPartyDataException e) {
+				e.printStackTrace();
+			}
 		}
 		return poll;
 	}

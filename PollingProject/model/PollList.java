@@ -154,8 +154,13 @@ public class PollList {
 		
 			// create a party object for this party and add it to the
 			// aggregate poll
-			Party testparty2 = new Party(partyNames[i],(float)(seatsum),(float)(percentsum));
-			testPoll.addParty(testparty2);
+			try {
+				Party testparty2 = new Party(partyNames[i],(float)(seatsum),(float)(percentsum));
+				testPoll.addParty(testparty2);
+			} catch (InvalidPartyDataException e) {
+				e.printStackTrace();
+			}
+
 			
 		}
 
@@ -175,24 +180,32 @@ public class PollList {
 		
 		// if the percentage total is greater than 100, go through each entry in the poll
 		// again, and apply normalization factor of 100/psum to each percentage.
-		if (psum>100.0) {
-			for (int i=0; i<testPoll.getNumberOfParties(); i++) {
-				testPoll.getParty(partyNames[i]).setProjectedPercentageOfVotes(
-						(float)(testPoll.getParty(partyNames[i]).
-								getProjectedPercentageOfVotes()*100.0f/psum));
-			}
+		try {
+			if (psum>100.0) {
+				for (int i=0; i<testPoll.getNumberOfParties(); i++) {
+					testPoll.getParty(partyNames[i]).setProjectedPercentageOfVotes(
+							(float)(testPoll.getParty(partyNames[i]).
+									getProjectedPercentageOfVotes()*100.0f/psum));
+				}
 
+			}
+		} catch (InvalidPartyDataException e) {
+			e.printStackTrace();
 		}
 		
 		// if the seat total is greater than allowed number of seats, go through each entry in the poll
 		// again, and apply normalization factor of (numSeats)/ssum to each seat number.
 		
-		if (ssum > this.getNumOfSeats()) {
-			for (int i=0; i<testPoll.getNumberOfParties(); i++) {
-				testPoll.getParty(partyNames[i]).setProjectedNumberOfSeats(
-						(float)(testPoll.getParty(partyNames[i]).
-								getProjectedNumberOfSeats()*this.getNumOfSeats()/ssum));
+		try {
+			if (ssum > this.getNumOfSeats()) {
+				for (int i=0; i<testPoll.getNumberOfParties(); i++) {
+					testPoll.getParty(partyNames[i]).setProjectedNumberOfSeats(
+							(float)(testPoll.getParty(partyNames[i]).
+									getProjectedNumberOfSeats()*this.getNumOfSeats()/ssum));
+				}
 			}
+		} catch (InvalidPartyDataException e) {
+			e.printStackTrace();
 		}
 		
 		return testPoll;
@@ -230,71 +243,74 @@ public class PollList {
 		
 
 		// Add first poll
-		Party cpc0 = new Party("CPC",81.92139f,33f);
-		Party liberal0 = new Party("Liberal",154.11794f,56f);
-		Party ndp0 = new Party("NDP",1.0f,4f);
-		Party green0 = new Party("Green",40.0f,5f);
-		Party rhino0 = new Party("Rhinoceros",1.0f,0f);
+		try {
+			Party cpc0 = new Party("CPC",81.92139f,33f);
+			Party liberal0 = new Party("Liberal",154.11794f,56f);
+			Party ndp0 = new Party("NDP",1.0f,4f);
+			Party green0 = new Party("Green",40.0f,5f);
+			Party rhino0 = new Party("Rhinoceros",1.0f,0f);
+			Poll Poll0 = new Poll("Poll0",5);
+			Poll0.addParty(cpc0);
+			Poll0.addParty(liberal0);
+			Poll0.addParty(ndp0);
+			Poll0.addParty(green0);
+			Poll0.addParty(rhino0);
+			System.out.println(Poll0);
 
-		Poll Poll0 = new Poll("Poll0",5);
-		Poll0.addParty(cpc0);
-		Poll0.addParty(liberal0);
-		Poll0.addParty(ndp0);
-		Poll0.addParty(green0);
-		Poll0.addParty(rhino0);
-				
-		System.out.println(Poll0);
-				
-		// Add second poll
-		Party cpc1 = new Party("CPC",33.0f,3f);
-		Party liberal1 = new Party("Liberal",85.86417f,40f);
-		Party ndp1 = new Party("NDP",35.877453f,10f);
-		Party green1 = new Party("Green",80.175026f,35f);
-		Party ppc1 = new Party("PPC",42.0f,9f);
-
-		Poll Poll1 = new Poll("Poll1",5);
-		Poll1.addParty(cpc1);
-		Poll1.addParty(liberal1);
-		Poll1.addParty(ndp1);
-		Poll1.addParty(green1);
-		Poll1.addParty(ppc1);
-				
-		System.out.println(Poll1);
-
-		// Add third poll
-		Party cpc2 = new Party("CPC",236.83212f,88f);
-		Party liberal2 = new Party("Liberal",14.0f,3f);
-		Party ndp2 = new Party("NDP",2.0f,0f);
-		Party green2 = new Party("Green",25.0f,8f);
-
-		Poll Poll2 = new Poll("Poll2",4);
-		Poll2.addParty(cpc2);
-		Poll2.addParty(liberal2);
-		Poll2.addParty(ndp2);
-		Poll2.addParty(green2);
-				
-		System.out.println(Poll2);
-
-
-		System.out.println("Adding first poll ... ");
-		testList.addPoll(Poll0);
-		System.out.println("Adding second poll ... ");
-		testList.addPoll(Poll1);
-		System.out.println("Adding third poll ... ");
-		testList.addPoll(Poll2);
-		System.out.println("Done adding polls ");
 		
-		System.out.println("\n Final Poll List + Aggregate: \n");
+			// Add second poll
+			Party cpc1 = new Party("CPC",33.0f,3f);
+			Party liberal1 = new Party("Liberal",85.86417f,40f);
+			Party ndp1 = new Party("NDP",35.877453f,10f);
+			Party green1 = new Party("Green",80.175026f,35f);
+			Party ppc1 = new Party("PPC",42.0f,9f);
+
+			Poll Poll1 = new Poll("Poll1",5);
+			Poll1.addParty(cpc1);
+			Poll1.addParty(liberal1);
+			Poll1.addParty(ndp1);
+			Poll1.addParty(green1);
+			Poll1.addParty(ppc1);
+				
+			System.out.println(Poll1);
+
+			// Add third poll
+			Party cpc2 = new Party("CPC",236.83212f,88f);
+			Party liberal2 = new Party("Liberal",14.0f,3f);
+			Party ndp2 = new Party("NDP",2.0f,0f);
+			Party green2 = new Party("Green",25.0f,8f);
+
+			Poll Poll2 = new Poll("Poll2",4);
+			Poll2.addParty(cpc2);
+			Poll2.addParty(liberal2);
+			Poll2.addParty(ndp2);
+			Poll2.addParty(green2);
+				
+			System.out.println(Poll2);
+
+
+			System.out.println("Adding first poll ... ");
+			testList.addPoll(Poll0);
+			System.out.println("Adding second poll ... ");
+			testList.addPoll(Poll1);
+			System.out.println("Adding third poll ... ");
+			testList.addPoll(Poll2);
+			System.out.println("Done adding polls ");
 		
-		System.out.println(testList);
+			System.out.println("\n Final Poll List + Aggregate: \n");
 		
-		String[] aggPollNames = {"CPC","Liberal","Green","NDP","PPC","Rhinoceros"};
-		//String[] aggPollNames = {"CPC","Liberal","Green","NDP"};		
-		Poll aggregatePoll = new Poll("aggregate",aggPollNames.length);
-		aggregatePoll = testList.getAggregatePoll(aggPollNames);
+			System.out.println(testList);
 		
-		System.out.println("Final Aggregate Poll:");
-		System.out.println(aggregatePoll);
+			String[] aggPollNames = {"CPC","Liberal","Green","NDP","PPC","Rhinoceros"};
+			//String[] aggPollNames = {"CPC","Liberal","Green","NDP"};		
+			Poll aggregatePoll = new Poll("aggregate",aggPollNames.length);
+			aggregatePoll = testList.getAggregatePoll(aggPollNames);
+		
+			System.out.println("Final Aggregate Poll:");
+			System.out.println(aggregatePoll);
+		} catch (InvalidPartyDataException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

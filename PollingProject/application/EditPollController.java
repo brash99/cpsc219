@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 import model.PollList;
+import model.InvalidPartyDataException;
 import model.Party;
 
 public class EditPollController extends PollTrackerController {
@@ -30,6 +31,10 @@ public class EditPollController extends PollTrackerController {
 	@FXML
 	private Label numberOfSeats;
 	@FXML
+	private Label errorLabel1;
+	@FXML
+	private Label errorLabel2;
+	@FXML
 	private MenuButton pollMenu;
 	@FXML
 	private MenuButton partyMenu;
@@ -46,6 +51,8 @@ public class EditPollController extends PollTrackerController {
 		System.out.println("In refresh method of AddPollController");
 		projNumberOfSeats.setText("");
 		projPercentageOfVotes.setText("");
+		errorLabel1.setText("No Error");
+		errorLabel1.setText("No Error");
 		
 		pollMenu.getItems().clear();
 		partyMenu.getItems().clear();
@@ -116,9 +123,21 @@ public class EditPollController extends PollTrackerController {
     public void handleUpdateAction() {
     	System.out.println("In handleUpdateAction");
     	float seats = Float.parseFloat(projNumberOfSeats.getText());
-    	tempPartyList[tempPartyIndex].setProjectedNumberOfSeats(seats);
+    	try {
+    		tempPartyList[tempPartyIndex].setProjectedNumberOfSeats(seats);
+    		errorLabel1.setText("No Error");
+    	} catch (InvalidPartyDataException e1) {
+    		errorLabel1.setText("Error: seats < 0 !!");
+    		e1.printStackTrace();
+    	}
     	float votes = Float.parseFloat(projPercentageOfVotes.getText());
-    	tempPartyList[tempPartyIndex].setProjectedPercentageOfVotes(votes);
+    	try {
+        	tempPartyList[tempPartyIndex].setProjectedPercentageOfVotes(votes);	
+    		errorLabel2.setText("No Error");
+    	} catch (InvalidPartyDataException e2) {
+    		errorLabel2.setText("Error: percentage out of range!!");
+    		e2.printStackTrace();
+    	}
     	
 		System.out.println(polls.getPolls()[tempPollIndex].getParty(tempPartyList[tempPartyIndex].getName()));
 		polls.getPolls()[tempPollIndex].replaceParty(tempPartyList[tempPartyIndex],tempPartyIndex);
