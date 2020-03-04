@@ -43,8 +43,8 @@
              </Label>
              <Label fx:id="numberOfSeats" layoutX="428.0" layoutY="142.0" text="/0" />
              <Label layoutX="441.0" layoutY="192.0" text="\%" />
-             <Label layoutX="328.0" layoutY = "115.0" fx:id="errorLabel1" text="No Error"/>
-             <Label layoutX="328.0" layoutY = "165.0" fx:id="errorLabel2" text="No Error"/>
+             <Label layoutX="328.0" layoutY = "115.0" fx:id="errorLabel1" text=""/>
+             <Label layoutX="328.0" layoutY = "165.0" fx:id="errorLabel2" text=""/>
              <Button layoutX="164.0" layoutY="225.0" mnemonicParsing="false" onAction="#handleClearEditAction" text="Clear">
                 <font>
                    <Font size="14.0" />

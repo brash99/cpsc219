@@ -148,7 +148,7 @@ public class PollTrackerApp extends Application {
 		
 		System.out.println("Back from open ... defining scene");
 		
-		Scene scene = new Scene(root,500,400);
+		Scene scene = new Scene(root,825,550);
 		
 //		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		primaryStage.setScene(scene);
