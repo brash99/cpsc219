@@ -78,6 +78,8 @@ public class Factory {
 				poll.addParty(new Party(partyNames[i], (float)(seats[i]), percentOfVotes));
 			} catch (InvalidPartyDataException e) {
 				e.printStackTrace();
+			} catch (PollFullException f) {
+				f.printStackTrace();
 			}
 		}
 		return poll;

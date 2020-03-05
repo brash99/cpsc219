@@ -19,8 +19,12 @@ public class Poll {
 	public int getNumberOfParties() {
 		return partiesInPoll;
 	}
-	public void addParty(Party aParty) {
-		parties[partiesInPoll++] = aParty;
+	public void addParty(Party aParty) throws PollFullException {
+		if (partiesInPoll < parties.length) {
+			parties[partiesInPoll++] = aParty;
+		} else {
+			throw new PollFullException("Poll full!  Cannot add any more parties!!");
+		}
 	}
 	
 	public void replaceParty(Party aParty, int index) {

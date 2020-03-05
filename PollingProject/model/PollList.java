@@ -156,7 +156,11 @@ public class PollList {
 			// aggregate poll
 			try {
 				Party testparty2 = new Party(partyNames[i],(float)(seatsum),(float)(percentsum));
-				testPoll.addParty(testparty2);
+				try {
+					testPoll.addParty(testparty2);
+				} catch (PollFullException f) {
+					f.printStackTrace();
+				}
 			} catch (InvalidPartyDataException e) {
 				e.printStackTrace();
 			}
@@ -310,6 +314,8 @@ public class PollList {
 			System.out.println(aggregatePoll);
 		} catch (InvalidPartyDataException e) {
 			e.printStackTrace();
+		} catch (PollFullException f) {
+			f.printStackTrace();
 		}
 	}
 	
