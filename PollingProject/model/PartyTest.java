@@ -25,35 +25,39 @@ public class PartyTest extends FormatTester{
 		@Test
 		public void test_Constructor_1(){
 			testClassDefinition();
-			Party c = new Party("Liberal");
-			assertEquals("Created party with name Liberal", "Liberal", c.getName());
+			String name = "Liberal";
+			Party c = new Party(name);
+			assertEquals("Created party with name Liberal", name, c.getName());
 		}
 		
 		@Test
 		public void test_Constructor_2(){
 			testClassDefinition();
+			String name = "Liberal";
 			float seats = 100.0f;
-			float votes = 50.0f;
-			Party c = new Party("Liberal",seats,votes);
-			assertEquals("Created party with name Liberal", "Liberal", c.getName());
-			assertEquals("Created party with 100.0 seats", 100.0, c.getProjectedNumberOfSeats(),0.000001f);
-			assertEquals("Created party with 50.0% of vote", 50.0, c.getProjectedPercentageOfVotes(),0.000001f);		
+			float percent = 50.0f;
+			try {
+				Party c = new Party("Liberal",seats,percent);
+				assertEquals("Created party with name Liberal", name, c.getName());
+				assertEquals("Created party with 100.0 seats", seats, c.getProjectedNumberOfSeats(),0.000001f);
+				assertEquals("Created party with 50% of vote", percent, c.getProjectedPercentageOfVotes(),0.000001f);
+			} catch (InvalidPartyDataException e) {
+				e.printStackTrace();
+				assertEquals("Execption Thrown - invalid Party data!!",0.0,0.0,.0000001);				
+			}
 		}
-		
+			
 		@Test
-		public void test_Constructor_bounciness_99_TooLow(){
+		public void test_Constructor_3(){
 			testClassDefinition();
-			Party c = new Party(.99,0);
-			assertEquals("Created bouncer with valid 99% bounciness", .99, c.getBounciness(), 0.000001);
-			assertEquals("Created bouncer with invalid 0 height.", 1, c.getHeight());
+			String name = "Liberal";
+			float seats = -100.0f;
+			float percent = 50.0f;
+			try {
+				Party c = new Party("Liberal",seats,percent);
+			} catch (InvalidPartyDataException e) {
+				e.printStackTrace();
+				assertEquals("Execption Thrown - invalid Party data!!",0.0,0.0,.000001);
+			}
 		}
-		
-		@Test
-		public void test_Constructor_bounciness_45_1(){
-			testClassDefinition();
-			Party c = new Party(.45,1);
-			assertEquals("Created bouncer with valid 45% bounciness", .45, c.getBounciness(), 0.000001);
-			assertEquals("Created bouncer with 1 height.", 1, c.getHeight());
-		}
-		
 }

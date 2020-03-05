@@ -12,9 +12,9 @@ public abstract class FormatTester {
 	public FormatTester(String classname, boolean forEclipse) {
 		this.classname = classname;
 		if (forEclipse) {
-			this.filename = classname + ".java";
+			this.filename = "model/" + classname + ".java";
 		} else {
-			this.filename = classname + ".java";
+			this.filename = "model/" + classname + ".java";
 		}
 	}
 	
