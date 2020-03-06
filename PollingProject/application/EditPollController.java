@@ -47,8 +47,12 @@ public class EditPollController extends PollTrackerController {
 	}
 	
 	public void refresh() {
+		//
+		// Why the fuck doesn't this work??????
+		//
 		this.polls = app.getPolls();
-		System.out.println("In refresh method of AddPollController");
+		System.out.println("In refresh method of EditPollController");
+		System.out.println(this.polls);
 		projNumberOfSeats.setText("");
 		projPercentageOfVotes.setText("");
 		//errorLabel1.setText("");
