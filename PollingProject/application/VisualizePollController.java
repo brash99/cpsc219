@@ -58,12 +58,10 @@ public class VisualizePollController extends PollTrackerController {
 	
 	private void displayPollChoiceCreate() {
 		for (int i=0; i<polls.getPolls().length; i++) {
-			System.out.println("Adding poll menu item ... " + polls.getPolls()[i].getPollName());
 			MenuItem add1 = new MenuItem(polls.getPolls()[i].getPollName());
 			displayPollChoice.getItems().add(add1);
 		    add1.setOnAction(new EventHandler<ActionEvent>() {
 		        public void handle(ActionEvent t) {
-					System.out.println("Choosing to display Poll " + add1.getText());
 		        	displayPollChoice.setText(add1.getText());
 		        	tempPollName = add1.getText();
 		        	for (int j=0; j<polls.getPolls().length; j++) {
@@ -76,12 +74,10 @@ public class VisualizePollController extends PollTrackerController {
 		    });	    
 		}
 
-		System.out.println("Adding aggregate poll menu item ... ");
 		MenuItem add2 = new MenuItem("aggregate");
 		displayPollChoice.getItems().add(add2);
 	    add2.setOnAction(new EventHandler<ActionEvent>() {
 	        public void handle(ActionEvent t) {
-				System.out.println("Choosing to display aggregate Poll " + add2.getText());
 	        	displayPollChoice.setText(add2.getText());
 	        	tempPollName = add2.getText();
 	        	String[] sss = app.getFactory().getPartyNames();
@@ -107,26 +103,23 @@ public class VisualizePollController extends PollTrackerController {
 	    	
 	        leftCaption.setTextFill(Color.BLACK);
 	        leftCaption.setStyle("-fx-font: 12 arial;");
-            //System.out.println("Here I am 1");
+
 	    	leftChart.setData(leftChartObservableList);
 	    	rightChart.setData(rightChartObservableList);
-            //System.out.println(leftChart.getData());
+
             
 	        for (final PieChart.Data data : leftChart.getData()) {
-                //System.out.println("Here I am 2" + leftChart.getData());
 	            data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
 	                @Override
 	                public void handle(MouseEvent e) {
 	                    leftCaption.setTranslateX(e.getSceneX());
 	                    leftCaption.setTranslateY(e.getSceneY()-35.0); 
 	                    leftCaption.setText(String.format("%.2f",data.getPieValue()  ));
-	                    //System.out.println("Here I am 3");
 	                }
 	            });
 	        }
 	        
 	        for (final PieChart.Data data : rightChart.getData()) {
-                //System.out.println("Here I am 2" + leftChart.getData());
 	            data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
 	                @Override
 	                public void handle(MouseEvent e) {
@@ -134,7 +127,6 @@ public class VisualizePollController extends PollTrackerController {
 	                    leftCaption.setTranslateY(e.getSceneY()-35.0);
 	 
 	                    leftCaption.setText(String.format("%.2f",data.getPieValue()) + "%");
-	                    //System.out.println("Here I am 3");
 	                }
 	            });
 	        }

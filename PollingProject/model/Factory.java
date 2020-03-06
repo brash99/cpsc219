@@ -38,8 +38,6 @@ public class Factory {
 	
 	public Poll createRandomPoll(String name) {
 		
-		System.out.println("Random poll: "+name);
-		//System.out.println("partyNames: "+partyNames.length);		
 		Poll poll = new Poll(name, partyNames.length);
 		
 		Random rand = new Random();
@@ -55,7 +53,6 @@ public class Factory {
 		}
 		indexlist = RandomizeArray(indexlist);
 		
-		System.out.println(indexlist);
 		
 		for (int i=0; i<partyNames.length; i++) {
 			if (i == partyNames.length-1) {
@@ -65,7 +62,7 @@ public class Factory {
 				seatsAvailable -= seats[indexlist[i]];
 			}
 			seatsum = seatsum + seats[indexlist[i]];
-			//System.out.println(i+" "+partyNames[i]+" "+seats[i]+" "+seatsum);
+
 		}
 		for (int i=0; i<partyNames.length; i++) {
 			seats[i] = (int)(float)(seats[i]/seatsum*numOfSeats);
@@ -73,7 +70,7 @@ public class Factory {
 		
 		for (int i=0; i<partyNames.length; i++) {
 			float percentOfVotes = (float)((float)seats[i]/numOfSeats*100.0);
-			//System.out.println(i+" "+partyNames[i]+" "+seats[i]+" "+percentOfVotes);
+
 			try {
 				poll.addParty(new Party(partyNames[i], (float)(seats[i]), percentOfVotes));
 			} catch (InvalidPartyDataException e) {

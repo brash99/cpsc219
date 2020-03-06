@@ -31,12 +31,8 @@ public class PollTrackerApp extends Application {
 	}
 	
 	public void setPolls(PollList aList) {
-		System.out.println("In PollTrackerApp.setPolls");
-		System.out.println("Priting passed list ...");
-	    System.out.println(aList);
+
 	    polls = aList;
-		System.out.println("Printing poll list ...");
-		System.out.println(polls);
 		//TextArea vizTextArea = new TextArea();
 		//this.updateVisualization(vizTextArea);
 	}
@@ -46,29 +42,18 @@ public class PollTrackerApp extends Application {
 	}
 	
 	public void setFactory(Factory aFactory) {
-		System.out.println("In PollTrackerApp.setFactory");
 		factory = aFactory;
-		for (int i=0; i<factory.getPartyNames().length; i++) {	
-			System.out.println(factory.getPartyNames()[i]);
-		}
 	}
 	
 	private Tab createTab(String tabName, String FXMLFilename) {
 		Tab aTab = null;
 		try {
-			System.out.println("Statement 1");
 			FXMLLoader loader = new FXMLLoader();
-			System.out.println("Statement 2");
 			FileInputStream xmlFile = new FileInputStream(FXMLFilename);
-			System.out.println("Statement 2.5");
 			aTab = new Tab(tabName, loader.load(xmlFile));
-			System.out.println("Statement 3");
 			PollTrackerController controller = (PollTrackerController)loader.getController();
-			System.out.println("Statement 4");
 			aTab.setOnSelectionChanged (e -> controller.refresh());
-			System.out.println("Statement 5");
 			controller.setupController(this);
-			System.out.println("Done");
 		} catch (IOException e1) {
 			System.out.println("Problem loading FXML file " + FXMLFilename);
 			e1.printStackTrace();
@@ -82,12 +67,7 @@ public class PollTrackerApp extends Application {
 		PrintStream visualizationStream = new PrintStream(visualization);
 		PrintStream old = System.out;
 		System.setOut(visualizationStream);
-		//System.out.println("Here I am!");
-		//System.out.println(factory);
-		//String[] partyNameList = factory.getPartyNames();
-		//for (String myString : partyNameList) {
-		//	System.out.println(myString);
-		//}
+
 		(new application.TextApplication(polls)).displayPollsBySeat(factory.getPartyNames());
 		System.out.flush();
 		System.setOut(old);
@@ -136,7 +116,7 @@ public class PollTrackerApp extends Application {
 		 * argument that provides a default visualization before finalizing your team's 
 		 * solution.
 		 */
-		System.out.println("Opening root TabPane object ...");
+
 		TabPane root = new TabPane(
 				createTab("Setup Poll Tracker", FXML_FILES_LOCATION + "SetupPollTrackerView.fxml"),
 				createTab("Setup Parties", FXML_FILES_LOCATION + "SetupPartiesView.fxml"),
@@ -146,19 +126,15 @@ public class PollTrackerApp extends Application {
 //				getDefaultVisualization()
 //									);
 		
-		System.out.println("Back from open ... defining scene");
 		
 		Scene scene = new Scene(root,825,550);
 		
 //		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		System.out.println("Showing scene ...")
 ;	}
 	
 	public static void main(String[] args) {
-		System.out.println("Starting launch ...");
 		launch(args);
-		System.out.println("Back from launch ...");
 	}
 }

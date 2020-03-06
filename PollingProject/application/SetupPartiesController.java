@@ -10,6 +10,7 @@ import model.Factory;
 import model.InvalidPartyDataException;
 import model.Party;
 import model.Poll;
+import model.PollFullException;
 import model.PollList;
 
 public class SetupPartiesController extends PollTrackerController {
@@ -36,38 +37,27 @@ public class SetupPartiesController extends PollTrackerController {
 		localFactory = app.getFactory();
 		partyNames = app.getFactory().getPartyNames();
 		
-		System.out.println("Initial party names:");
-		for (int i=0; i<partyNames.length; i++) {
-			System.out.println(partyNames[i]);
-		}
 	}
 	
 	public void refresh() {
 		System.out.println("In refresh method of SetupPartiesController");
     	newPartyName.setText("");
     	currentPartyName.setText("");
-		System.out.println("Main app party names:");
-		for (int i=0; i<app.getFactory().getPartyNames().length;i++) {
-			System.out.println(app.getFactory().getPartyNames()[i]);
-		}
+
 		if (reload) {
-			System.out.println("Reload ...");
 			localPolls = app.getPolls();
 			localFactory = app.getFactory();
 			partyNames = app.getFactory().getPartyNames();
 			newPartyNames = new String[partyNames.length];
 			for (int i=0; i<newPartyNames.length; i++) {
 				newPartyNames[i] = Integer.toString(i+1);
-				System.out.println("new names = " + newPartyNames[i]);
 			}
-			
 			reload = false;
 		}
 		
 		partyMenu.getItems().clear();
 		
 		for (int i=0; i<partyNames.length; i++) {
-			System.out.println("Updating menu items ... " + newPartyNames[i]);
 			MenuItem add1 = new MenuItem(newPartyNames[i]);
 			partyMenu.getItems().add(add1);
 		    add1.setOnAction(new EventHandler<ActionEvent>() {
@@ -91,9 +81,7 @@ public class SetupPartiesController extends PollTrackerController {
     	
     	partyMenu.setText(newPartyName.getText());
     	for (int i=0; i<newPartyNames.length; i++) {
-    		System.out.println(partyNames[i] + " ...*... " + currentPartyName.getText());
     		if (partyNames[i].equals(currentPartyName.getText())) {
-    			System.out.println("Match! " + i);
     			newPartyNames[i] = newPartyName.getText();
     		}
     	}
@@ -112,41 +100,36 @@ public class SetupPartiesController extends PollTrackerController {
     	for (int i=0; i<newPartyNames.length; i++) {
     		String tempPartyName = partyNames[i];
     		String replacementPartyName = newPartyNames[i];
-    		System.out.println("Checking party = " + tempPartyName + " for replacement with " + replacementPartyName);
 			int pollCounter = 0;
     		for (Poll tempPoll:  localPolls.getPolls()) {
-    			System.out.println("Poll = " + tempPoll);
 				int partyCounter = 0;
     			for (Party tempParty: tempPoll.getPartiesSortedBySeats()) {
-    				System.out.println("Party = " + tempParty);
     				if(tempParty.getName() == tempPartyName) {
-    					System.out.println("Match!!! ...  partyCounter = " + partyCounter);
     					try {
     						Party replacementParty = new model.Party(replacementPartyName,tempParty.getProjectedNumberOfSeats(),tempParty.getProjectedPercentageOfVotes());
-    						localPolls.getPolls()[pollCounter].replaceParty(replacementParty,partyCounter);
+    						try {
+    							localPolls.getPolls()[pollCounter].replaceParty(replacementParty,partyCounter);
+    						} catch (PollFullException e) {
+    							e.printStackTrace();
+    						}
     					} catch (InvalidPartyDataException e) {
     						e.printStackTrace();
     					}
     				}
     				partyCounter++;
     			}
-    			System.out.println("Updated local Poll = " + localPolls.getPolls()[pollCounter]);
-    			System.out.println("Updated main Poll = " + app.getPolls().getPolls()[pollCounter]);
     			pollCounter++;
     		}
     	}
     	
-    	System.out.println(localPolls);
     	localFactory.setPartyNames(newPartyNames);
     	app.setPolls(localPolls);
     	app.setFactory(localFactory);
-    	System.out.println(app.getPolls());
 
     	refresh();
     }
     
     public void handleMenuChoice() {
-    	System.out.println(partyMenu.getId());
     	partyMenu.setText(currentPartyName.getText());
     }
     
