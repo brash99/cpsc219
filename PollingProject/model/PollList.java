@@ -27,7 +27,6 @@ public class PollList {
 		//
 		// Step 1: Get the index of the next empty space in the poll list
 		int goodIndex = getEmptyPollIndex(polls);
-		//System.out.println("goodIndex = " + goodIndex);
 		//
 		// Step 2: Search through the poll list from the end, to check for a matching poll name
 		//			If one is found, replace it with the new poll and then return
@@ -36,9 +35,8 @@ public class PollList {
 		//
 		for(int i=0;i<goodIndex;i++){
 			if(polls[i].getPollName() == aPoll.getPollName()){
-				System.out.println("Replacing poll at index = " + i);
+				//ystem.out.println("Replacing poll at index = " + i);
 				polls[i]=aPoll;
-				//System.out.println("");
 				return;
 			}
 		}
@@ -70,9 +68,8 @@ public class PollList {
 		
 		for(int i=0;i<polls.length;i++){
 			if(polls[i].getPollName() == originalName){
-				System.out.println("Replacing poll at index = " + i);
+				//System.out.println("Replacing poll at index = " + i);
 				polls[i]=aPoll;
-				//System.out.println("");
 				return;
 			}
 		}
