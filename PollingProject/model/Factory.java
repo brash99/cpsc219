@@ -82,15 +82,24 @@ public class Factory {
 		return poll;
 	}
 
-	public PollList createRandomPollList(int numOfPolls) {
+	public PollList createRandomPollList(int numOfPolls) throws PollListFullException {
 		PollList list = new PollList(numOfPolls,numOfSeats);
 		for (int counter = 0; counter < numOfPolls; counter++) {
-			list.addPoll(createRandomPoll("Poll" + counter));
+			try {
+				list.addPoll(createRandomPoll("Poll" + counter));
+			} catch (PollListFullException e) {
+				e.printStackTrace();
+			}
 		}
 		return list;
 	}
 	
-	public PollList promptForPollList(int numOfPolls) {
-		return createRandomPollList(numOfPolls);
+	public PollList promptForPollList(int numOfPolls) throws PollListFullException {
+		try {
+			return createRandomPollList(numOfPolls);
+		} catch (PollListFullException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

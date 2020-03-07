@@ -17,7 +17,7 @@ public class PollList {
 		return polls;
 	}
 
-	public void addPoll(Poll aPoll) {
+	public void addPoll(Poll aPoll) throws PollListFullException{
 		if (aPoll == null) {
 			System.out.println("Error:  null poll passed to addPoll");
 			return;
@@ -48,7 +48,7 @@ public class PollList {
 		//
 		//System.out.println("Adding NEW poll ...");
 		if (goodIndex == (polls.length)) {
-			System.out.println("Poll list already full.");
+			throw new PollListFullException("Poll list already full.");
 		} else {
 			polls[goodIndex] = aPoll;
 		}
@@ -289,14 +289,17 @@ public class PollList {
 				
 			System.out.println(Poll2);
 
-
-			System.out.println("Adding first poll ... ");
-			testList.addPoll(Poll0);
-			System.out.println("Adding second poll ... ");
-			testList.addPoll(Poll1);
-			System.out.println("Adding third poll ... ");
-			testList.addPoll(Poll2);
-			System.out.println("Done adding polls ");
+			try {
+				System.out.println("Adding first poll ... ");
+				testList.addPoll(Poll0);
+				System.out.println("Adding second poll ... ");
+				testList.addPoll(Poll1);
+				System.out.println("Adding third poll ... ");
+				testList.addPoll(Poll2);
+				System.out.println("Done adding polls ");
+			} catch (PollListFullException e) {
+				e.printStackTrace();
+			}
 		
 			System.out.println("\n Final Poll List + Aggregate: \n");
 		

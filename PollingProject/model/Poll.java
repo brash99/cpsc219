@@ -28,11 +28,8 @@ public class Poll {
 	}
 	
 	public void replaceParty(Party aParty, int index) throws PollFullException {
-		if (index >= partiesInPoll) {
-			parties[index] = aParty;
-		} else {
-			throw new PollFullException("Poll full! Cannot add any more parties!!");
-		}
+		//System.out.println("replaceParty:" + aParty + " " + index + " " + parties.length);
+		parties[index] = aParty;
 	}
 
 	public Party getParty(String name) {

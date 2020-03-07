@@ -5,6 +5,7 @@ import javafx.scene.control.TextField;
 
 import model.Factory;
 import model.PollList;
+import model.PollListFullException;
 
 public class SetupPollTrackerController extends PollTrackerController {
 	
@@ -61,7 +62,11 @@ public class SetupPollTrackerController extends PollTrackerController {
 		}
 		localFactory = new Factory(localNumberOfSeats);
 		localFactory.setPartyNames(nameList);
-		localPolls = localFactory.createRandomPollList(localNumberOfPolls);
+		try {
+			localPolls = localFactory.createRandomPollList(localNumberOfPolls);
+		} catch (PollListFullException e) {
+			e.printStackTrace();
+		}
 
 		app.setPolls(localPolls);		
 		app.setFactory(localFactory);
