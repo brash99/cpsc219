@@ -2,6 +2,8 @@ package application;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import model.InvalidSetupDataException;
 
 import model.Factory;
 import model.PollList;
@@ -23,6 +25,8 @@ public class SetupPollTrackerController extends PollTrackerController {
 	private TextField numberOfSeatsAvailable;
 	@FXML
 	private TextField numberOfPartiesRunning;
+	@FXML
+	private Label errorSetupPolls;
 	
 	public void setupController(PollTrackerApp app) {
 		System.out.println("In SetupPollTrackerController setupController ...");
@@ -38,14 +42,22 @@ public class SetupPollTrackerController extends PollTrackerController {
 
 	}
 	
-    public void handleSubmitAction() {
+    public void handleSubmitAction() throws InvalidSetupDataException {
+    	
         localNumberOfPolls = Integer.parseInt(numberOfPollsToTrack.getText());
         localNumberOfSeats = Integer.parseInt(numberOfSeatsAvailable.getText());
         localNumberOfParties = Integer.parseInt(numberOfPartiesRunning.getText());
         
-		this.createNewPolls();
+        if (localNumberOfPolls > 0 && localNumberOfSeats > 0 && localNumberOfParties > 0) {
+        	errorSetupPolls.setText("");
+        	this.createNewPolls();
+        } else {
+    		errorSetupPolls.setText("Error: All entries must be positive numbers!!!");
+    	    errorSetupPolls.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
+    	    handleClearAction();
+    	    throw new InvalidSetupDataException("Invalid data ... all entries must be > 0");
+        }
         
-        refresh();
     }
     
     public void handleClearAction() {
@@ -63,7 +75,7 @@ public class SetupPollTrackerController extends PollTrackerController {
 		localFactory = new Factory(localNumberOfSeats);
 		localFactory.setPartyNames(nameList);
 		try {
-			localPolls = localFactory.createRandomPollList(localNumberOfPolls);
+			localPolls = localFactory.createEmptyPollList(localNumberOfPolls);
 		} catch (PollListFullException e) {
 			e.printStackTrace();
 		}

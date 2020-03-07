@@ -1,7 +1,7 @@
 package application;
 
 import javafx.fxml.FXML;
-
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -22,6 +22,8 @@ public class AddPollController extends PollTrackerController {
 	private TextField newPollName;
 	@FXML
 	private MenuButton pollMenu;
+	@FXML
+	private Label pollErrorLabel;
 	
 	public void setupController(PollTrackerApp app) {
 		System.out.println("In AddPollController setupController ...");
@@ -33,6 +35,7 @@ public class AddPollController extends PollTrackerController {
 		this.polls = app.getPolls();
 		System.out.println("In refresh method of AddPollController");
     	newPollName.setText("");
+    	pollErrorLabel.setText("");
 		
 		pollMenu.getItems().clear();
 		for (int i=0; i<polls.getPolls().length; i++) {

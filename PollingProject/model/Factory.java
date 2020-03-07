@@ -81,12 +81,49 @@ public class Factory {
 		}
 		return poll;
 	}
+	
+	public Poll createEmptyPoll(String name) {
+		
+		Poll poll = new Poll(name, partyNames.length);
+		
+		Float[] seats = new Float[partyNames.length];
+		Float[] percentOfVotes = new Float[partyNames.length];	
+		
+		for (int i=0; i<partyNames.length; i++) {
+				seats[i] = 0.0f;
+				percentOfVotes[i] = 0.0f;
+		} 
+		
+		for (int i=0; i<partyNames.length; i++) {
+
+			try {
+				poll.addParty(new Party(partyNames[i], seats[i], percentOfVotes[i]));
+			} catch (InvalidPartyDataException e) {
+				e.printStackTrace();
+			} catch (PollFullException f) {
+				f.printStackTrace();
+			}
+		}
+		return poll;
+	}
 
 	public PollList createRandomPollList(int numOfPolls) throws PollListFullException {
 		PollList list = new PollList(numOfPolls,numOfSeats);
 		for (int counter = 0; counter < numOfPolls; counter++) {
 			try {
 				list.addPoll(createRandomPoll("Poll" + counter));
+			} catch (PollListFullException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	public PollList createEmptyPollList(int numOfPolls) throws PollListFullException {
+		PollList list = new PollList(numOfPolls,numOfSeats);
+		for (int counter = 0; counter < numOfPolls; counter++) {
+			try {
+				list.addPoll(createEmptyPoll("Poll" + counter));
 			} catch (PollListFullException e) {
 				e.printStackTrace();
 			}

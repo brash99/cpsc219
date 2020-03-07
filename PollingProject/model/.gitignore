@@ -12,3 +12,4 @@
 /FormatTester.class
 /PollFullException.class
 /PollListFullException.class
+/InvalidSetupDataException.class
