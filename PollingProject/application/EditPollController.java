@@ -10,9 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 import model.PollList;
-import model.InvalidPartyDataException;
 import model.Party;
-import model.PollFullException;
 
 public class EditPollController extends PollTrackerController {
 	
@@ -31,10 +29,6 @@ public class EditPollController extends PollTrackerController {
 	private TextField projPercentageOfVotes;
 	@FXML
 	private Label numberOfSeats;
-	@FXML
-	private Label errorLabel1;
-	@FXML
-	private Label errorLabel2;
 	@FXML
 	private MenuButton pollMenu;
 	@FXML
@@ -56,8 +50,10 @@ public class EditPollController extends PollTrackerController {
 		
 		pollMenu.getItems().clear();
 		partyMenu.getItems().clear();
-		pollMenuCreate();
-		partyMenuCreate(tempPartyList);
+		if (polls.getPolls() != null) {
+			pollMenuCreate();
+			partyMenuCreate(tempPartyList);
+		}
 		
 	}
 	
@@ -118,29 +114,12 @@ public class EditPollController extends PollTrackerController {
     
     public void handleUpdateAction() {
     	float seats = Float.parseFloat(projNumberOfSeats.getText());
-    	try {
-    		tempPartyList[tempPartyIndex].setProjectedNumberOfSeats(seats);
-    		errorLabel1.setText("");
-    	} catch (InvalidPartyDataException e1) {
-    		errorLabel1.setText("Error: seats < 0 !!");
-    	    errorLabel1.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
-    		e1.printStackTrace();
-    	}
-    	float votes = Float.parseFloat(projPercentageOfVotes.getText());
-    	try {
-        	tempPartyList[tempPartyIndex].setProjectedPercentageOfVotes(votes);	
-    		errorLabel2.setText("");
-    	} catch (InvalidPartyDataException e2) {
-    		errorLabel2.setText("Error: percentage out of range!!");
-    	    errorLabel2.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
-    		e2.printStackTrace();
-    	}
+    	tempPartyList[tempPartyIndex].setProjectedNumberOfSeats(seats); 
     	
-		try {
-			polls.getPolls()[tempPollIndex].replaceParty(tempPartyList[tempPartyIndex],tempPartyIndex);
-		} catch (PollFullException e) {
-			e.printStackTrace();
-		}
+    	float votes = Float.parseFloat(projPercentageOfVotes.getText());
+        tempPartyList[tempPartyIndex].setProjectedPercentageOfVotes(votes);	
+    	
+		polls.getPolls()[tempPollIndex].replaceParty(tempPartyList[tempPartyIndex],tempPartyIndex);
 		
         refresh();
     }

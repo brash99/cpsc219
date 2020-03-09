@@ -7,10 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import model.Factory;
-import model.InvalidPartyDataException;
 import model.Party;
 import model.Poll;
-import model.PollFullException;
 import model.PollList;
 
 public class SetupPartiesController extends PollTrackerController {
@@ -105,16 +103,8 @@ public class SetupPartiesController extends PollTrackerController {
 				int partyCounter = 0;
     			for (Party tempParty: tempPoll.getPartiesSortedBySeats()) {
     				if(tempParty.getName() == tempPartyName) {
-    					try {
-    						Party replacementParty = new model.Party(replacementPartyName,tempParty.getProjectedNumberOfSeats(),tempParty.getProjectedPercentageOfVotes());
-    						try {
-    							localPolls.getPolls()[pollCounter].replaceParty(replacementParty,partyCounter);
-    						} catch (PollFullException e) {
-    							e.printStackTrace();
-    						}
-    					} catch (InvalidPartyDataException e) {
-    						e.printStackTrace();
-    					}
+    					Party replacementParty = new model.Party(replacementPartyName,tempParty.getProjectedNumberOfSeats(),tempParty.getProjectedPercentageOfVotes());
+    					localPolls.getPolls()[pollCounter].replaceParty(replacementParty,partyCounter);		
     				}
     				partyCounter++;
     			}

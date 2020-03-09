@@ -53,7 +53,9 @@ public class VisualizePollController extends PollTrackerController {
 		displayPollChoice.getItems().clear();
 		leftCaption.setText(null);
 		rightCaption.setText(null);
-		displayPollChoiceCreate();
+		if (polls.getPolls() != null) {
+			displayPollChoiceCreate();
+		}
 	}
 	
 	private void displayPollChoiceCreate() {

@@ -2,10 +2,13 @@ package model;
 
 import java.util.Random;
 
+import model.PollList;
+
  //(For teams of 4 or less this class is optional.)
 public class Factory {
 	private int numOfSeats;
 	private String[] partyNames;
+	private PollList localList;
 	
 	public Factory(int numOfSeats) {
 		this.numOfSeats = numOfSeats;
@@ -71,13 +74,8 @@ public class Factory {
 		for (int i=0; i<partyNames.length; i++) {
 			float percentOfVotes = (float)((float)seats[i]/numOfSeats*100.0);
 
-			try {
-				poll.addParty(new Party(partyNames[i], (float)(seats[i]), percentOfVotes));
-			} catch (InvalidPartyDataException e) {
-				e.printStackTrace();
-			} catch (PollFullException f) {
-				f.printStackTrace();
-			}
+			poll.addParty(new Party(partyNames[i], (float)(seats[i]), percentOfVotes));
+			
 		}
 		return poll;
 	}
@@ -95,48 +93,33 @@ public class Factory {
 		} 
 		
 		for (int i=0; i<partyNames.length; i++) {
-
-			try {
-				poll.addParty(new Party(partyNames[i], seats[i], percentOfVotes[i]));
-			} catch (InvalidPartyDataException e) {
-				e.printStackTrace();
-			} catch (PollFullException f) {
-				f.printStackTrace();
-			}
+			poll.addParty(new Party(partyNames[i], seats[i], percentOfVotes[i]));
 		}
 		return poll;
 	}
 
-	public PollList createRandomPollList(int numOfPolls) throws PollListFullException {
-		PollList list = new PollList(numOfPolls,numOfSeats);
+	public PollList createRandomPollList(int numOfPolls) {
+		
+		localList = new PollList(numOfPolls,numOfSeats);
 		for (int counter = 0; counter < numOfPolls; counter++) {
-			try {
-				list.addPoll(createRandomPoll("Poll" + counter));
-			} catch (PollListFullException e) {
-				e.printStackTrace();
-			}
+			localList.addPoll(createRandomPoll("Poll" + counter));
 		}
-		return list;
+		
+		return localList;
+		
 	}
 	
-	public PollList createEmptyPollList(int numOfPolls) throws PollListFullException {
-		PollList list = new PollList(numOfPolls,numOfSeats);
+	public PollList createEmptyPollList(int numOfPolls) {
+
+		localList = new PollList(numOfPolls,numOfSeats);
 		for (int counter = 0; counter < numOfPolls; counter++) {
-			try {
-				list.addPoll(createEmptyPoll("Poll" + counter));
-			} catch (PollListFullException e) {
-				e.printStackTrace();
-			}
+			localList.addPoll(createEmptyPoll("Poll" + counter));
 		}
-		return list;
+		
+		return localList;
 	}
 	
-	public PollList promptForPollList(int numOfPolls) throws PollListFullException {
-		try {
-			return createRandomPollList(numOfPolls);
-		} catch (PollListFullException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public PollList promptForPollList(int numOfPolls) {
+		return createRandomPollList(numOfPolls);
 	}
 }

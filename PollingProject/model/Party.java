@@ -9,18 +9,18 @@ public class Party implements Comparable{
 		name = partyName;
 	}
 	
-	public Party(String partyName, float projectedNumberOfSeats, float projectedPercentageOfVotes) throws InvalidPartyDataException {
+	public Party(String partyName, float projectedNumberOfSeats, float projectedPercentageOfVotes) {
 		name = partyName;
 		if (projectedNumberOfSeats >= 0.0) {
 			seats = projectedNumberOfSeats;
 		} else {
-			throw new InvalidPartyDataException("Number of seats must be >= zero!");
+			System.out.println("Number of seats must be >= zero!");
 		}
 		
 		if (projectedPercentageOfVotes >=0.0 && projectedPercentageOfVotes <=100.0) {
 			percent = projectedPercentageOfVotes;
 		} else {
-			throw new InvalidPartyDataException("Percentage of votes must be between 0 and 100!");
+			System.out.println("Percentage of votes must be between 0 and 100!");
 		}
 	}
 	
@@ -36,19 +36,19 @@ public class Party implements Comparable{
 		return percent;
 	}
 	
-	public void setProjectedNumberOfSeats(float projectedNumberOfSeats) throws InvalidPartyDataException {
+	public void setProjectedNumberOfSeats(float projectedNumberOfSeats) {
 		if (projectedNumberOfSeats >= 0) {
 			seats = projectedNumberOfSeats;
 		} else {
-			throw new InvalidPartyDataException("Number of seats must be >= zero!");
+			System.out.println("Number of seats must be >= zero!");
 		}
 	}
 	
-	public void setProjectedPercentageOfVotes(float projectedPercentageOfVotes) throws InvalidPartyDataException {
+	public void setProjectedPercentageOfVotes(float projectedPercentageOfVotes) {
 		if (projectedPercentageOfVotes >=0 && projectedPercentageOfVotes <=100.0) {
 			percent = projectedPercentageOfVotes;
 		} else {
-			throw new InvalidPartyDataException("Percentage of votes must be between 0 and 1!");
+			System.out.println("Percentage of votes must be between 0 and 1!");
 		}
 	}
 	

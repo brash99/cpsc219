@@ -5,7 +5,6 @@ import java.util.Scanner;
 import model.Party;
 import model.Poll;
 import model.PollList;
-import model.PollListFullException;
 import model.Factory;
 
 public class TextApplication {
@@ -121,23 +120,22 @@ public class TextApplication {
 		this.displayPollDataByVotes(aggregatePoll);
 	}
 	
-	public static void run_test() throws PollListFullException {
+	public static void run_test()  {
 		// Testing code
 		int numOfSeats = 280;
 		PollList polls = new PollList(4, numOfSeats);
 		Factory factory = new Factory(numOfSeats);
 		String[] partyNames = {"BQ","CPC","Green","Liberal","NDP","PPC","Rhinoceros"};
 		factory.setPartyNames(partyNames);
-		try {
-			polls.addPoll(factory.createRandomPoll("Poll1"));
-			polls.addPoll(factory.createRandomPoll("Poll2"));
-			polls.addPoll(factory.createRandomPoll("Poll3"));
-			polls.addPoll(factory.createRandomPoll("Poll4"));
-		} catch (PollListFullException e) {
-			e.printStackTrace();
-		}
+
+		polls.addPoll(factory.createRandomPoll("Poll1"));
+		polls.addPoll(factory.createRandomPoll("Poll2"));
+		polls.addPoll(factory.createRandomPoll("Poll3"));
+		polls.addPoll(factory.createRandomPoll("Poll4"));
+			
 		TextApplication app = new TextApplication(polls);
 		app.displayPollsBySeat(factory.getPartyNames());
+
 	}
 	
 	public static void run() {
@@ -145,19 +143,19 @@ public class TextApplication {
 		System.out.println("Welcome to the poll tracker");
 		Scanner myObj = new Scanner(System.in);  // Create a Scanner object
 		
-	    System.out.println("How many seats are available in the election?");
-	    String mySeats = myObj.nextLine();  // Read user input
-	    int numOfSeats = Integer.parseInt(mySeats);
-	    Factory factory = new Factory(numOfSeats);
+		System.out.println("How many seats are available in the election?");
+		String mySeats = myObj.nextLine();  // Read user input
+		int numOfSeats = Integer.parseInt(mySeats);
+		Factory factory = new Factory(numOfSeats);
 	    
-	    System.out.println("Which parties are in the election (provide names, comma separated):");
-	    String myParties = myObj.nextLine();  // Read user input
-	    String[] partyNames = myParties.split(",");
-	    //System.out.println(Arrays.toString(partyNames));
-	    factory.setPartyNames(partyNames);
+		System.out.println("Which parties are in the election (provide names, comma separated):");
+		String myParties = myObj.nextLine();  // Read user input
+		String[] partyNames = myParties.split(",");
+		//System.out.println(Arrays.toString(partyNames));
+		factory.setPartyNames(partyNames);
 	    
-	    System.out.println("How many polls do you want to track with this application?");
-	    String myNumber = myObj.nextLine();
+		System.out.println("How many polls do you want to track with this application?");
+		String myNumber = myObj.nextLine();
 	    int numberOfPolls = Integer.parseInt(myNumber);
 	    PollList polls = new PollList(numberOfPolls, numOfSeats);
 	    
@@ -168,40 +166,36 @@ public class TextApplication {
 	    	for (int i=0; i<numberOfPolls;i++) {
 	    		//System.out.println("creating random set of polls ... ");
 	    		String myPollName = "Poll"+i;
-	    		try {
-	    			polls.addPoll(factory.createRandomPoll(myPollName));
-	    		} catch (PollListFullException e) {
-	    			e.printStackTrace();
-	    		}
+	    		polls.addPoll(factory.createRandomPoll(myPollName));
 	    	}
 	    }
+	    	
 	    TextApplication app = new TextApplication(polls);
-	    		
+    		
 	    while (true) {
-	    	System.out.println("Options: all (show result of all polls), aggregate (show aggregate result), quit (end application)");
-	    	System.out.println("Choose an option:");
-	    	String myChoice2 = myObj.nextLine();
-	    	if (myChoice2.contentEquals("all")) {
-	    		app.displayPollsBySeat(factory.getPartyNames());
-	    	} else if (myChoice2.contentEquals("aggregate")) {
-	    		app.displayAggregatePollbySeat(partyNames);
-	    	} else if (myChoice2.contentEquals("quit")) {
-	    		break;
-	    	}
-	    }
-	    
-	    System.out.println("Goodbye ... :)");
+		    System.out.println("Options: all (show result of all polls), aggregate (show aggregate result), quit (end application)");
+		    System.out.println("Choose an option:");
+		    String myChoice2 = myObj.nextLine();
+		    if (myChoice2.contentEquals("all")) {
+		    	app.displayPollsBySeat(factory.getPartyNames());
+		    } else if (myChoice2.contentEquals("aggregate")) {
+		    	app.displayAggregatePollbySeat(partyNames);
+		    } else if (myChoice2.contentEquals("quit")) {
+		    	break;
+		    }
+		   }
+		    
 	    myObj.close();
 	    
+	    System.out.println("Goodbye ... :)");
 		return;
+		
 	}
 	
 	public static void main(String[] args) {
 		
 		//run_test();
-		
-		run();
-		
+		run();	
 	}
 
 }
