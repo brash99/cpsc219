@@ -42,7 +42,6 @@
  			</font>
  		</Label>
 		<TextField layoutX="195.0" layoutY="103.0" fx:id="newPollName" prefHeight="27.0" prefWidth="267.0" />
-		
 	
 	</children>
 </AnchorPane>

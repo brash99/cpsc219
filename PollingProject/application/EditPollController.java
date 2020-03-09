@@ -42,26 +42,27 @@ public class EditPollController extends PollTrackerController {
 	}
 	
 	public void refresh() {
+
 		this.polls = app.getPolls();
-		System.out.println("In refresh method of AddPollController");
+		System.out.println("In refresh method of EditPollController");
 		projNumberOfSeats.setText("");
 		projPercentageOfVotes.setText("");
 		
 		pollMenu.getItems().clear();
 		partyMenu.getItems().clear();
-		pollMenuCreate();
-		partyMenuCreate(tempPartyList);
+		if (polls.getPolls() != null) {
+			pollMenuCreate();
+			partyMenuCreate(tempPartyList);
+		}
 		
 	}
 	
 	private void pollMenuCreate() {
 		for (int i=0; i<polls.getPolls().length; i++) {
-			System.out.println("Adding poll menu item ... " + polls.getPolls()[i].getPollName());
 			MenuItem add1 = new MenuItem(polls.getPolls()[i].getPollName());
 			pollMenu.getItems().add(add1);
 		    add1.setOnAction(new EventHandler<ActionEvent>() {
 		        public void handle(ActionEvent t) {
-					System.out.println("Choosing to edit Poll " + add1.getText());
 		        	pollMenu.setText(add1.getText());
 		        	tempPollName = add1.getText();
 		        	for (int j=0; j<polls.getPolls().length; j++) {
@@ -81,13 +82,11 @@ public class EditPollController extends PollTrackerController {
 		if (tempPartyList != null) {
 			for (int i=0; i<tempPartyList.length; i++) {
 				String partyName = tempPartyList[i].getName();
-				System.out.println(tempPartyList[i]);
 				MenuItem add2 = new MenuItem(partyName);
 				partyMenu.getItems().add(add2);
 				add2.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent t) {
 						float seatSum = 0.0f;
-						System.out.println("Choosing to edit Party " + add2.getText());
 						partyMenu.setText(add2.getText());
 						for (int j=0; j<tempPartyList.length; j++) {
 							seatSum = seatSum + tempPartyList[j].getProjectedNumberOfSeats();
@@ -114,15 +113,13 @@ public class EditPollController extends PollTrackerController {
    }
     
     public void handleUpdateAction() {
-    	System.out.println("In handleUpdateAction");
     	float seats = Float.parseFloat(projNumberOfSeats.getText());
-    	tempPartyList[tempPartyIndex].setProjectedNumberOfSeats(seats);
-    	float votes = Float.parseFloat(projPercentageOfVotes.getText());
-    	tempPartyList[tempPartyIndex].setProjectedPercentageOfVotes(votes);
+    	tempPartyList[tempPartyIndex].setProjectedNumberOfSeats(seats); 
     	
-		System.out.println(polls.getPolls()[tempPollIndex].getParty(tempPartyList[tempPartyIndex].getName()));
+    	float votes = Float.parseFloat(projPercentageOfVotes.getText());
+        tempPartyList[tempPartyIndex].setProjectedPercentageOfVotes(votes);	
+    	
 		polls.getPolls()[tempPollIndex].replaceParty(tempPartyList[tempPartyIndex],tempPartyIndex);
-		System.out.println(polls.getPolls()[tempPollIndex].getParty(tempPartyList[tempPartyIndex].getName()));
 		
         refresh();
     }

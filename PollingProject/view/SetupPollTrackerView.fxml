@@ -36,5 +36,6 @@
  		<TextField fx:id="numberOfPartiesRunning" layoutX="359.0" layoutY="159.0" />
  		<Button layoutX="181.0" layoutY="215.0" mnemonicParsing="false" text="Clear" onAction="#handleClearAction"/>
 		<Button layoutX="298.0" layoutY="215.0" mnemonicParsing="false" text="Submit" onAction="#handleSubmitAction"/>
+		<Label fx:id="errorSetupPolls" layoutX="359.0" layoutY="212.0" text="" />
 	</children>
 </AnchorPane>

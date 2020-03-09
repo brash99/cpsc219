@@ -19,11 +19,16 @@ public class Poll {
 	public int getNumberOfParties() {
 		return partiesInPoll;
 	}
-	public void addParty(Party aParty) {
-		parties[partiesInPoll++] = aParty;
+	public void addParty(Party aParty)  {
+		if (partiesInPoll < parties.length) {
+			parties[partiesInPoll++] = aParty;
+		} else {
+			System.out.println("Poll full! Cannot add any more parties!!");
+		}
 	}
 	
 	public void replaceParty(Party aParty, int index) {
+		System.out.println("replaceParty:" + aParty + " " + index + " " + parties.length);
 		parties[index] = aParty;
 	}
 
@@ -51,7 +56,6 @@ public class Poll {
 	
 	@Override
 	public String toString() {
-		System.out.println("In Poll toString() method ...");
 		String output = this.name + ":\n";
 		Party[] sortedPartyList = this.getPartiesSortedBySeats();
 		for (int i=0; i<sortedPartyList.length; i++) {

@@ -5,8 +5,14 @@ public class PollList {
 	private int numOfSeats;
 	
 	public PollList(int numOfPolls, int numOfSeats) {
-		polls = new Poll[numOfPolls];
-		this.numOfSeats = numOfSeats;
+		
+		if (numOfPolls > 0 && numOfSeats > 0) {
+			polls = new Poll[numOfPolls];
+			this.numOfSeats = numOfSeats;
+		} else {
+			System.out.println("Error!!! Attempt to set up poll list with invalid data!!!");
+		}
+		
 	}
 	
 	public int getNumOfSeats() {
@@ -27,7 +33,6 @@ public class PollList {
 		//
 		// Step 1: Get the index of the next empty space in the poll list
 		int goodIndex = getEmptyPollIndex(polls);
-		//System.out.println("goodIndex = " + goodIndex);
 		//
 		// Step 2: Search through the poll list from the end, to check for a matching poll name
 		//			If one is found, replace it with the new poll and then return
@@ -36,9 +41,8 @@ public class PollList {
 		//
 		for(int i=0;i<goodIndex;i++){
 			if(polls[i].getPollName() == aPoll.getPollName()){
-				System.out.println("Replacing poll at index = " + i);
+				//ystem.out.println("Replacing poll at index = " + i);
 				polls[i]=aPoll;
-				//System.out.println("");
 				return;
 			}
 		}
@@ -70,9 +74,8 @@ public class PollList {
 		
 		for(int i=0;i<polls.length;i++){
 			if(polls[i].getPollName() == originalName){
-				System.out.println("Replacing poll at index = " + i);
+				//System.out.println("Replacing poll at index = " + i);
 				polls[i]=aPoll;
-				//System.out.println("");
 				return;
 			}
 		}
@@ -154,8 +157,10 @@ public class PollList {
 		
 			// create a party object for this party and add it to the
 			// aggregate poll
+			
 			Party testparty2 = new Party(partyNames[i],(float)(seatsum),(float)(percentsum));
 			testPoll.addParty(testparty2);
+
 			
 		}
 
@@ -175,18 +180,21 @@ public class PollList {
 		
 		// if the percentage total is greater than 100, go through each entry in the poll
 		// again, and apply normalization factor of 100/psum to each percentage.
+
 		if (psum>100.0) {
 			for (int i=0; i<testPoll.getNumberOfParties(); i++) {
 				testPoll.getParty(partyNames[i]).setProjectedPercentageOfVotes(
-						(float)(testPoll.getParty(partyNames[i]).
+							(float)(testPoll.getParty(partyNames[i]).
 								getProjectedPercentageOfVotes()*100.0f/psum));
 			}
 
 		}
 		
+		
 		// if the seat total is greater than allowed number of seats, go through each entry in the poll
 		// again, and apply normalization factor of (numSeats)/ssum to each seat number.
 		
+
 		if (ssum > this.getNumOfSeats()) {
 			for (int i=0; i<testPoll.getNumberOfParties(); i++) {
 				testPoll.getParty(partyNames[i]).setProjectedNumberOfSeats(
@@ -194,6 +202,7 @@ public class PollList {
 								getProjectedNumberOfSeats()*this.getNumOfSeats()/ssum));
 			}
 		}
+	
 		
 		return testPoll;
 	}
@@ -226,25 +235,23 @@ public class PollList {
 		//
 		// Next we create a PollList that allows for the number of Polls that we will store
 		//
-		PollList testList = new PollList(numberOfPolls,278);
 		
-
 		// Add first poll
+		
 		Party cpc0 = new Party("CPC",81.92139f,33f);
 		Party liberal0 = new Party("Liberal",154.11794f,56f);
 		Party ndp0 = new Party("NDP",1.0f,4f);
 		Party green0 = new Party("Green",40.0f,5f);
 		Party rhino0 = new Party("Rhinoceros",1.0f,0f);
-
 		Poll Poll0 = new Poll("Poll0",5);
 		Poll0.addParty(cpc0);
 		Poll0.addParty(liberal0);
 		Poll0.addParty(ndp0);
 		Poll0.addParty(green0);
 		Poll0.addParty(rhino0);
-				
 		System.out.println(Poll0);
-				
+
+		
 		// Add second poll
 		Party cpc1 = new Party("CPC",33.0f,3f);
 		Party liberal1 = new Party("Liberal",85.86417f,40f);
@@ -275,7 +282,7 @@ public class PollList {
 				
 		System.out.println(Poll2);
 
-
+		PollList testList = new PollList(numberOfPolls,278);
 		System.out.println("Adding first poll ... ");
 		testList.addPoll(Poll0);
 		System.out.println("Adding second poll ... ");
@@ -283,10 +290,9 @@ public class PollList {
 		System.out.println("Adding third poll ... ");
 		testList.addPoll(Poll2);
 		System.out.println("Done adding polls ");
+		System.out.println(testList);
 		
 		System.out.println("\n Final Poll List + Aggregate: \n");
-		
-		System.out.println(testList);
 		
 		String[] aggPollNames = {"CPC","Liberal","Green","NDP","PPC","Rhinoceros"};
 		//String[] aggPollNames = {"CPC","Liberal","Green","NDP"};		
@@ -295,6 +301,7 @@ public class PollList {
 		
 		System.out.println("Final Aggregate Poll:");
 		System.out.println(aggregatePoll);
+			
 	}
 	
 }

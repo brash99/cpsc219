@@ -7,3 +7,9 @@
 /VoteComparator.class
 /PollTrackerApp.class
 /PollTrackerController.class
+/InvalidPartyDataException.class
+/PartyTest.class
+/FormatTester.class
+/PollFullException.class
+/PollListFullException.class
+/InvalidSetupDataException.class
