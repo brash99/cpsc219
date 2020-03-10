@@ -23,7 +23,7 @@ public class PollList {
 		return polls;
 	}
 
-	public void addPoll(Poll aPoll) {
+	public void addPoll(Poll aPoll) throws PollListFullException {
 		if (aPoll == null) {
 			System.out.println("Error:  null poll passed to addPoll");
 			return;
@@ -55,6 +55,7 @@ public class PollList {
 		//System.out.println("Adding NEW poll ...");
 		if (goodIndex == (polls.length)) {
 			System.out.println("Poll list already full.");
+			throw new PollListFullException("Error: Poll list already full!!");
 		} else {
 			polls[goodIndex] = aPoll;
 		}
@@ -63,7 +64,7 @@ public class PollList {
 		return;
 	}
 	
-	public void replacePollAtIndex(Poll aPoll, String originalName) {
+	public void replacePollAtIndex(Poll aPoll, String originalName) throws PollListFullException {
 		
 		if (aPoll == null) {
 			System.out.println("Error:  null poll passed to addPoll");
@@ -327,6 +328,8 @@ public class PollList {
 			e.printStackTrace();
 		} catch (PollFullException f) {
 			f.printStackTrace();
+		}catch (PollListFullException g) {
+			g.printStackTrace();
 		}
 			
 	}

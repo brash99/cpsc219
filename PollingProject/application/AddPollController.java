@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 
 import model.PollList;
 import model.Poll;
+import model.PollListFullException;
 
 public class AddPollController extends PollTrackerController {
 	
@@ -22,6 +23,8 @@ public class AddPollController extends PollTrackerController {
 	private TextField newPollName;
 	@FXML
 	private MenuButton pollMenu;
+	@FXML
+	private Label addPollError;
 	
 	public void setupController(PollTrackerApp app) {
 		System.out.println("In AddPollController setupController ...");
@@ -51,13 +54,20 @@ public class AddPollController extends PollTrackerController {
     public void handlePollClearAction() {
     	refresh();
     	newPollName.setText("");
+    	addPollError.setText("");
    }
     
     public void handleAddPollAction() {
-    	pollMenu.setText(newPollName.getText());
-		Poll aPoll = app.getFactory().createRandomPoll(newPollName.getText());
-		polls.replacePollAtIndex(aPoll, originalName);
-		polls = app.getPolls();
+    	try {
+    		pollMenu.setText(newPollName.getText());
+    		Poll aPoll = app.getFactory().createRandomPoll(newPollName.getText());
+    		polls.replacePollAtIndex(aPoll, originalName);
+    		polls = app.getPolls();
+    	} catch (PollListFullException e) {
+    		System.out.println("Poll list full exception!");
+    		addPollError.setText("Error:  Poll list is already full!");
+    		e.printStackTrace();
+    	}
 
         refresh();
     }

@@ -5,6 +5,7 @@ import java.util.Scanner;
 import model.Party;
 import model.Poll;
 import model.PollList;
+import model.PollListFullException;
 import model.Factory;
 
 public class TextApplication {
@@ -128,13 +129,18 @@ public class TextApplication {
 		String[] partyNames = {"BQ","CPC","Green","Liberal","NDP","PPC","Rhinoceros"};
 		factory.setPartyNames(partyNames);
 
-		polls.addPoll(factory.createRandomPoll("Poll1"));
-		polls.addPoll(factory.createRandomPoll("Poll2"));
-		polls.addPoll(factory.createRandomPoll("Poll3"));
-		polls.addPoll(factory.createRandomPoll("Poll4"));
+		try {
+			polls.addPoll(factory.createRandomPoll("Poll1"));
+			polls.addPoll(factory.createRandomPoll("Poll2"));
+			polls.addPoll(factory.createRandomPoll("Poll3"));
+			polls.addPoll(factory.createRandomPoll("Poll4"));
 			
-		TextApplication app = new TextApplication(polls);
-		app.displayPollsBySeat(factory.getPartyNames());
+			TextApplication app = new TextApplication(polls);
+			app.displayPollsBySeat(factory.getPartyNames());
+		} catch (PollListFullException e) {
+			System.out.println("Poll list full exception!");
+			e.printStackTrace();
+		}
 
 	}
 	
@@ -166,7 +172,12 @@ public class TextApplication {
 	    	for (int i=0; i<numberOfPolls;i++) {
 	    		//System.out.println("creating random set of polls ... ");
 	    		String myPollName = "Poll"+i;
-	    		polls.addPoll(factory.createRandomPoll(myPollName));
+	    		try {
+	    			polls.addPoll(factory.createRandomPoll(myPollName));
+	    		} catch (PollListFullException e) {
+	    			System.out.println("Poll list full exception!");
+	    			e.printStackTrace();
+	    		}
 	    	}
 	    }
 	    	
