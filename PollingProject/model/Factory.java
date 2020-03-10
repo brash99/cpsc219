@@ -74,7 +74,12 @@ public class Factory {
 		for (int i=0; i<partyNames.length; i++) {
 			float percentOfVotes = (float)((float)seats[i]/numOfSeats*100.0);
 
-			poll.addParty(new Party(partyNames[i], (float)(seats[i]), percentOfVotes));
+			try {
+				poll.addParty(new Party(partyNames[i], (float)(seats[i]), percentOfVotes));
+			} catch (InvalidPartyDataException e) {
+				System.out.println("Invalid party data exception!!");
+				e.printStackTrace();
+			}
 			
 		}
 		return poll;
@@ -93,7 +98,12 @@ public class Factory {
 		} 
 		
 		for (int i=0; i<partyNames.length; i++) {
-			poll.addParty(new Party(partyNames[i], seats[i], percentOfVotes[i]));
+			try {
+				poll.addParty(new Party(partyNames[i], seats[i], percentOfVotes[i]));
+			} catch (InvalidPartyDataException e) {
+				System.out.println("Invalid party data exception!!");
+				e.printStackTrace();
+			}
 		}
 		return poll;
 	}

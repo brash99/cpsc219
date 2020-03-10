@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 
 import model.PollList;
 import model.Party;
+import model.InvalidPartyDataException;
 
 public class EditPollController extends PollTrackerController {
 	
@@ -33,6 +34,10 @@ public class EditPollController extends PollTrackerController {
 	private MenuButton pollMenu;
 	@FXML
 	private MenuButton partyMenu;
+	@FXML
+	private Label errorLabel1;
+	@FXML
+	private Label errorLabel2;
 	
 	public void setupController(PollTrackerApp app) {
 		System.out.println("In EditPollController setupController ...");
@@ -114,10 +119,24 @@ public class EditPollController extends PollTrackerController {
     
     public void handleUpdateAction() {
     	float seats = Float.parseFloat(projNumberOfSeats.getText());
-    	tempPartyList[tempPartyIndex].setProjectedNumberOfSeats(seats); 
+    	try {
+    		tempPartyList[tempPartyIndex].setProjectedNumberOfSeats(seats);
+    		errorLabel1.setText("");
+    	} catch (InvalidPartyDataException e1) {
+    		errorLabel1.setText("Error: seats < 0 !!");
+    		errorLabel1.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
+    		e1.printStackTrace();
+    	}
     	
     	float votes = Float.parseFloat(projPercentageOfVotes.getText());
-        tempPartyList[tempPartyIndex].setProjectedPercentageOfVotes(votes);	
+    	try {
+    		tempPartyList[tempPartyIndex].setProjectedPercentageOfVotes(votes);	
+    		errorLabel2.setText("");
+    	} catch (InvalidPartyDataException e2) {
+    		errorLabel2.setText("Error: percentage out of range!!");
+    		errorLabel2.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
+    		e2.printStackTrace();
+    	}
     	
 		polls.getPolls()[tempPollIndex].replaceParty(tempPartyList[tempPartyIndex],tempPartyIndex);
 		

@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import model.Factory;
+import model.InvalidPartyDataException;
 import model.Party;
 import model.Poll;
 import model.PollList;
@@ -95,22 +96,26 @@ public class SetupPartiesController extends PollTrackerController {
     	// go through each poll in the poll list
     	// replace the entire party entry in each poll with the new party name, using the replaceParty method of the poll class
     	
-    	for (int i=0; i<newPartyNames.length; i++) {
-    		String tempPartyName = partyNames[i];
-    		String replacementPartyName = newPartyNames[i];
-			int pollCounter = 0;
-    		for (Poll tempPoll:  localPolls.getPolls()) {
-				int partyCounter = 0;
-    			for (Party tempParty: tempPoll.getPartiesSortedBySeats()) {
-    				if(tempParty.getName() == tempPartyName) {
-    					Party replacementParty = new model.Party(replacementPartyName,tempParty.getProjectedNumberOfSeats(),tempParty.getProjectedPercentageOfVotes());
-    					localPolls.getPolls()[pollCounter].replaceParty(replacementParty,partyCounter);		
+    	try {
+    		for (int i=0; i<newPartyNames.length; i++) {
+    			String tempPartyName = partyNames[i];
+    			String replacementPartyName = newPartyNames[i];
+    			int pollCounter = 0;
+    			for (Poll tempPoll:  localPolls.getPolls()) {
+    				int partyCounter = 0;
+    				for (Party tempParty: tempPoll.getPartiesSortedBySeats()) {
+    					if(tempParty.getName() == tempPartyName) {
+    						Party replacementParty = new model.Party(replacementPartyName,tempParty.getProjectedNumberOfSeats(),tempParty.getProjectedPercentageOfVotes());
+    						localPolls.getPolls()[pollCounter].replaceParty(replacementParty,partyCounter);		
+    					}
+    					partyCounter++;
     				}
-    				partyCounter++;
+    				pollCounter++;
     			}
-    			pollCounter++;
     		}
-    	}
+    	} catch (InvalidPartyDataException e) {
+			e.printStackTrace();
+		}
     	
     	localFactory.setPartyNames(newPartyNames);
     	app.setPolls(localPolls);
