@@ -55,9 +55,13 @@ public class EditPollController extends PollTrackerController {
 		
 		pollMenu.getItems().clear();
 		partyMenu.getItems().clear();
-		if (polls.getPolls() != null) {
-			pollMenuCreate();
-			partyMenuCreate(tempPartyList);
+		try {
+			if (polls.getPolls() != null) {
+				pollMenuCreate();
+				partyMenuCreate(tempPartyList);
+			}
+		}  catch (NullPointerException e) {
+			System.out.println("Empty poll list ... continuing ... ");
 		}
 		
 	}

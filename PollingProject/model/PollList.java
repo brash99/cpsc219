@@ -4,15 +4,15 @@ public class PollList {
 	private Poll[] polls;
 	private int numOfSeats;
 	
-	public PollList(int numOfPolls, int numOfSeats) {
+	public PollList(int numOfPolls, int numOfSeats) throws InvalidSetupDataException {
 		
 		if (numOfPolls > 0 && numOfSeats > 0) {
 			polls = new Poll[numOfPolls];
 			this.numOfSeats = numOfSeats;
 		} else {
 			System.out.println("Error!!! Attempt to set up poll list with invalid data!!!");
+			throw new InvalidSetupDataException("Error!!! Attempt to set up poll list with invalid data!!!");
 		}
-		
 	}
 	
 	public int getNumOfSeats() {
@@ -161,8 +161,18 @@ public class PollList {
 			// that this party was actually in.
 			//System.out.println("Found this party in " + counterSeats + " polls with seatsum = " + seatsum);
 			//System.out.println("Found this party in " + counterPercent + " polls with percentsum = " + percentsum);		
-			seatsum = seatsum / counterSeats;
-			percentsum = percentsum / counterPercent;
+			if (counterSeats > 0) {
+				seatsum = seatsum / counterSeats;
+			} else {
+				seatsum = 0.0f;
+			}
+			
+			if (counterPercent > 0) {
+				percentsum = percentsum / counterPercent;
+			} else {
+				percentsum = 0.0f;
+			}
+
 		
 			// create a party object for this party and add it to the
 			// aggregate poll
@@ -328,8 +338,10 @@ public class PollList {
 			e.printStackTrace();
 		} catch (PollFullException f) {
 			f.printStackTrace();
-		}catch (PollListFullException g) {
+		} catch (PollListFullException g) {
 			g.printStackTrace();
+		} catch (InvalidSetupDataException h) {
+			h.printStackTrace();
 		}
 			
 	}

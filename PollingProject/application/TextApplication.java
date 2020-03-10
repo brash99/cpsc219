@@ -5,8 +5,9 @@ import java.util.Scanner;
 import model.Party;
 import model.Poll;
 import model.PollList;
-import model.PollListFullException;
 import model.Factory;
+import model.PollListFullException;
+import model.InvalidSetupDataException;
 
 public class TextApplication {
 	
@@ -123,13 +124,15 @@ public class TextApplication {
 	
 	public static void run_test()  {
 		// Testing code
-		int numOfSeats = 280;
-		PollList polls = new PollList(4, numOfSeats);
-		Factory factory = new Factory(numOfSeats);
-		String[] partyNames = {"BQ","CPC","Green","Liberal","NDP","PPC","Rhinoceros"};
-		factory.setPartyNames(partyNames);
 
 		try {
+			int numOfSeats = 280;
+			PollList polls = new PollList(4, numOfSeats);
+			Factory factory = new Factory(numOfSeats);
+			String[] partyNames = {"BQ","CPC","Green","Liberal","NDP","PPC","Rhinoceros"};
+			factory.setPartyNames(partyNames);
+			
+			
 			polls.addPoll(factory.createRandomPoll("Poll1"));
 			polls.addPoll(factory.createRandomPoll("Poll2"));
 			polls.addPoll(factory.createRandomPoll("Poll3"));
@@ -140,6 +143,9 @@ public class TextApplication {
 		} catch (PollListFullException e) {
 			System.out.println("Poll list full exception!");
 			e.printStackTrace();
+		} catch (InvalidSetupDataException f) {
+			System.out.println("Invalid setup data Exception");
+			f.printStackTrace();
 		}
 
 	}

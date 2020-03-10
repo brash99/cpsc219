@@ -116,15 +116,19 @@ public class Factory {
 
 	public PollList createRandomPollList(int numOfPolls) {
 		
-		localList = new PollList(numOfPolls,numOfSeats);
-		
 		try {
+			
+			localList = new PollList(numOfPolls,numOfSeats);
 			for (int counter = 0; counter < numOfPolls; counter++) {
 				localList.addPoll(createRandomPoll("Poll" + counter));
 			}
+			
 		} catch (PollListFullException e) {
 			System.out.println("Poll list full excepeption!!");
 			e.printStackTrace();
+		} catch (InvalidSetupDataException f) {
+			System.out.println("Invalid Setup Data!!");
+			f.printStackTrace();
 		}
 		
 		return localList;
@@ -133,14 +137,18 @@ public class Factory {
 	
 	public PollList createEmptyPollList(int numOfPolls) {
 
-		localList = new PollList(numOfPolls,numOfSeats);
+
 		try {
+			localList = new PollList(numOfPolls,numOfSeats);
 			for (int counter = 0; counter < numOfPolls; counter++) {
 				localList.addPoll(createEmptyPoll("Poll" + counter));
 			}
 		} catch (PollListFullException e) {
 			System.out.println("Poll list full excepeption!!");
 			e.printStackTrace();
+		} catch (InvalidSetupDataException f) {
+			System.out.println("Invalid Setup Data!!");
+			f.printStackTrace();
 		}
 			
 		return localList;
