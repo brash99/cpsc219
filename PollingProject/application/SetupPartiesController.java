@@ -114,6 +114,7 @@ public class SetupPartiesController extends PollTrackerController {
     			}
     		}
     	} catch (InvalidPartyDataException e) {
+    		System.out.println("Error!  Invalid party data ... this should never happen!!!");
 			e.printStackTrace();
 		}
     	

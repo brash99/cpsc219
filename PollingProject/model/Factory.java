@@ -79,6 +79,9 @@ public class Factory {
 			} catch (InvalidPartyDataException e) {
 				System.out.println("Invalid party data exception!!");
 				e.printStackTrace();
+			} catch (PollFullException f) {
+				System.out.println("Poll full exception!!");
+				f.printStackTrace();
 			}
 			
 		}
@@ -103,6 +106,9 @@ public class Factory {
 			} catch (InvalidPartyDataException e) {
 				System.out.println("Invalid party data exception!!");
 				e.printStackTrace();
+			} catch (PollFullException f) {
+				System.out.println("Poll full exception!!");
+				f.printStackTrace();
 			}
 		}
 		return poll;

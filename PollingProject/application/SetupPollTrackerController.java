@@ -30,6 +30,7 @@ public class SetupPollTrackerController extends PollTrackerController {
 		if (localNumberOfPolls >= 0 && localNumberOfSeats >= 0 && localNumberOfParties >= 0) {
         	this.createNewPolls();
         } else {
+        	System.out.println("Error:  invalid input data ... resetting.");
     	    handleClearAction();
         }
 	}
@@ -43,13 +44,19 @@ public class SetupPollTrackerController extends PollTrackerController {
 	
     public void handleSubmitAction() {
     	
-        localNumberOfPolls = Integer.parseInt(numberOfPollsToTrack.getText());
-        localNumberOfSeats = Integer.parseInt(numberOfSeatsAvailable.getText());
-        localNumberOfParties = Integer.parseInt(numberOfPartiesRunning.getText());
+    	try {
+    		localNumberOfPolls = Integer.parseInt(numberOfPollsToTrack.getText());
+    		localNumberOfSeats = Integer.parseInt(numberOfSeatsAvailable.getText());
+    		localNumberOfParties = Integer.parseInt(numberOfPartiesRunning.getText());
+    	} catch (NumberFormatException e) {
+        	System.out.println("Error: Input data must be numerical ... resetting.");
+        	handleClearAction();
+        }
         
         if (localNumberOfPolls > 0 && localNumberOfSeats > 0 && localNumberOfParties > 0) {
         	this.createNewPolls();
         } else {
+        	System.out.println("Error: invalid input data ... resetting.");
     	    handleClearAction();
         }
         

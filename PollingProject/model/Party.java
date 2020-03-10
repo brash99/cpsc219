@@ -42,7 +42,7 @@ public class Party implements Comparable{
 		if (projectedNumberOfSeats >= 0) {
 			seats = projectedNumberOfSeats;
 		} else {
-			System.out.println("Number of seats must be >= zero!");
+			System.out.println("Number of seats must be an integer >= zero!");
 			throw new InvalidPartyDataException("Number of seats must be >= zero!");
 		}
 	}
@@ -51,8 +51,8 @@ public class Party implements Comparable{
 		if (projectedPercentageOfVotes >=0 && projectedPercentageOfVotes <=100.0) {
 			percent = projectedPercentageOfVotes;
 		} else {
-			System.out.println("Percentage of votes must be between 0 and 100!");
-			throw new InvalidPartyDataException("Percentage of Votes must be between 0 and 100!!");
+			System.out.println("Percentage of votes must be a real number between 0 and 100!");
+			throw new InvalidPartyDataException("Percentage of Votes must be a real number between 0 and 100!!");
 		}
 	}
 	

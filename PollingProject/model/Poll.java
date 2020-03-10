@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Arrays;
+import model.PollFullException;
 
 public class Poll {
 	private String name;
@@ -19,11 +20,12 @@ public class Poll {
 	public int getNumberOfParties() {
 		return partiesInPoll;
 	}
-	public void addParty(Party aParty)  {
+	public void addParty(Party aParty) throws PollFullException {
 		if (partiesInPoll < parties.length) {
 			parties[partiesInPoll++] = aParty;
 		} else {
 			System.out.println("Poll full! Cannot add any more parties!!");
+			throw new PollFullException("Poll full! Cannot add any more parties!!");
 		}
 	}
 	
@@ -42,7 +44,6 @@ public class Poll {
 	}
 	
 	public Party[] getPartiesSortedBySeats() {
-		
 		Arrays.sort(parties, new SeatComparator());
 		return parties;
 	}

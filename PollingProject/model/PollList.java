@@ -171,6 +171,8 @@ public class PollList {
 				testPoll.addParty(testparty2);
 			} catch (InvalidPartyDataException e) {
 				e.printStackTrace();
+			} catch (PollFullException f) {
+				f.printStackTrace();
 			}
 
 			
@@ -323,6 +325,8 @@ public class PollList {
 			System.out.println(aggregatePoll);
 		} catch (InvalidPartyDataException e) {
 			e.printStackTrace();
+		} catch (PollFullException f) {
+			f.printStackTrace();
 		}
 			
 	}
