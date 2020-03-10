@@ -8,6 +8,7 @@ import model.PollList;
 import model.Factory;
 import model.PollListFullException;
 import model.InvalidSetupDataException;
+import model.InvalidPartyDataException;
 
 public class TextApplication {
 	
@@ -152,55 +153,106 @@ public class TextApplication {
 	
 	public static void run() {
 		
+		boolean goodData = true;
+		
 		System.out.println("Welcome to the poll tracker");
 		Scanner myObj = new Scanner(System.in);  // Create a Scanner object
 		
-		System.out.println("How many seats are available in the election?");
-		String mySeats = myObj.nextLine();  // Read user input
-		int numOfSeats = Integer.parseInt(mySeats);
-		Factory factory = new Factory(numOfSeats);
-	    
+		int numOfSeats = 0;
+		
+		while (goodData) {
+			System.out.println("How many seats are available in the election?");
+			String mySeats = myObj.nextLine();  // Read user input
+			try {
+				numOfSeats = Integer.parseInt(mySeats);
+				if (numOfSeats>0) {
+					goodData = false;
+				} else {
+					System.out.println("Number of seats must be > 0 !");
+				}
+			} catch (NumberFormatException f) {
+				System.out.println("Number of seats must be an integer!");
+			}	
+		}
+		
+		Factory factory = new Factory(numOfSeats);	
+			
+
 		System.out.println("Which parties are in the election (provide names, comma separated):");
 		String myParties = myObj.nextLine();  // Read user input
 		String[] partyNames = myParties.split(",");
-		//System.out.println(Arrays.toString(partyNames));
 		factory.setPartyNames(partyNames);
-	    
-		System.out.println("How many polls do you want to track with this application?");
-		String myNumber = myObj.nextLine();
-	    int numberOfPolls = Integer.parseInt(myNumber);
-	    PollList polls = new PollList(numberOfPolls, numOfSeats);
-	    
-	    System.out.println("Would you like me to create a random set of polls?");
-	    String myChoice = myObj.nextLine();
-	    System.out.println(myChoice);
-	    if (myChoice.contentEquals("yes")) {
-	    	for (int i=0; i<numberOfPolls;i++) {
-	    		//System.out.println("creating random set of polls ... ");
-	    		String myPollName = "Poll"+i;
-	    		try {
-	    			polls.addPoll(factory.createRandomPoll(myPollName));
-	    		} catch (PollListFullException e) {
-	    			System.out.println("Poll list full exception!");
-	    			e.printStackTrace();
-	    		}
-	    	}
-	    }
+		goodData = false;
+				
 	    	
-	    TextApplication app = new TextApplication(polls);
+		goodData = true;
+		int numberOfPolls = 0;
+		
+		while (goodData) {
+			System.out.println("How many polls do you want to track with this application?");
+			String myNumber = myObj.nextLine();
+			try {
+				numberOfPolls = Integer.parseInt(myNumber);
+				if (numberOfPolls > 0) {
+					goodData = false;
+				} else {
+					System.out.println("Number of polls must be > 0!");
+				}
+			} catch (NumberFormatException f) {
+				System.out.println("Number of polls must be an integer!");
+			}	
+		} 
+		
+		try {
+			PollList polls = new PollList(numberOfPolls, numOfSeats);
+		
+		
+			System.out.println("Would you like me to create a random set of polls?");
+			String myChoice = myObj.nextLine();
+			System.out.println(myChoice);
+			if (myChoice.contentEquals("yes")) {
+				for (int i=0; i<numberOfPolls;i++) {
+					//System.out.println("creating random set of polls ... ");
+					String myPollName = "Poll"+i;
+					try {
+						polls.addPoll(factory.createRandomPoll(myPollName));
+					} catch (PollListFullException e) {
+						System.out.println("Poll list full exception!");
+						e.printStackTrace();
+					}
+				}
+			} else {
+				for (int i=0; i<numberOfPolls;i++) {
+					//System.out.println("creating random set of polls ... ");
+					String myPollName = "Poll"+i;
+					try {
+						polls.addPoll(factory.createEmptyPoll(myPollName));
+					} catch (PollListFullException e) {
+						System.out.println("Poll list full exception!");
+						e.printStackTrace();
+					}
+				}
+			}
+	    	
+			TextApplication app = new TextApplication(polls);
     		
-	    while (true) {
-		    System.out.println("Options: all (show result of all polls), aggregate (show aggregate result), quit (end application)");
-		    System.out.println("Choose an option:");
-		    String myChoice2 = myObj.nextLine();
-		    if (myChoice2.contentEquals("all")) {
-		    	app.displayPollsBySeat(factory.getPartyNames());
-		    } else if (myChoice2.contentEquals("aggregate")) {
-		    	app.displayAggregatePollbySeat(partyNames);
-		    } else if (myChoice2.contentEquals("quit")) {
-		    	break;
-		    }
-		   }
+			while (true) {
+				System.out.println("Options: all (show result of all polls), aggregate (show aggregate result), quit (end application)");
+				System.out.println("Choose an option:");
+				String myChoice2 = myObj.nextLine();
+				if (myChoice2.contentEquals("all")) {
+					app.displayPollsBySeat(factory.getPartyNames());
+				} else if (myChoice2.contentEquals("aggregate")) {
+					app.displayAggregatePollbySeat(partyNames);
+				} else if (myChoice2.contentEquals("quit")) {
+					break;
+				}
+			}
+	    
+		} catch (InvalidSetupDataException e) {
+			System.out.println("Invalid setup data - this should not happen!");
+			e.printStackTrace();
+		}
 		    
 	    myObj.close();
 	    
