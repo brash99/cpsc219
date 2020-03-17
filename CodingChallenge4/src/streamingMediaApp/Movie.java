@@ -1,3 +1,4 @@
+package streamingMediaApp;
 
 public class Movie extends StreamingMedia {
 	

@@ -1,3 +1,4 @@
+package bouncerApp;
 /**
  * Bouncer class for coding challenge 3 - practice 2
  */

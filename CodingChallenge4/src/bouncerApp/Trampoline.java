@@ -1,3 +1,4 @@
+package bouncerApp;
 
 public class Trampoline extends Bouncer {
 	
