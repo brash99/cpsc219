@@ -158,8 +158,8 @@ public class PollList {
 			}
 			// average the number of seats and percentages over the polls 
 			// that this party was actually in.
-			System.out.println("Found this party in " + counterSeats + " polls with seatsum = " + seatsum);
-			System.out.println("Found this party in " + counterPercent + " polls with percentsum = " + percentsum);		
+			//System.out.println("Found this party in " + counterSeats + " polls with seatsum = " + seatsum);
+			//System.out.println("Found this party in " + counterPercent + " polls with percentsum = " + percentsum);		
 			if (counterSeats > 0) {
 				seatsum = seatsum / counterSeats;
 			} else {
