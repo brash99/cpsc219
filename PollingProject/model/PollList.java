@@ -137,7 +137,7 @@ public class PollList {
 			int counterSeats = 0;
 			int counterPercent = 0;
 		
-			System.out.println("Creating aggregate poll entry for " + partyNames[i] + " for " +  polls.length + " polls.");
+			//System.out.println("Creating aggregate poll entry for " + partyNames[i] + " for " +  polls.length + " polls.");
 			for (int j=0; j<polls.length; j++) {
 				//System.out.println(polls[j].getParty(partyNames[i]));
 				// store the current poll information associated with the current search party in a temporary object 
@@ -160,9 +160,16 @@ public class PollList {
 			// that this party was actually in.
 			System.out.println("Found this party in " + counterSeats + " polls with seatsum = " + seatsum);
 			System.out.println("Found this party in " + counterPercent + " polls with percentsum = " + percentsum);		
-			seatsum = seatsum / counterSeats;
-			percentsum = percentsum / counterPercent;
-		
+			if (counterSeats > 0) {
+				seatsum = seatsum / counterSeats;
+			} else {
+				seatsum = 0.0f;
+			}
+			if (counterPercent > 0) {
+				percentsum = percentsum / counterPercent;
+			} else {
+				percentsum = 0.0f;
+			}
 			// create a party object for this party and add it to the
 			// aggregate poll
 			

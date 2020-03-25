@@ -140,12 +140,24 @@ public class TextApplication {
 	
 	public static void run() {
 		
+		boolean goodData = true;
+		
 		System.out.println("Welcome to the poll tracker");
 		Scanner myObj = new Scanner(System.in);  // Create a Scanner object
 		
-		System.out.println("How many seats are available in the election?");
-		String mySeats = myObj.nextLine();  // Read user input
-		int numOfSeats = Integer.parseInt(mySeats);
+		int numOfSeats = 0;
+		
+		while (goodData) {
+				System.out.println("How many seats are available in the election?");
+				String mySeats = myObj.nextLine();  // Read user input
+				numOfSeats = Integer.parseInt(mySeats);
+				if (numOfSeats>0) {
+					goodData = false;
+				} else {
+					System.out.println("Number of seats must be > 0 !");
+				}
+		}
+		
 		Factory factory = new Factory(numOfSeats);
 	    
 		System.out.println("Which parties are in the election (provide names, comma separated):");
@@ -153,10 +165,21 @@ public class TextApplication {
 		String[] partyNames = myParties.split(",");
 		//System.out.println(Arrays.toString(partyNames));
 		factory.setPartyNames(partyNames);
+		
+		goodData = true;
+		int numberOfPolls = 0;
 	    
-		System.out.println("How many polls do you want to track with this application?");
-		String myNumber = myObj.nextLine();
-	    int numberOfPolls = Integer.parseInt(myNumber);
+		while (goodData) {
+			System.out.println("How many polls do you want to track with this application?");
+			String myNumber = myObj.nextLine();
+			numberOfPolls = Integer.parseInt(myNumber);
+			if (numberOfPolls > 0) {
+				goodData = false;
+			} else {
+				System.out.println("Number of polls must be > 0!");
+			}
+		}
+		
 	    PollList polls = new PollList(numberOfPolls, numOfSeats);
 	    
 	    System.out.println("Would you like me to create a random set of polls?");
