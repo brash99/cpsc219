@@ -43,8 +43,10 @@ public class FileExercises {
 			
 		} catch (FileNotFoundException f) {
 			System.out.println("File " + fileName + " not found ... check file name!");
+			result = false;
 		} catch (IOException e) {
 			System.out.println("IO Exception reading " + fileName);
+			result = false;
 		}
 		
 		return result;
