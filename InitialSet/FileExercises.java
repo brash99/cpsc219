@@ -52,10 +52,13 @@ public class FileExercises {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException,IOException {
+		
 		String fileName1 = "testFile1.bin";
 		System.out.println("File 1 result: " + is3ByteRGB(fileName1));
+		
 		String fileName2 = "testFile2.bin";
 		System.out.println("File 2 result: " + is3ByteRGB(fileName2));
+		
 		String fileName3 = "testFile3.bin";
 		System.out.println("File 3 result: " + is3ByteRGB(fileName3));
 	}
