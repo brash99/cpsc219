@@ -4,7 +4,7 @@ import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class CreateTestFiles {
+public class CreateBinaryDataFiles {
 	private static void createFile(String filename, int[] header, int[][] nums) throws IOException {
 		DataOutputStream out = new DataOutputStream(new FileOutputStream(filename));
 		for (int headerNum : header) {
