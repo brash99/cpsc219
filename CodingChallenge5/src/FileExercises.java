@@ -162,36 +162,4 @@ public class FileExercises {
 		in.close();
 	}
 	
-
-	public static void main(String[] args) throws FileNotFoundException,IOException {
-		
-		//String fileName1 = "testFile1.bin";
-		//System.out.println("File 1 result: " + is3ByteRGB(fileName1));
-		
-		//String fileName2 = "testFile2.bin";
-		//System.out.println("File 2 result: " + is3ByteRGB(fileName2));
-		
-		//String fileName3 = "testFile3.bin";
-		//System.out.println("File 3 result: " + is3ByteRGB(fileName3));
-		
-		//String firstNumber = "35";
-		//System.out.println("35 = " + parseNonNegativeInt(firstNumber));
-		
-		//String secondNumber = "-35";
-		//System.out.println("-35 = " + parseNonNegativeInt(secondNumber));
-		
-		//String thirdNumber = "Your Mom";
-		//System.out.println("Your Mom = " + parseNonNegativeInt(thirdNumber));
-		
-		//int[] data = {0,0,0,0,0};
-		//for (int i=8; i<13; i++) {
-		//	data[i-8]=i;
-		//}
-		
-		//append(data,"test.bin");
-		//printFile("test.bin");
-		
-		//encrypt(1,"test.txt","encrypted.txt");
-		
-	}
 }
