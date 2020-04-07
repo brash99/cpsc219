@@ -36,14 +36,10 @@ public class Lab3 extends JFrame implements ActionListener {
 
 	public Lab3() {
 		
-		System.out.println("Here I am 1");
-		
 		setTitle("Address Book");
 		setBounds(100, 100, 704, 239);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new java.awt.GridLayout(5, 0));
-		
-		System.out.println("Here I am 2");
 
 		surnamePanel = new JPanel();
 		surnameLabel = new JLabel();
@@ -210,6 +206,7 @@ public class Lab3 extends JFrame implements ActionListener {
 		System.out.println(evt.getActionCommand());
 		
 		String command = evt.getActionCommand();
+		
 		if (command.equals("Get")) {
 			try {
 				int position = Integer.parseInt(positionTF.getText().trim());
@@ -245,11 +242,13 @@ public class Lab3 extends JFrame implements ActionListener {
 			long offset = 8*(position-1);
 			RandomAccessFile raf = new RandomAccessFile(indexFile,"r");
 			raf.seek(offset);
+			
 			long indexPosition = raf.readLong();
 			System.out.println("Entry in index file = " + indexPosition);
 	
 			RandomAccessFile raf2 = new RandomAccessFile(bookFile,"r");
 			raf2.seek(indexPosition);
+			
 			String surname = raf2.readUTF();
 			String givenNames = raf2.readUTF();
 			String streetAddress = raf2.readUTF();
