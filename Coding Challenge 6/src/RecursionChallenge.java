@@ -15,7 +15,7 @@ public class RecursionChallenge {
 		} else if (sString.charAt(0) == cChar) {
 			return 1 + countChar(sString.substring(1), cChar);
 		} else {
-			return countChar(sString.substring(1), cChar);
+			return 0 + countChar(sString.substring(1), cChar);
 		}
 	}
 	
@@ -25,6 +25,23 @@ public class RecursionChallenge {
 		} else {
 			int toAdd = adding % 10;
 			return toAdd + addDigits(adding/10);
+		}
+	}
+	
+	public int prodDigits(int adding) {
+		if (adding < 10) {
+			return adding;
+		} else {
+			int toAdd = adding % 10;
+			return toAdd*addDigits(adding/10);
+		}
+	}
+	
+	public int factorial(int number) {
+		if (number == 1) {
+			return 1;
+		} else {
+			return number*factorial(number-1);
 		}
 	}
 
