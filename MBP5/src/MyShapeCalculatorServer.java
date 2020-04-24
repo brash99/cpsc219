@@ -38,8 +38,10 @@ class ServerThread extends Thread {
 	
 	public void run() {
 		try {
+			
 			BufferedReader is = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			PrintWriter os = new PrintWriter(new BufferedOutputStream(socket.getOutputStream()));
+			
 			String inputLine, outputLine;
 			System.out.println("here i am ...");
 			
