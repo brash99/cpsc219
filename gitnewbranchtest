@@ -1,0 +1,48 @@
+#!/bin/sh
+
+# create new test branch
+git branch mytestcode
+git checkout mytestcode
+
+# Add some new commits to mytestcode branch
+touch mynewcode1.java
+git add mynewcode1.java
+git commit -am "Adding new piece of code 1"
+git push origin mytestcode
+touch mynewcode2.java
+git add mynewcode2.java
+git commit -am "Adding new piece of code 2"
+git push origin mytestcode
+touch mynewcode3.java
+git add mynewcode3.java
+git commit -am "Adding new piece of code3"
+git push origin mytestcode
+touch mynewcode4.java
+git add mynewcode4.java
+git commit -am "Adding new piece of code4"
+git push origin mytestcode
+
+# Add some new commits to the master branch
+git checkout master
+touch mynewcode5.java
+git add mynewcode5.java
+git commit -am "Adding new piece of code 5"
+git push origin master
+touch mynewcode6.java
+git add mynewcode6.java
+git commit -am "Adding new piece of code 6"
+git push origin master
+touch mynewcode7.java
+git add mynewcode7.java
+git commit -am "Adding new piece of code 7"
+git push origin master
+
+# Merge mytestcode branch into master and push
+git merge mytestcode
+git push origin master
+
+# Delete local and remote new branches
+git branch -d mytestcode
+git push origin --delete mytestcode
+
+
