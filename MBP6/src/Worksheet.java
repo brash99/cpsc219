@@ -99,10 +99,13 @@ public class Worksheet {
 		
 		gcdCounter = 0;
 		System.out.println(calcGCD(9,3) + " " + gcdCounter);
+		
 		gcdCounter = 0;
-		System.out.println(calcGCD(12,9) + " " + gcdCounter);	
+		System.out.println(calcGCD(12,9) + " " + gcdCounter);
+		
 		gcdCounter = 0;
 		System.out.println(calcGCD(17,15) + " " + gcdCounter);
+		
 		gcdCounter = 0;
 		System.out.println(calcGCD(28,40) + " " + gcdCounter);
 		
