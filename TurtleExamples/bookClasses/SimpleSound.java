@@ -1658,8 +1658,10 @@ public class SimpleSound{
   public static void convert(String mp3File, String wavFile)
   {
     try {
-      Converter converter = new Converter();
-      converter.convert(mp3File,wavFile);
+      SimpleOutput.showError("Couldn't covert the file - Converter class not found - fix!!" + mp3File);
+      // Need to fix this!!!!!
+      //Converter converter = new Converter();
+      //converter.convert(mp3File,wavFile);
     } catch (Exception ex) {
       SimpleOutput.showError("Couldn't covert the file " + mp3File);
     }
