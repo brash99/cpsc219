@@ -12,7 +12,7 @@
 
 */
 
-public class HelloWorld {
+public class Turtle {
 
     // This is another comment
 
